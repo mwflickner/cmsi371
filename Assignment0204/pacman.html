@@ -13,6 +13,28 @@
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="pacman.js"></script>
+    <script>
+      (function () {
+        var canvas = document.getElementById("canvas");
+        var renderingContext = canvas.getContext("2d");
+        var isChomping;
+        var isFacingLeft;
+        var drawScene = function() {
+          renderingContext.save();
+          SpriteLibrary.pacman({
+            renderingContext: renderingContext,
+            isFacingLeft: isFacingLeft,
+            isChomping: isChomping
+          });
+
+          renderingContext.restore();
+          window.requestAnimationFrame(drawScene);
+        }
+
+        window.requestAnimationFrame(drawScene);
+
+      })
+    </script>
   </body>
 
 </html>

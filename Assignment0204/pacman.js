@@ -1,19 +1,46 @@
 //From dondi/bazaar/canvas-template
-
+/*
+* First paren is for closure, doesn't dirty up the name space
+* Keeps stuff in the func there like, Vegas
+* Plus otherwise Window (top-level object) gets really cluttered
+*/
 (function () {
-    // Ditto on using jQuery here.
-    var canvas = document.getElementById("canvas");
-    var renderingContext = canvas.getContext("2d");
 
-    // Declare other variables here.
-    var radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
+    // To make something global within closure, make it a property of window
+    window.SpriteLibrary = window.SpriteLibrary || { };
 
-    // Put your canvas drawing code (and any other code) here.
-    //radialGradient.addColorStop(0, "white");
-    radialGradient.addColorStop(0, "yellow");
+    SpriteLibrary.pacman = function (pacmanProperties) {
+        var renderingContext = pacmanProperties.renderingContext;
+        var facingLeft = pacmanProperties.isFacingLeft || false;
+        var isChomping = pacmanProperties.isChomping || true;
 
-    renderingContext.fillStyle = radialGradient;
-    renderingContext.beginPath();
-    renderingContext.arc(256, 256, 200, 0, Math.PI * 2/3, true);
-    renderingContext.fill();
+        renderingContext.save();
+
+        if (isFacingLeft) {
+            if (isChomping){
+
+            } else {
+
+            }
+            // Draw the other way
+        } else {
+            if (isChomping) {
+
+            } else {
+                var radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
+
+                // Put your canvas drawing code (and any other code) here.
+                radialGradient.addColorStop(0, "yellow");
+                
+                renderingContext.fillStyle = radialGradient;
+                renderingContext.beginPath();
+                renderingContext.arc(256, 256, 200, 0, Math.PI * 2/3, true);
+                renderingContext.fill();
+            }
+        }
+        
+
+        renderingContext.restore();
+    };
+    
 }());
