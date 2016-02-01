@@ -17,8 +17,8 @@
       (function () {
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
-        var isChomping;
-        var isFacingLeft;
+        var isChomping = false;
+        var isFacingLeft = false;
         var drawScene = function() {
           renderingContext.save();
           SpriteLibrary.pacman({
@@ -29,11 +29,10 @@
 
           renderingContext.restore();
           window.requestAnimationFrame(drawScene);
-        }
-
+        };
         window.requestAnimationFrame(drawScene);
 
-      })
+      }());
     </script>
   </body>
 

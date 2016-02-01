@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>PacMan</title>
+    <title>Ghost</title>
   </head>
   <body>
     <!--From dondi/bazzar/canvas-template -->
@@ -12,7 +12,26 @@
     </canvas>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src=""></script>
+    <script src="ghost.js"></script>
+    <script>
+      (function () {
+        var canvas = document.getElementById("canvas");
+        var renderingContext = canvas.getContext("2d");
+        var drawScene = function() {
+          renderingContext.save();
+          SpriteLibrary.ghost({
+            renderingContext: renderingContext,
+            isBlinking: false,
+            ghostColor: "orange"
+          });
+
+          renderingContext.restore();
+          window.requestAnimationFrame(drawScene);
+        };
+        window.requestAnimationFrame(drawScene);
+
+      }());
+    </script>
   </body>
 
 </html>
