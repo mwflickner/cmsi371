@@ -21,6 +21,9 @@
           renderingContext.save();
           SpriteLibrary.ghost({
             renderingContext: renderingContext,
+            ghostPosition: {xPos: 200, yPos: 200},
+            ghostWidth: 100,
+            eyeDirection: "right",
             isBlinking: false,
             ghostColor: "orange"
           });
