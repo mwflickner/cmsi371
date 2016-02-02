@@ -8,10 +8,10 @@
         var ghostPosition = ghostProperties.ghostPosition;
         var ghostWidth = ghostProperties.ghostWidth;
         var eyeDirection = ghostProperties.eyeDirection;
-        var isBlinking = ghostProperties.isBlinking || false;
+        var canBeEaten = ghostProperties.canBeEaten || false;
         var ghostColor = ghostProperties.ghostColor;
 
-        function fillWithColor(renderingContext, color){
+        function fillWithColor(color){
             renderingContext.fillStyle = color;
             renderingContext.fill();
         }
@@ -36,66 +36,70 @@
             renderingContext.beginPath();
             var pupilDirection = getPupilDirection();
             renderingContext.arc(eyePupilX + pupilDirection.x, eyePupilY + pupilDirection.y, 7/200*ghostWidth, 0, Math.PI*2);
-            fillWithColor(renderingContext, "black");
+            fillWithColor("black");
             renderingContext.closePath();
             renderingContext.restore();
         }
 
-        function drawLeftEye(){
-            var leftEyeCenterX = ghostPosition.xPos - 35/200*ghostWidth;
-            var leftEyeCenterY = ghostPosition.yPos - 1/20*ghostWidth;
+        function drawEye(isLeftEye){
+            var eyeCenterY = ghostPosition.yPos - 1/20*ghostWidth;
+            var eyeCenterX;
+            if (isLeftEye){
+                eyeCenterX = ghostPosition.xPos - 35/200*ghostWidth;
+            } else {
+                eyeCenterX = ghostPosition.xPos + 35/200*ghostWidth;
+            }
             renderingContext.save();
             renderingContext.beginPath();
-            renderingContext.arc(leftEyeCenterX,leftEyeCenterY, 22/200*ghostWidth, 0, Math.PI*2);
-            fillWithColor(renderingContext,"white");
+            renderingContext.arc(eyeCenterX,eyeCenterY, 22/200*ghostWidth, 0, Math.PI*2);
+            fillWithColor("white");
             renderingContext.closePath();
-            drawPupil(leftEyeCenterX, leftEyeCenterY);
+            drawPupil(eyeCenterX, eyeCenterY);
             renderingContext.restore();
         }
 
+        /*
         function drawRightEye(){
             var rightEyeCenterX = ghostPosition.xPos + 35/200*ghostWidth;
             var rightEyeCenterY = ghostPosition.yPos - 1/20*ghostWidth;
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.arc(rightEyeCenterX,rightEyeCenterY, 22/200*ghostWidth, 0, Math.PI*2);
-            fillWithColor(renderingContext,"white");
+            fillWithColor("white");
             renderingContext.closePath();
             drawPupil(rightEyeCenterX, rightEyeCenterY);
             renderingContext.restore();
         }
+        */
 
-        renderingContext.save();
-        renderingContext.beginPath();
-
-        //Draw the body
-        renderingContext.arc(ghostPosition.xPos, ghostPosition.yPos, ghostWidth/2, 0, Math.PI, true);
-        var cursorPos = {xPos: ghostPosition.xPos - ghostWidth/2, yPos: ghostPosition.yPos + ghostWidth/2}
-        renderingContext.lineTo(cursorPos.xPos, cursorPos.yPos);
-        var ghostBottomRadius = ghostWidth/8;
-        for (var i = cursorPos.xPos + ghostBottomRadius; i < cursorPos.yPos; i = i+ghostBottomRadius*2){
+        function drawBody(){
             renderingContext.save();
-            renderingContext.arc(i, cursorPos.yPos, ghostBottomRadius, 0, Math.PI, false);
+            renderingContext.beginPath();
+            renderingContext.arc(ghostPosition.xPos, ghostPosition.yPos, ghostWidth/2, 0, Math.PI, true);
+            var cursorPos = {xPos: ghostPosition.xPos - ghostWidth/2, yPos: ghostPosition.yPos + ghostWidth/2}
+            renderingContext.lineTo(cursorPos.xPos, cursorPos.yPos);
+            var ghostBottomRadius = ghostWidth/8;
+            for (var i = cursorPos.xPos + ghostBottomRadius; i < cursorPos.yPos; i = i+ghostBottomRadius*2){
+                renderingContext.save();
+                renderingContext.arc(i, cursorPos.yPos, ghostBottomRadius, 0, Math.PI, false);
+                renderingContext.restore();
+            }
+            cursorPos.xPos = cursorPos.yPos;
+            renderingContext.lineTo(cursorPos.xPos,cursorPos.yPos);
+            cursorPos.yPos = 2/3*cursorPos.xPos
+            renderingContext.lineTo(cursorPos.xPos,cursorPos.yPos);
+            renderingContext.closePath();
+            if (canBeEaten){
+                fillWithColor("blue");
+            } else {
+                fillWithColor(ghostColor);
+            }
             renderingContext.restore();
         }
-        cursorPos.xPos = cursorPos.yPos;
-        renderingContext.lineTo(cursorPos.xPos,cursorPos.yPos);
-        cursorPos.yPos = 2/3*cursorPos.xPos
-        renderingContext.lineTo(cursorPos.xPos,cursorPos.yPos);
-        renderingContext.closePath();
 
-        if (isBlinking) {
-            alert("not supported yet");
-        } else {
-            fillWithColor(renderingContext, ghostColor);
-            renderingContext.restore();
-            drawRightEye();
-            drawLeftEye();
-            
-            
-        }
-
-        renderingContext.restore();
+        drawBody();
+        drawEye(true);
+        drawEye(false);
     };
     
 }());
