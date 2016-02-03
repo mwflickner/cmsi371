@@ -21,10 +21,12 @@
         var isFacingLeft = false;
         var drawScene = function() {
           renderingContext.save();
+
           SpriteLibrary.pacman({
             renderingContext: renderingContext,
-            isFacingLeft: isFacingLeft,
-            isChomping: isChomping
+            pacmanCenter: {xPos: 200, yPos: 200},
+            isFacingLeft: false,
+            mouthDegree: 1/3*Math.PI
           });
 
           renderingContext.restore();

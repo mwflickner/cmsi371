@@ -11,28 +11,40 @@
 
     SpriteLibrary.pacman = function (pacmanProperties) {
         var renderingContext = pacmanProperties.renderingContext;
-        var isFacingLeft = /*pacmanProperties.isFacingLeft || */false;
-        var mouthClosed = pacmanProperties.mouthClosed || true;
-        var pacmanSize = pacmanProperties.pacmanSize || 100;
-        renderingContext.save();
-        if (mouthClosed){
-            var radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
-            // Put your canvas drawing code (and any other code) here.
-            radialGradient.addColorStop(0, "yellow");
+        var pacmanCenter = pacmanProperties.pacmanCenter;
+        var isFacingLeft = pacmanProperties.isFacingLeft || false;
+        var mouthDegree = pacmanProperties.mouthDegree;
+        var pacmanRadius = pacmanProperties.pacmanRadius || 100;
 
-            renderingContext.fillStyle = radialGradient;
-            renderingContext.beginPath();
-            renderingContext.arc(256, 256, pacmanSize, 0, Math.PI * 2, true);
+        function fillWithColor(color){
+            renderingContext.fillStyle = color;
             renderingContext.fill();
-        } else {
-            if (isFacingLeft) {
-
-            } else {
-                
-            }
         }
 
-        renderingContext.restore();
+        function strokeWithColor(color){
+            renderingContext.strokeStyle = color;
+            renderingContext.stroke();
+        }
+
+        function drawPacman() {
+            renderingContext.save();
+            renderingContext.beginPath();
+            var x = pacmanCenter.xPos;
+            var y = pacmanCenter.yPos;
+            if (isFacingLeft){
+                renderingContext.arc(x, y, pacmanRadius, Math.PI + mouthDegree/2, Math.PI - mouthDegree/2, false);
+            } else {
+                renderingContext.arc(x, y, pacmanRadius, mouthDegree/2, -mouthDegree/2, false);
+            }     
+            renderingContext.lineTo(pacmanCenter.xPos, pacmanCenter.yPos);
+            fillWithColor("yellow");
+            renderingContext.closePath();
+            renderingContext.restore();
+        }
+
+        drawPacman();
+
+
     };
     
 }());
