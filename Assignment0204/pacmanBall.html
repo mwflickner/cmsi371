@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>PacMan</title>
+  </head>
+  <body>
+    <!--From dondi/bazzar/canvas-template -->
+    <canvas id="canvas" width="512" height="512" style="border-style: solid; background-color: black;">
+      Sorry, but you need a web browser that supports the
+      <code>canvas</code> element.
+    </canvas>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="pacmanBall.js"></script>
+    <script>
+      (function () {
+        var canvas = document.getElementById("canvas");
+        var renderingContext = canvas.getContext("2d");
+
+        var drawScene = function() {
+          renderingContext.save();
+
+          SpriteLibrary.pacmanBall({
+            renderingContext: renderingContext,
+            ballCenter: {xPos: 256, yPos: 256},
+            ballRadius: 50,
+            isPowerball: true
+          });
+
+          renderingContext.restore();
+          window.requestAnimationFrame(drawScene);
+        };
+        window.requestAnimationFrame(drawScene);
+
+      }());
+    </script>
+  </body>
+
+</html>
