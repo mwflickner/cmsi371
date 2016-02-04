@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>PacMan</title>
+  </head>
+  <body>
+    <!--From dondi/bazzar/canvas-template -->
+    <canvas id="canvas" width="512" height="512" style="border-style: solid; background-color: black;">
+      Sorry, but you need a web browser that supports the
+      <code>canvas</code> element.
+    </canvas>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="heart.js"></script>
+    <script>
+      (function () {
+        var canvas = document.getElementById("canvas");
+        var renderingContext = canvas.getContext("2d");
+
+        var drawScene = function() {
+          renderingContext.save();
+
+          SpriteLibrary.heart({
+            renderingContext: renderingContext,
+            heartCenter: {xPos: 256, yPos: 256},
+            heartCenterHeight: 100,
+            howBroken: 0 // lol this is dark
+          });
+
+          renderingContext.restore();
+          window.requestAnimationFrame(drawScene);
+        };
+        window.requestAnimationFrame(drawScene);
+
+      }());
+    </script>
+  </body>
+
+</html>
