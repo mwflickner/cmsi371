@@ -11,6 +11,7 @@
         var canBeEaten = ghostProperties.canBeEaten || false;
         var ghostColor = ghostProperties.ghostColor;
         var ghostMood = ghostProperties.mood;
+        var isEaten = ghostProperties.isEaten || false;
 
         function fillWithColor(color){
             renderingContext.fillStyle = color;
@@ -145,10 +146,17 @@
             renderingContext.restore();
         }
 
-        drawBody();
-        drawEye(true);
-        drawEye(false);
-        drawMouth();
+        function drawGhost(){
+            if (!isEaten){
+                drawBody();
+                drawMouth();
+            }
+            drawEye(true);
+            drawEye(false);
+        };
+
+        drawGhost();
+        
     };
     
 }());
