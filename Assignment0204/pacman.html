@@ -17,14 +17,14 @@
       (function () {
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
-        var isChomping = false;
-        var isFacingLeft = false;
         var drawScene = function() {
           renderingContext.save();
+
           SpriteLibrary.pacman({
             renderingContext: renderingContext,
-            isFacingLeft: isFacingLeft,
-            isChomping: isChomping
+            pacmanCenter: {xPos: 256, yPos: 256},
+            isFacingLeft: false,
+            mouthDegree: 1/3*Math.PI
           });
 
           renderingContext.restore();
