@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Ghost</title>
+    <title>PacMan</title>
   </head>
   <body>
     <!--From dondi/bazzar/canvas-template -->
@@ -12,35 +12,38 @@
     </canvas>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="ghost.js"></script>
+    <script src="heart.js"></script>
     <script>
       (function (){
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
+        //var broken = 0; Uncomment to animate
         var drawScene = function(){
+          renderingContext.clearRect(0,0, canvas.width, canvas.height);
 
-          function createGhost(x,y,eyeDirection,color,mood,canBeEaten,isEaten){
+          function createHeart(x,y,howBroken){
             renderingContext.save();
             renderingContext.translate(x,y);
-            SpriteLibrary.ghost({
+            SpriteLibrary.heart({
               renderingContext: renderingContext,
-              eyeDirection: eyeDirection,
-              canBeEaten: canBeEaten,
-              ghostColor: color,
-              mood: mood,
-              isEaten: isEaten
+              howBroken: howBroken // lol this is dark
             });
             renderingContext.restore();
           }
 
-          var y = 250;
-          createGhost(120, y, "right", "orange", "happy", false, false);
-          createGhost(240, y, "down", "cyan", "meh", false, false);
-          createGhost(360, y, "straight", "red", "sad", true, false);
-          
+          createHeart(250,250,0);
+
+          /* Uncomment to animate heart breaking
+            broken = broken + .2;
+            if (broken > 12){
+             broken = 0;
+            }
+            console.log(broken);
+          */
+
           window.requestAnimationFrame(drawScene);
         };
-
+         
         window.requestAnimationFrame(drawScene);
 
       }());

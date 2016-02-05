@@ -6,13 +6,110 @@
   </head>
   <body>
     <!--From dondi/bazzar/canvas-template -->
-    <canvas id="canvas" width="512" height="512">
+    <canvas id="canvas" width="1024" height="512" style="border-style: solid; background-color: black;">
       Sorry, but you need a web browser that supports the
       <code>canvas</code> element.
     </canvas>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src=""></script>
+    <script src="fruit.js"></script>
+    <script src="ghost.js"></script>
+    <script src="heart.js"></script>
+    <script src="pacman.js"></script>
+    <script src="pacmanBall.js"></script>
+    <script>
+      (function (){
+        var canvas = document.getElementById("canvas");
+        var renderingContext = canvas.getContext("2d");
+        
+        var drawScene = function(){
+          renderingContext.save();
+
+          var baseSize = 100;
+          var ballSize = baseSize/10;
+          var yUpperLevel = 100;
+          var yLowerLevel = 350;
+
+          function createGhost(x,y,eyeDirection,color,mood,canBeEaten,isEaten){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            SpriteLibrary.ghost({
+              renderingContext: renderingContext,
+              eyeDirection: eyeDirection,
+              canBeEaten: canBeEaten,
+              ghostColor: color,
+              mood: mood,
+              isEaten: isEaten
+            });
+            renderingContext.restore();
+          }
+
+          function createFruit(x,y,fruitType,isEaten){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.4,.4);
+            SpriteLibrary.fruit({
+              renderingContext: renderingContext,
+              fruitType: fruitType,
+              isEaten: isEaten
+            });
+            renderingContext.restore();
+          }
+
+          function createBall(x, y, isPowerball){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.5,.5);
+            SpriteLibrary.pacmanBall({
+              renderingContext: renderingContext,
+              isPowerball: isPowerball
+            });
+            renderingContext.restore();
+          }
+
+          function createPacman(x, y, mouthDegree, isFacingLeft){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            SpriteLibrary.pacman({
+              renderingContext: renderingContext,
+              isFacingLeft: isFacingLeft,
+              mouthDegree: mouthDegree
+            });
+            renderingContext.restore();
+          }
+
+          function createHeart(x,y,howBroken){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            SpriteLibrary.heart({
+              renderingContext: renderingContext,
+              howBroken: howBroken // lol this is dark
+            });
+            renderingContext.restore();
+          }
+
+          createPacman(150, yLowerLevel, 1/2*Math.PI, false);
+          createBall(200, yLowerLevel, false);
+          createBall(250, yLowerLevel, false);
+          createBall(325, yLowerLevel, true);
+          createGhost(450, yLowerLevel, "left", "orange", "shocked", true, false);
+          createGhost(600, yLowerLevel, "left", "pink", "shocked", false, false);
+          createGhost(750, yLowerLevel, "right", "red", "happy", false, false);
+          createGhost(500, yUpperLevel, "down", "cyan", "sad", false, false);
+          createGhost(700, yUpperLevel, "left", "cyan", "sad", false, true);
+          createHeart(600, yUpperLevel, 4);
+          createFruit(800, yLowerLevel - 50, "cherry", false);
+          createHeart(820, yLowerLevel - 30, 0);
+          createFruit(100, yUpperLevel - 90, "strawberry", false);
+
+          renderingContext.restore();
+          window.requestAnimationFrame(drawScene);
+        };
+         
+        window.requestAnimationFrame(drawScene);
+
+      }());
+    </script>
   </body>
 
 </html>

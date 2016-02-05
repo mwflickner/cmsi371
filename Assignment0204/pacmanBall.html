@@ -12,21 +12,36 @@
     </canvas>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="pacman.js"></script>
+    <script src="pacmanBall.js"></script>
     <script>
       (function (){
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
-        var drawScene = function() {
-          renderingContext.save();
-          renderingContext.translate(250,250);
-          SpriteLibrary.pacman({
-            renderingContext: renderingContext,
-            isFacingLeft: false,
-            mouthDegree: 1/3*Math.PI
-          });
 
-          renderingContext.restore();
+        var drawScene = function(){
+
+          function createBall(x, y, isPowerball){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.5,.5);
+            SpriteLibrary.pacmanBall({
+              renderingContext: renderingContext,
+              isPowerball: isPowerball
+            });
+            renderingContext.restore();
+          }
+
+          var y = 250;
+          for (var i = 125; i < 400; i = i+75){
+            if (i == 225){
+              i = i + 25;
+              createBall(i, y, true);
+            } else {
+              createBall(i, y, false);
+              i = i - 25;
+            }
+          }
+
           window.requestAnimationFrame(drawScene);
         };
         window.requestAnimationFrame(drawScene);

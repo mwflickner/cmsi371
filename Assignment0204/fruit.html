@@ -12,21 +12,29 @@
     </canvas>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="pacman.js"></script>
+    <script src="fruit.js"></script>
     <script>
       (function (){
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
-        var drawScene = function() {
-          renderingContext.save();
-          renderingContext.translate(250,250);
-          SpriteLibrary.pacman({
-            renderingContext: renderingContext,
-            isFacingLeft: false,
-            mouthDegree: 1/3*Math.PI
-          });
 
-          renderingContext.restore();
+        var drawScene = function(){
+
+          function createFruit(x,y,fruitType,isEaten){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.5,.5);
+            SpriteLibrary.fruit({
+              renderingContext: renderingContext,
+              fruitType: fruitType,
+              isEaten: isEaten
+            });
+            renderingContext.restore();
+          }
+          var y = 150;
+          createFruit(250, y, "strawberry", false);
+          createFruit(100, y, "cherry", false);
+
           window.requestAnimationFrame(drawScene);
         };
         window.requestAnimationFrame(drawScene);

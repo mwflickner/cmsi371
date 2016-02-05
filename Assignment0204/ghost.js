@@ -3,14 +3,16 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
-    SpriteLibrary.ghost = function (ghostProperties) {
+    SpriteLibrary.ghost = function (ghostProperties){
         var renderingContext = ghostProperties.renderingContext;
-        var ghostPosition = ghostProperties.ghostPosition;
-        var ghostWidth = ghostProperties.ghostWidth;
         var eyeDirection = ghostProperties.eyeDirection;
         var canBeEaten = ghostProperties.canBeEaten || false;
         var ghostColor = ghostProperties.ghostColor;
         var ghostMood = ghostProperties.mood;
+        var isEaten = ghostProperties.isEaten || false;
+
+        var ghostPosition = {xPos: 0, yPos: 0};
+        var ghostWidth = 100;
 
         function fillWithColor(color){
             renderingContext.fillStyle = color;
@@ -40,11 +42,9 @@
             }
             renderingContext.save();
             renderingContext.beginPath();
-            //renderingContext.arc(eyePupilX + pupilDirection.x, eyePupilY + pupilDirection.y, 7/200*ghostWidth, 0, Math.PI*2);
-            if (canBeEaten){
+            if (canBeEaten && !(canBeEaten && isEaten)){
                 renderingContext.fillStyle = "white";
                 renderingContext.fillRect(eyePupilX - 14/200*ghostWidth, eyePupilY - 7/200*ghostWidth, 1/8*ghostWidth, 1/8*ghostWidth);
-                //fillWithColor("white");
             } else {
                 var pupilDirection = getPupilDirection();
                 renderingContext.arc(eyePupilX + pupilDirection.x, eyePupilY + pupilDirection.y, 7/200*ghostWidth, 0, Math.PI*2);
@@ -62,7 +62,7 @@
             } else {
                 eyeCenterX = ghostPosition.xPos + 35/200*ghostWidth;
             }
-            if (!canBeEaten){
+            if (!canBeEaten || (canBeEaten&&isEaten)){
                 renderingContext.save();
                 renderingContext.beginPath();
                 renderingContext.arc(eyeCenterX,eyeCenterY, 22/200*ghostWidth, 0, Math.PI*2);
@@ -73,19 +73,19 @@
             drawPupil(eyeCenterX, eyeCenterY);
         }
 
-        function drawMouth() {
+        function drawMouth(){
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.lineWidth = Math.floor(ghostWidth/100)*2
             if (canBeEaten){
-                var mouthLeftX = ghostPosition.xPos - ghostWidth/3;
-                var mouthRightX = ghostPosition.xPos + ghostWidth/3;
-                var mouthTopY = ghostPosition.yPos + ghostWidth/4;
-                var mouthBottomY = ghostPosition.yPos + ghostWidth/3;
+                var mouthLeftX = ghostPosition.xPos - Math.floor(ghostWidth/3);
+                var mouthRightX = ghostPosition.xPos + Math.floor(ghostWidth/3);
+                var mouthTopY = ghostPosition.yPos + Math.floor(ghostWidth/4);
+                var mouthBottomY = ghostPosition.yPos + Math.floor(ghostWidth/3);
                 var mouthLength = mouthRightX - mouthLeftX;
                 renderingContext.moveTo(mouthLeftX, mouthBottomY);
                 var counter = 0;
-                for (var x = mouthLeftX; x < mouthRightX + mouthLength/6; x = x + mouthLength/6){
+                for (var x = mouthLeftX; x <= mouthRightX; x = x + mouthLength/6){
                     var y = counter % 2 ? mouthTopY : mouthBottomY;
                     renderingContext.lineWidth = Math.floor(ghostWidth/100)*2
                     renderingContext.lineTo(x,y);
@@ -96,8 +96,6 @@
                 var mouthColor = "blue";
                 if (ghostMood == "happy"){
                     renderingContext.arc(ghostPosition.xPos, ghostPosition.yPos, ghostWidth/3, 1/6*Math.PI, 5/6*Math.PI, false);
-                    //renderingContext.lineCap = "round";
-                    //strokeWithColor(mouthColor);
                 } else if (ghostMood == "sad"){
                     var mouthCenterX = ghostPosition.xPos;
                     var mouthCenterY = ghostPosition.yPos + ghostWidth/2;
@@ -127,12 +125,12 @@
             var cursorPos = {xPos: ghostPosition.xPos - ghostWidth/2, yPos: ghostPosition.yPos + ghostWidth/2}
             renderingContext.lineTo(cursorPos.xPos, cursorPos.yPos);
             var ghostBottomRadius = ghostWidth/6;
-            for (var i = cursorPos.xPos + ghostBottomRadius; i < cursorPos.yPos; i = i+ghostBottomRadius*2){
+            for (var i = cursorPos.xPos + ghostBottomRadius; i < ghostPosition.xPos + ghostWidth/2; i = i+ghostBottomRadius*2){
                 renderingContext.save();
                 renderingContext.arc(i, cursorPos.yPos, ghostBottomRadius, 0, Math.PI, false);
                 renderingContext.restore();
             }
-            cursorPos.xPos = cursorPos.yPos;
+            cursorPos.xPos = ghostPosition.xPos + ghostWidth/2;
             renderingContext.lineTo(cursorPos.xPos,cursorPos.yPos);
             cursorPos.yPos = 2/3*cursorPos.xPos
             renderingContext.lineTo(cursorPos.xPos,cursorPos.yPos);
@@ -145,10 +143,17 @@
             renderingContext.restore();
         }
 
-        drawBody();
-        drawEye(true);
-        drawEye(false);
-        drawMouth();
+        function drawGhost(){
+            if (!isEaten){
+                drawBody();
+                drawMouth();
+            }
+            drawEye(true);
+            drawEye(false);
+        };
+
+        drawGhost();
+        
     };
     
 }());
