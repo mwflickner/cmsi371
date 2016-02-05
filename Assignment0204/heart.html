@@ -18,19 +18,23 @@
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
 
-        var drawScene = function() {
-          renderingContext.save();
+        var drawScene = function(){
+          function createHeart(x,y,howBroken){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            SpriteLibrary.heart({
+              renderingContext: renderingContext,
+              howBroken: 0 // lol this is dark
+            });
+            renderingContext.restore();
+          }
 
-          SpriteLibrary.heart({
-            renderingContext: renderingContext,
-            heartCenter: {xPos: 256, yPos: 256},
-            heartCenterHeight: 100,
-            howBroken: 0 // lol this is dark
-          });
+          createHeart(0,0,0);
 
-          renderingContext.restore();
+
           window.requestAnimationFrame(drawScene);
         };
+         
         window.requestAnimationFrame(drawScene);
 
       }());

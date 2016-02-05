@@ -11,10 +11,10 @@
 
     SpriteLibrary.pacman = function (pacmanProperties) {
         var renderingContext = pacmanProperties.renderingContext;
-        var pacmanCenter = pacmanProperties.pacmanCenter;
         var isFacingLeft = pacmanProperties.isFacingLeft || false;
         var mouthDegree = pacmanProperties.mouthDegree;
         var pacmanRadius = pacmanProperties.pacmanRadius || 100;
+        var pacmanCenter = {xPos: 0, yPos: 0};
 
         function fillWithColor(color){
             renderingContext.fillStyle = color;

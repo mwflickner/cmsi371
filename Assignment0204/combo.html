@@ -6,13 +6,160 @@
   </head>
   <body>
     <!--From dondi/bazzar/canvas-template -->
-    <canvas id="canvas" width="512" height="512">
+    <canvas id="canvas" width="1024" height="512" style="border-style: solid; background-color: black;">
       Sorry, but you need a web browser that supports the
       <code>canvas</code> element.
     </canvas>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src=""></script>
+    <script src="fruit.js"></script>
+    <script src="ghost.js"></script>
+    <script src="heart.js"></script>
+    <script src="pacman.js"></script>
+    <script src="pacmanBall.js"></script>
+    <script>
+      (function () {
+        var canvas = document.getElementById("canvas");
+        var renderingContext = canvas.getContext("2d");
+        
+        var drawScene = function(){
+          renderingContext.save();
+
+          var baseSize = 100;
+          var ballSize = baseSize/10;
+          var yUpperLevel = 100;
+          var yLowerLevel = 350;
+
+          function createGhost(x,y,eyeDirection,color,mood,canBeEaten,isEaten){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            SpriteLibrary.ghost({
+              renderingContext: renderingContext,
+              eyeDirection: eyeDirection,
+              canBeEaten: canBeEaten,
+              ghostColor: color,
+              mood: mood,
+              isEaten: isEaten
+            });
+            renderingContext.restore();
+          }
+
+          function createFruit(x,y,fruitType,isEaten){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.1,.1);
+            SpriteLibrary.fruit({
+              renderingContext: renderingContext,
+              fruitType: fruitType,
+              isEaten: isEaten
+            });
+            renderingContext.restore();
+          }
+
+          function createBall(x, y, isPowerball){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.5,.5);
+            SpriteLibrary.pacmanBall({
+              renderingContext: renderingContext,
+              isPowerball: isPowerball
+            });
+            renderingContext.restore();
+          }
+
+          function createPacman() {
+            renderingContext.save();
+            renderingContext.translate(250,250);
+            SpriteLibrary.pacman({
+              renderingContext: renderingContext,
+              isFacingLeft: false,
+              mouthDegree: 1/3*Math.PI
+            });
+            renderingContext.restore();
+          }
+
+          SpriteLibrary.pacman({
+            renderingContext: renderingContext,
+            pacmanCenter: {xPos: 150, yPos: yLowerLevel},
+            isFacingLeft: false,
+            mouthDegree: 1/2*Math.PI
+          });
+
+          // PACMAN BALLS
+          SpriteLibrary.pacmanBall({
+            renderingContext: renderingContext,
+            ballCenter: {xPos: 200, yPos: yLowerLevel},
+            ballRadius: ballSize,
+            isPowerball: false
+          });
+
+          SpriteLibrary.pacmanBall({
+            renderingContext: renderingContext,
+            ballCenter: {xPos: 250, yPos: yLowerLevel},
+            ballRadius: ballSize,
+            isPowerball: false
+          });
+
+          // FRUITS
+          SpriteLibrary.fruit({
+            renderingContext: renderingContext,
+            fruitPosition: {xPos: 550, yPos: yLowerLevel - baseSize/2},
+            fruitSize: {width: baseSize, height: baseSize},
+            fruitType: "cherry",
+            isEaten: false
+          });
+
+
+        // GHOSTS: 
+          // Blue ghost
+          SpriteLibrary.ghost({
+            renderingContext: renderingContext,
+            ghostPosition: {xPos: 350, yPos: yLowerLevel},
+            ghostWidth: 100,
+            eyeDirection: "left",
+            canBeEaten: true,
+            ghostColor: "orange",
+            mood: "shocked"
+          });
+
+          // Red Ghost
+          SpriteLibrary.ghost({
+            renderingContext: renderingContext,
+            ghostPosition: {xPos: 300, yPos: yUpperLevel},
+            ghostWidth: 100,
+            eyeDirection: "down",
+            canBeEaten: false,
+            ghostColor: "red",
+            mood: "sad"
+          });
+
+          // Pink Ghost
+          SpriteLibrary.ghost({
+            renderingContext: renderingContext,
+            ghostPosition: {xPos: 500, yPos: yLowerLevel},
+            ghostWidth: 100,
+            eyeDirection: "left",
+            canBeEaten: false,
+            ghostColor: "pink",
+            mood: "shocked"
+          });
+
+          SpriteLibrary.heart({
+            renderingContext: renderingContext,
+            heartCenter: {xPos: 256, yPos: 256},
+            heartCenterHeight: 100,
+            howBroken: 0 // lol this is dark
+          });
+
+          renderingContext.restore();
+          window.requestAnimationFrame(drawScene);
+        };
+         
+        
+        window.requestAnimationFrame(drawScene);
+
+      }());
+    </script>
   </body>
 
 </html>

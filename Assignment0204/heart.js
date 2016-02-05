@@ -10,9 +10,9 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.heart = function (heartProperties) {
+        // Some code modified from Mozilla Canvas Tutorial
+        
         var renderingContext = heartProperties.renderingContext;
-        var heartCenter = heartProperties.heartCenter;
-        var heartCenterHeight = heartProperties.heartCenterHeight;
         var howBroken = heartProperties.howBroken;
 
         function fillWithColor(color){
@@ -23,12 +23,16 @@
         function drawLeftHalfOfHeart(){
             renderingContext.save();
             renderingContext.beginPath();
-            var x = heartCenter.xPos;
-            var y = heartCenter.yPos;
-            renderingContext.moveTo(75,40);
-            renderingContext.bezierCurveTo(75,37,70,25,50,25);
-            renderingContext.bezierCurveTo(20,25,20,62.5,20,62.5);
-            renderingContext.bezierCurveTo(20,80,40,102,75,120);
+            renderingContext.moveTo(75,120);
+            if (howBroken != 1 && howBroken <= 5){
+                renderingContext.bezierCurveTo(40,102,20,80,20,62.5);
+            }
+            if (howBroken < 10){
+                renderingContext.bezierCurveTo(20,62.5,20,25,50,25);
+            }
+            if (howBroken < 2){
+                renderingContext.bezierCurveTo(70,25,75,37,75,40);
+            } 
             fillWithColor("red");
             renderingContext.closePath();
             renderingContext.restore(); 
@@ -39,9 +43,15 @@
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.moveTo(75,120);
-            renderingContext.bezierCurveTo(110,102,130,80,130,62.5);
-            renderingContext.bezierCurveTo(130,62.5,130,25,100,25);
-            renderingContext.bezierCurveTo(85,25,75,37,75,40);
+            if (howBroken != 4 && howBroken < 6){
+                renderingContext.bezierCurveTo(110,102,130,80,130,62.5);
+            }
+            if (howBroken != 5 && howBroken < 8){
+                renderingContext.bezierCurveTo(130,62.5,130,25,100,25);
+            }
+            if (howBroken != 7 && howBroken < 9){
+               renderingContext.bezierCurveTo(85,25,75,37,75,40); 
+            }
             fillWithColor("red");
             renderingContext.closePath();
             renderingContext.restore();

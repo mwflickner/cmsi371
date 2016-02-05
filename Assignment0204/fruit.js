@@ -22,7 +22,7 @@
             renderingContext.beginPath();
             var fruitImage = new Image();
             fruitImage.addEventListener("load", function(){
-                renderingContext.drawImage(fruitImage,0,0);
+                renderingContext.drawImage(fruitImage, 0, 0);
             }, false);
             fruitImage.src = fruitType+".png";
             renderingContext.closePath();

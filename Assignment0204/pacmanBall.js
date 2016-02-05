@@ -11,10 +11,11 @@
 
     SpriteLibrary.pacmanBall = function (ballProperties) {
         var renderingContext = ballProperties.renderingContext;
-        var ballCenter = ballProperties.ballCenter;
-        var ballRadius = ballProperties.ballRadius || 100;
         var isPowerball = ballProperties.isPowerball || false;
         var isEaten = ballProperties.isEaten || false;
+
+        var ballCenter = {xPos : 0, yPos : 0};
+        var ballRadius = 25;
 
         function fillWithColor(color){
             renderingContext.fillStyle = color;
@@ -35,7 +36,7 @@
             var x = ballCenter.xPos;
             var y = ballCenter.yPos;
             if (isPowerball) {
-                renderingContext.arc(x,y,2*ballRadius, 0, 2*Math.PI, true);
+                renderingContext.arc(x,y,2.25*ballRadius, 0, 2*Math.PI, true);
             } else {
                 renderingContext.arc(x,y,ballRadius, 0, 2*Math.PI, true);
             }

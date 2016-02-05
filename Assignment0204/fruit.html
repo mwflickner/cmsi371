@@ -19,13 +19,21 @@
         var renderingContext = canvas.getContext("2d");
 
         var drawScene = function() {
-          renderingContext.save();
 
-          SpriteLibrary.fruit({
-            renderingContext: renderingContext,
-            fruitType: "strawberry",
-            isEaten: false
-          });
+          function createFruit(x,y,fruitType,isEaten){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.1,.1);
+            SpriteLibrary.fruit({
+              renderingContext: renderingContext,
+              fruitType: fruitType,
+              isEaten: isEaten
+            });
+            renderingContext.restore();
+          }
+          var y = 250;
+          createFruit(350, y, "strawberry", false);
+          createFruit(250, y, "cherry", false);
 
           renderingContext.restore();
           window.requestAnimationFrame(drawScene);

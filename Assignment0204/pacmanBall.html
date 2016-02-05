@@ -19,16 +19,29 @@
         var renderingContext = canvas.getContext("2d");
 
         var drawScene = function() {
-          renderingContext.save();
 
-          SpriteLibrary.pacmanBall({
-            renderingContext: renderingContext,
-            ballCenter: {xPos: 256, yPos: 256},
-            ballRadius: 50,
-            isPowerball: true
-          });
+          function createBall(x, y, isPowerball){
+            renderingContext.save();
+            renderingContext.translate(x,y);
+            renderingContext.scale(.5,.5);
+            SpriteLibrary.pacmanBall({
+              renderingContext: renderingContext,
+              isPowerball: isPowerball
+            });
+            renderingContext.restore();
+          }
 
-          renderingContext.restore();
+          var y = 250;
+          for (var i = 125; i < 400; i = i+75){
+            if (i == 225){
+              i = i + 25;
+              createBall(i, y, true);
+            } else {
+              createBall(i, y, false);
+              i = i - 25;
+            }
+          }
+
           window.requestAnimationFrame(drawScene);
         };
         window.requestAnimationFrame(drawScene);
