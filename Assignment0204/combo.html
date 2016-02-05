@@ -67,23 +67,19 @@
             renderingContext.restore();
           }
 
-          function createPacman() {
+          function createPacman(x, y, mouthDegree, isFacingLeft) {
             renderingContext.save();
-            renderingContext.translate(250,250);
+            renderingContext.translate(x,y);
             SpriteLibrary.pacman({
               renderingContext: renderingContext,
-              isFacingLeft: false,
-              mouthDegree: 1/3*Math.PI
+              isFacingLeft: isFacingLeft,
+              mouthDegree: mouthDegree
             });
             renderingContext.restore();
           }
 
-          SpriteLibrary.pacman({
-            renderingContext: renderingContext,
-            pacmanCenter: {xPos: 150, yPos: yLowerLevel},
-            isFacingLeft: false,
-            mouthDegree: 1/2*Math.PI
-          });
+          createPacman(150, yLowerLevel, 1/2*Math.PI, false);
+          createBall(1)
 
           // PACMAN BALLS
           SpriteLibrary.pacmanBall({

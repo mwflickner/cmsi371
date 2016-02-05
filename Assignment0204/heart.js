@@ -11,7 +11,7 @@
 
     SpriteLibrary.heart = function (heartProperties) {
         // Some code modified from Mozilla Canvas Tutorial
-        
+
         var renderingContext = heartProperties.renderingContext;
         var howBroken = heartProperties.howBroken;
 
@@ -36,7 +36,6 @@
             fillWithColor("red");
             renderingContext.closePath();
             renderingContext.restore(); 
-
         }
 
         function drawRightHalfOfHeart(){

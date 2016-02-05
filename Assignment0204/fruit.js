@@ -9,22 +9,25 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
+    var fruitImage = new Image();
+    var fruitLoaded = false;
+    fruitImage.addEventListener("load", function(){
+        fruitLoaded = true;
+    }, false);
+    fruitImage.src = /* TODO fruitType+ */ "cherry.png";
+
     SpriteLibrary.fruit = function (fruitProperties) {
         var renderingContext = fruitProperties.renderingContext;
         var fruitType = fruitProperties.fruitType;
         var isEaten = fruitProperties.isEaten || false;
 
         function drawFruit(){
-            if (isEaten){
+            if (isEaten || !fruitLoaded){
                 return;
             }
             renderingContext.save();
             renderingContext.beginPath();
-            var fruitImage = new Image();
-            fruitImage.addEventListener("load", function(){
-                renderingContext.drawImage(fruitImage, 0, 0);
-            }, false);
-            fruitImage.src = fruitType+".png";
+            renderingContext.drawImage(fruitImage, 0, 0);
             renderingContext.closePath();
             renderingContext.restore();
         }
