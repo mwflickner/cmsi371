@@ -3,7 +3,7 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
-    SpriteLibrary.ghost = function (ghostProperties) {
+    SpriteLibrary.ghost = function (ghostProperties){
         var renderingContext = ghostProperties.renderingContext;
         var eyeDirection = ghostProperties.eyeDirection;
         var canBeEaten = ghostProperties.canBeEaten || false;
@@ -73,7 +73,7 @@
             drawPupil(eyeCenterX, eyeCenterY);
         }
 
-        function drawMouth() {
+        function drawMouth(){
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.lineWidth = Math.floor(ghostWidth/100)*2
@@ -96,8 +96,6 @@
                 var mouthColor = "blue";
                 if (ghostMood == "happy"){
                     renderingContext.arc(ghostPosition.xPos, ghostPosition.yPos, ghostWidth/3, 1/6*Math.PI, 5/6*Math.PI, false);
-                    //renderingContext.lineCap = "round";
-                    //strokeWithColor(mouthColor);
                 } else if (ghostMood == "sad"){
                     var mouthCenterX = ghostPosition.xPos;
                     var mouthCenterY = ghostPosition.yPos + ghostWidth/2;

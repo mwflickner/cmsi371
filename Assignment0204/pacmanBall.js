@@ -9,7 +9,7 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
-    SpriteLibrary.pacmanBall = function (ballProperties) {
+    SpriteLibrary.pacmanBall = function (ballProperties){
         var renderingContext = ballProperties.renderingContext;
         var isPowerball = ballProperties.isPowerball || false;
         var isEaten = ballProperties.isEaten || false;
@@ -46,8 +46,7 @@
         }
 
         drawBall();
-
-
+        
     };
     
 }());

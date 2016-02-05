@@ -14,7 +14,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="ghost.js"></script>
     <script>
-      (function () {
+      (function (){
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
         var drawScene = function(){
@@ -33,7 +33,6 @@
             renderingContext.restore();
           }
 
-          
           var y = 250;
           createGhost(120, y, "right", "orange", "happy", false, false);
           createGhost(240, y, "down", "cyan", "meh", false, false);
@@ -41,6 +40,7 @@
           
           window.requestAnimationFrame(drawScene);
         };
+
         window.requestAnimationFrame(drawScene);
 
       }());

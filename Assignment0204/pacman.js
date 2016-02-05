@@ -9,7 +9,7 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
-    SpriteLibrary.pacman = function (pacmanProperties) {
+    SpriteLibrary.pacman = function (pacmanProperties){
         var renderingContext = pacmanProperties.renderingContext;
         var isFacingLeft = pacmanProperties.isFacingLeft || false;
         var mouthDegree = pacmanProperties.mouthDegree;
@@ -26,7 +26,7 @@
             renderingContext.stroke();
         }
 
-        function drawPacman() {
+        function drawPacman(){
             renderingContext.save();
             renderingContext.beginPath();
             var x = pacmanCenter.xPos;

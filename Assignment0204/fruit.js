@@ -9,32 +9,44 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
-    var fruitImage = new Image();
-    var fruitLoaded = false;
-    fruitImage.addEventListener("load", function(){
-        fruitLoaded = true;
-    }, false);
-    fruitImage.src = /* TODO fruitType+ */ "cherry.png";
+    var myFruitImages = new Array();
 
-    SpriteLibrary.fruit = function (fruitProperties) {
+    var strawberryImage = new Image();
+    var strawberryLoaded = false;
+    strawberryImage.addEventListener("load", function(){
+        myFruitImages["strawberry"] = strawberryImage;
+        strawberryLoaded = true;
+    }, false);
+    strawberryImage.src = "strawberry.png";
+
+
+    var cherryImage = new Image();
+    var cherryLoaded = false;
+    cherryImage.addEventListener("load", function(){
+        myFruitImages["cherry"] = cherryImage;
+        cherryLoaded = true;
+    }, false);
+    cherryImage.src = "cherry.png";
+
+
+    SpriteLibrary.fruit = function (fruitProperties){
         var renderingContext = fruitProperties.renderingContext;
         var fruitType = fruitProperties.fruitType;
         var isEaten = fruitProperties.isEaten || false;
 
         function drawFruit(){
-            if (isEaten || !fruitLoaded){
+            var noDraw = isEaten || !cherryLoaded || !strawberryLoaded
+            if (noDraw){
                 return;
             }
             renderingContext.save();
             renderingContext.beginPath();
-            renderingContext.drawImage(fruitImage, 0, 0);
+            renderingContext.drawImage(myFruitImages[fruitType], 0, 0);
             renderingContext.closePath();
             renderingContext.restore();
         }
-
+        
         drawFruit();
-
-
     };
     
 }());

@@ -9,7 +9,7 @@
     // To make something global within closure, make it a property of window
     window.SpriteLibrary = window.SpriteLibrary || { };
 
-    SpriteLibrary.heart = function (heartProperties) {
+    SpriteLibrary.heart = function (heartProperties){
         // Some code modified from Mozilla Canvas Tutorial
 
         var renderingContext = heartProperties.renderingContext;
@@ -23,15 +23,15 @@
         function drawLeftHalfOfHeart(){
             renderingContext.save();
             renderingContext.beginPath();
-            renderingContext.moveTo(75,120);
+            renderingContext.moveTo(0,0);
             if (howBroken != 1 && howBroken <= 5){
-                renderingContext.bezierCurveTo(40,102,20,80,20,62.5);
+                renderingContext.bezierCurveTo(/*check*/-35,-18,-50,-40,-55,-57.5);
             }
             if (howBroken < 10){
-                renderingContext.bezierCurveTo(20,62.5,20,25,50,25);
+                renderingContext.bezierCurveTo(-55,-57.5,-55,-95,-25,-95);
             }
             if (howBroken < 2){
-                renderingContext.bezierCurveTo(70,25,75,37,75,40);
+                renderingContext.bezierCurveTo(-10,-95,0,-83,0,-80);
             } 
             fillWithColor("red");
             renderingContext.closePath();
@@ -41,15 +41,15 @@
         function drawRightHalfOfHeart(){
             renderingContext.save();
             renderingContext.beginPath();
-            renderingContext.moveTo(75,120);
+            renderingContext.moveTo(0,0);
             if (howBroken != 4 && howBroken < 6){
-                renderingContext.bezierCurveTo(110,102,130,80,130,62.5);
+                renderingContext.bezierCurveTo(35,-18,55,-40,55,-57.5);
             }
             if (howBroken != 5 && howBroken < 8){
-                renderingContext.bezierCurveTo(130,62.5,130,25,100,25);
+                renderingContext.bezierCurveTo(55,-57.5,55,-95,25,-95);
             }
             if (howBroken != 7 && howBroken < 9){
-               renderingContext.bezierCurveTo(85,25,75,37,75,40); 
+               renderingContext.bezierCurveTo(10,-95,0,-83,0,-80); 
             }
             fillWithColor("red");
             renderingContext.closePath();

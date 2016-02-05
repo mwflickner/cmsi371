@@ -14,7 +14,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="heart.js"></script>
     <script>
-      (function () {
+      (function (){
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
         //var broken = 0; Uncomment to animate
@@ -31,7 +31,7 @@
             renderingContext.restore();
           }
 
-          createHeart(0,0,0);
+          createHeart(250,250,0);
 
           /* Uncomment to animate heart breaking
             broken = broken + .2;

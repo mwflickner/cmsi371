@@ -14,16 +14,16 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="fruit.js"></script>
     <script>
-      (function () {
+      (function (){
         var canvas = document.getElementById("canvas");
         var renderingContext = canvas.getContext("2d");
 
-        var drawScene = function() {
+        var drawScene = function(){
 
           function createFruit(x,y,fruitType,isEaten){
             renderingContext.save();
             renderingContext.translate(x,y);
-            renderingContext.scale(.1,.1);
+            renderingContext.scale(.5,.5);
             SpriteLibrary.fruit({
               renderingContext: renderingContext,
               fruitType: fruitType,
@@ -31,11 +31,10 @@
             });
             renderingContext.restore();
           }
-          var y = 250;
-          createFruit(350, y, "strawberry", false);
-          createFruit(250, y, "cherry", false);
+          var y = 150;
+          createFruit(250, y, "strawberry", false);
+          createFruit(100, y, "cherry", false);
 
-          renderingContext.restore();
           window.requestAnimationFrame(drawScene);
         };
         window.requestAnimationFrame(drawScene);
