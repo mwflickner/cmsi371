@@ -8,6 +8,26 @@
     // First, a selection of "drawing functions" from which we
     // can choose.  Their common trait: they all accept a single
     // renderingContext argument.
+    var pacman = function (renderingContext){
+        SpriteLibrary.pacman({
+            renderingContext: renderingContext,
+            isFacingLeft: false,
+            mouthDegree: Math.PI/4
+        });
+    }
+
+    var ghost = function (renderingContext){
+        SpriteLibrary.ghost({
+            renderingContext: renderingContext,
+            eyeDirection: "down",
+            canBeEaten: false,
+            ghostColor: "cyan",
+            mood: "happy",
+            isEaten: false
+        });
+    }
+        
+
     var square = function (renderingContext) {
         renderingContext.fillStyle = "blue";
         renderingContext.fillRect(-20, -20, 40, 40);
@@ -27,7 +47,7 @@
     // has a drawing function and an array of keyframes.
     var sprites = [
         {
-            draw: square,
+            draw: pacman,
             keyframes: [
                 {
                     frame: 0,
@@ -54,7 +74,7 @@
         },
 
         {
-            draw: circle,
+            draw: ghost,
             keyframes: [
                 {
                     frame: 50,
