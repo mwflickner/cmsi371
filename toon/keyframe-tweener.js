@@ -150,6 +150,11 @@
                     (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
         },
 
+        chomp: function (currentTime, openAngle, closedAngle, duration){
+            var percentComplete = currentTime / duration;
+
+        },
+
         initialize: initializeAnimation
     };
 }());
