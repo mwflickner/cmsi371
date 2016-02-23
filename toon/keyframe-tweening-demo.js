@@ -185,16 +185,6 @@
         },
 
         {
-            function drawBallRow(){
-                for (i = 0; i < canvasRightEdge; i = i + canvas.width/10) {
-                    drawBall(i, canvasCenterHeight, false);
-                }
-            }
-
-            function drawBall(x,y,isPowerball){
-                
-            }
-
             draw: ball,
             keyframes: [
                 {
