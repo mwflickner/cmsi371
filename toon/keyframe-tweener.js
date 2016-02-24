@@ -108,8 +108,36 @@
                             ease(currentTweenFrame, rotateStart, rotateDistance, duration)
                         );
 
+                        var keyframe = sprites[i].keyframes[j];
+                        
+                        
+                        var movingLeft = false;
+                        if (txStart > endKeyframe.tx){
+                            movingLeft = true
+                        }
+
+                        var mouthAngle = keyframe.mouthDegree || Math.PI/2;
+                        var closing = false;
+                        if (currentFrame%10 > 4){
+                            closing = true;
+                        }
+                        if (closing) {
+                            newMouthAngle = mouthAngle/((currentFrame % 5) + 1);
+                        } else {
+                            newMouthAngle = mouthAngle/((4 - currentFrame % 5) + 1);
+                        }
+                        console.log(currentFrame%10);
+
+
+                        var isFacingLeft = keyframe.isFacingLeft || movingLeft;
+                        var properties = {
+                            renderingContext: renderingContext,
+                            isFacingLeft: isFacingLeft,
+                            mouthDegree: newMouthAngle
+                        }
+
                         // Draw the sprite.
-                        sprites[i].draw(renderingContext);
+                        sprites[i].draw(properties);
 
                         // Clean up.
                         renderingContext.restore();

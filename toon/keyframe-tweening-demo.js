@@ -59,7 +59,6 @@
     var canvasCenterWidth = canvas.width/2;
     var canvasRightEdge = canvas.width;
     var canvasBottomEdge = canvas.height;
-    console.log(canvas.width);
     
     // Now, to actually define the animated sprites.  Each sprite
     // has a drawing function and an array of keyframes.
@@ -74,140 +73,156 @@
                     ease: KeyframeTweener.linear
                 },
 
-                {
-                    frame: 40,
-                    tx: canvasRightEdge/2,
-                    ty: canvasCenterHeight,
-                    ease: KeyframeTweener.linear
-                },
-
                 // The last keyframe does not need an easing function.
                 {
                     frame: 80,
                     tx: canvasRightEdge + 100,
-                    ty: canvasCenterHeight
+                    ty: canvasCenterHeight,
+                    ease: KeyframeTweener.linear
                     //rotate: 60 // Keyframe.rotate uses degrees.
-                }
-            ]
-        },
-
-        {
-            draw: orangeGhost,
-            keyframes: [
-                {
-                    frame: 50,
-                    tx: 300,
-                    ty: canvasBottomEdge,
-                    //sx: 0.5,
-                    //sy: 0.5,
-                    ease: KeyframeTweener.quadEaseOut
                 },
 
                 {
                     frame: 100,
-                    tx: 300,
-                    ty: 100,
-                    //sx: 3,
-                    //sy: 0.25,
-                    ease: KeyframeTweener.quadEaseOut
-                },
-
-                {
-                    frame: 150,
-                    tx: 400,
-                    ty: 100,
-                    //sx: 0.5,
-                    //sy: 0.5
-                }
-            ]
-        },
-
-        {
-            draw: pinkGhost,
-            keyframes: [
-                {
-                    frame: 50,
-                    tx: 300,
-                    ty: canvasBottomEdge + 100,
-                    //sx: 0.5,
-                    //sy: 0.5,
-                    ease: KeyframeTweener.quadEaseOut
-                },
-
-                {
-                    frame: 100,
-                    tx: 300,
-                    ty: 200,
-                    //sx: 3,
-                    //sy: 0.25,
-                    ease: KeyframeTweener.quadEaseOut
-                },
-
-                {
-                    frame: 150,
-                    tx: 300,
-                    ty: 100,
-                    //sx: 0.5,
-                    //sy: 0.5
-                }
-            ]
-        },
-
-        {
-            draw: fruit1,
-            keyframes: [
-                {
-                    frame: 50,
-                    tx: 300,
-                    ty: canvasBottomEdge + 100,
-                    sx: 0.25,
-                    sy: 0.25,
-                    ease: KeyframeTweener.quadEaseOut
-                },
-
-                {
-                    frame: 100,
-                    tx: 300,
-                    ty: 200,
-                    sx: 0.25,
-                    sy: 0.25,
-                    ease: KeyframeTweener.quadEaseOut
-                },
-
-                {
-                    frame: 150,
-                    tx: 300,
-                    ty: 100,
-                    sx: 0.25,
-                    sy: 0.25
-                }
-            ]
-        },
-
-        {
-            draw: ball,
-            keyframes: [
-                {
-                    frame: 50,
-                    tx: 300,
+                    tx: canvasRightEdge + 100,
                     ty: canvasCenterHeight,
-                    ease: KeyframeTweener.quadEaseOut
+                    isFacingLeft: true,
+                    ease: KeyframeTweener.linear
                 },
 
                 {
-                    frame: 100,
-                    tx: 300,
+                    frame: 140,
+                    tx: canvasCenterWidth,
                     ty: canvasCenterHeight,
-                    ease: KeyframeTweener.quadEaseOut
+                    isFacingLeft: false,
+                    ease: KeyframeTweener.linear
                 },
 
                 {
-                    frame: 150,
-                    tx: 300,
+                    frame: 180,
+                    tx: canvasRightEdge + 100,
                     ty: canvasCenterHeight
                 }
             ]
         }
+
+        // {
+        //     draw: orangeGhost,
+        //     keyframes: [
+        //         {
+        //             frame: 50,
+        //             tx: 300,
+        //             ty: canvasBottomEdge,
+        //             //sx: 0.5,
+        //             //sy: 0.5,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 100,
+        //             tx: 300,
+        //             ty: 100,
+        //             //sx: 3,
+        //             //sy: 0.25,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 150,
+        //             tx: 400,
+        //             ty: 100,
+        //             //sx: 0.5,
+        //             //sy: 0.5
+        //         }
+        //     ]
+        // },
+
+        // {
+        //     draw: pinkGhost,
+        //     keyframes: [
+        //         {
+        //             frame: 50,
+        //             tx: 300,
+        //             ty: canvasBottomEdge + 100,
+        //             //sx: 0.5,
+        //             //sy: 0.5,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 100,
+        //             tx: 300,
+        //             ty: 200,
+        //             //sx: 3,
+        //             //sy: 0.25,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 150,
+        //             tx: 300,
+        //             ty: 100,
+        //             //sx: 0.5,
+        //             //sy: 0.5
+        //         }
+        //     ]
+        // },
+
+        // {
+        //     draw: fruit1,
+        //     keyframes: [
+        //         {
+        //             frame: 50,
+        //             tx: 300,
+        //             ty: canvasBottomEdge + 100,
+        //             sx: 0.25,
+        //             sy: 0.25,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 100,
+        //             tx: 300,
+        //             ty: 200,
+        //             sx: 0.25,
+        //             sy: 0.25,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 150,
+        //             tx: 300,
+        //             ty: 100,
+        //             sx: 0.25,
+        //             sy: 0.25
+        //         }
+        //     ]
+        // },
+
+        // {
+        //     draw: ball,
+        //     keyframes: [
+        //         {
+        //             frame: 50,
+        //             tx: 300,
+        //             ty: canvasCenterHeight,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 100,
+        //             tx: 300,
+        //             ty: canvasCenterHeight,
+        //             ease: KeyframeTweener.quadEaseOut
+        //         },
+
+        //         {
+        //             frame: 150,
+        //             tx: 300,
+        //             ty: canvasCenterHeight
+        //         }
+        //     ]
+        // }
     ];
 
     // Finally, we initialize the engine.  Mainly, it needs

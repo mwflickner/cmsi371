@@ -10,9 +10,10 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.pacman = function (pacmanProperties){
-        var renderingContext = pacmanProperties.renderingContext;
-        var isFacingLeft = pacmanProperties.isFacingLeft || false;
-        var mouthDegree = pacmanProperties.mouthDegree;
+        var tweenable = pacmanProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
+        var isFacingLeft = tweenable.isFacingLeft || false;
+        var mouthDegree = tweenable.mouthDegree || Math.PI/4;
         var pacmanRadius = pacmanProperties.pacmanRadius || 100;
         var pacmanCenter = {xPos: 0, yPos: 0};
 
