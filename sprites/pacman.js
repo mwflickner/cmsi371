@@ -10,6 +10,7 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.pacman = function (pacmanProperties){
+
         var tweenable = pacmanProperties.renderingContext;
         var renderingContext = tweenable.renderingContext;
         var isFacingLeft = tweenable.isFacingLeft || false;
@@ -32,11 +33,13 @@
             renderingContext.beginPath();
             var x = pacmanCenter.xPos;
             var y = pacmanCenter.yPos;
+
             if (isFacingLeft){
                 renderingContext.arc(x, y, pacmanRadius, Math.PI + mouthDegree/2, Math.PI - mouthDegree/2, false);
             } else {
                 renderingContext.arc(x, y, pacmanRadius, mouthDegree/2, -mouthDegree/2, false);
-            }     
+            } 
+                
             renderingContext.lineTo(pacmanCenter.xPos, pacmanCenter.yPos);
             fillWithColor("yellow");
             renderingContext.closePath();

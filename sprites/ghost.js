@@ -4,7 +4,8 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.ghost = function (ghostProperties){
-        var renderingContext = ghostProperties.renderingContext;
+        var tweenable = ghostProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
         var eyeDirection = ghostProperties.eyeDirection;
         var canBeEaten = ghostProperties.canBeEaten || false;
         var ghostColor = ghostProperties.ghostColor;
@@ -14,7 +15,7 @@
         var ghostPosition = {xPos: 0, yPos: 0};
         var ghostWidth = 100;
 
-        function fillWithColor(color){
+        var fillWithColor = function(color){
             renderingContext.fillStyle = color;
             renderingContext.fill();
         }

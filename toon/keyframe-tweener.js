@@ -110,7 +110,7 @@
 
                         var keyframe = sprites[i].keyframes[j];
                         
-                        
+                        // Pacman Properties
                         var movingLeft = false;
                         if (txStart > endKeyframe.tx){
                             movingLeft = true
@@ -126,14 +126,17 @@
                         } else {
                             newMouthAngle = mouthAngle/((4 - currentFrame % 5) + 1);
                         }
-                        console.log(currentFrame%10);
+                        console.log(ghostMood);
 
+                        // Ghost Properties
+                        var ghostMood = keyframe.ghostMood;
 
                         var isFacingLeft = keyframe.isFacingLeft || movingLeft;
                         var properties = {
                             renderingContext: renderingContext,
                             isFacingLeft: isFacingLeft,
-                            mouthDegree: newMouthAngle
+                            mouthDegree: newMouthAngle,
+                            ghostMood: ghostMood
                         }
 
                         // Draw the sprite.

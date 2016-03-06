@@ -104,38 +104,35 @@
                     ty: canvasCenterHeight
                 }
             ]
+        },
+
+        {
+            draw: orangeGhost,
+            keyframes: [
+                {
+                    frame: 50,
+                    tx: 300,
+                    ty: canvasBottomEdge,
+                    ghostMood: "happy",
+                    ease: KeyframeTweener.linear
+                },
+
+                {
+                    frame: 100,
+                    tx: 300,
+                    ty: 100,
+                    ghostMood: "sad",
+                    ease: KeyframeTweener.linear
+                },
+
+                {
+                    frame: 150,
+                    tx: 400,
+                    ty: 100,
+                    ghostMood: "sad"
+                }
+            ]
         }
-
-        // {
-        //     draw: orangeGhost,
-        //     keyframes: [
-        //         {
-        //             frame: 50,
-        //             tx: 300,
-        //             ty: canvasBottomEdge,
-        //             //sx: 0.5,
-        //             //sy: 0.5,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
-
-        //         {
-        //             frame: 100,
-        //             tx: 300,
-        //             ty: 100,
-        //             //sx: 3,
-        //             //sy: 0.25,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
-
-        //         {
-        //             frame: 150,
-        //             tx: 400,
-        //             ty: 100,
-        //             //sx: 0.5,
-        //             //sy: 0.5
-        //         }
-        //     ]
-        // },
 
         // {
         //     draw: pinkGhost,
