@@ -130,6 +130,8 @@
 
                         // Ghost Properties
                         var ghostMood = keyframe.ghostMood;
+                        var isEaten = keyframe.isEaten;
+                        var canBeEaten = keyframe.canBeEaten;
 
                         var isFacingLeft = keyframe.isFacingLeft || movingLeft;
                         var properties = {

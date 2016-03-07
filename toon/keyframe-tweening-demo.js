@@ -128,8 +128,7 @@
                 {
                     frame: 150,
                     tx: 400,
-                    ty: 100,
-                    ghostMood: "sad"
+                    ty: 100
                 }
             ]
         }
