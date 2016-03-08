@@ -134,7 +134,7 @@
                     ty: canvasCenterHeight,
                     ghostMood: "meh",
                     eyeDirection: "right",
-                    ease: KeyframeTweener.quadEaseInAndOut
+                    ease: KeyframeTweener.sineEaseInAndOut
                 },
 
                 {
@@ -187,7 +187,7 @@
                     tx: canvas.width/2 - 140,
                     ty: heartHeight,
                     howBroken: 0,
-                    ease: KeyframeTweener.quadEaseInAndOut
+                    ease: KeyframeTweener.sineEaseInAndOut
                 },
 
                 {

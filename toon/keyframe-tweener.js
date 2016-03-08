@@ -196,9 +196,9 @@
                     (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
         },
 
-        chomp: function (currentTime, openAngle, closedAngle, duration){
-            var percentComplete = currentTime / duration;
-
+        sineEaseInAndOut: function (currentTime, start, distance, duration) {
+            var percentComplete = currentTime/ (duration / 2);
+            return -distance/2 * (Math.cos(Math.PI*currentTime/duration) - 1) + start;
         },
 
         initialize: initializeAnimation
