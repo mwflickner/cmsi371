@@ -126,19 +126,29 @@
                         } else {
                             newMouthAngle = mouthAngle/((4 - currentFrame % 5) + 1);
                         }
-                        console.log(ghostMood);
+                        //console.log(ghostMood);
 
                         // Ghost Properties
                         var ghostMood = keyframe.ghostMood;
-                        var isEaten = keyframe.isEaten;
+                        var eyeDirection = keyframe.eyeDirection;
+                        var ghostIsEaten = keyframe.ghostIsEaten;
                         var canBeEaten = keyframe.canBeEaten;
+
+                        // Ball Properties
+                        var ballIsEaten = keyframe.ballIsEaten;
+
+                        console.log(ballIsEaten);
 
                         var isFacingLeft = keyframe.isFacingLeft || movingLeft;
                         var properties = {
                             renderingContext: renderingContext,
                             isFacingLeft: isFacingLeft,
                             mouthDegree: newMouthAngle,
-                            ghostMood: ghostMood
+                            ghostMood: ghostMood,
+                            ghostIsEaten: ghostIsEaten,
+                            ballIsEaten: ballIsEaten,
+                            eyeDirection: eyeDirection
+
                         }
 
                         // Draw the sprite.

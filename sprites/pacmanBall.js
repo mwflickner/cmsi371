@@ -10,9 +10,10 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.pacmanBall = function (ballProperties){
-        var renderingContext = ballProperties.renderingContext;
-        var isPowerball = ballProperties.isPowerball || false;
-        var isEaten = ballProperties.isEaten || false;
+        var tweenable = ballProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
+        var isPowerball = tweenable.isPowerball || false;
+        var isEaten = tweenable.ballIsEaten || false;
 
         var ballCenter = {xPos : 0, yPos : 0};
         var ballRadius = 25;

@@ -10,7 +10,7 @@
         var canBeEaten = tweenable.canBeEaten || false;
         var ghostColor = ghostProperties.ghostColor;
         var ghostMood = tweenable.ghostMood;
-        var isEaten = tweenable.isEaten || false;
+        var isEaten = tweenable.ghostIsEaten || false;
 
         var ghostPosition = {xPos: 0, yPos: 0};
         var ghostWidth = 100;

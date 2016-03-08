@@ -37,6 +37,17 @@
             isEaten: false
         });
     }
+
+    var redGhost = function (renderingContext){
+        SpriteLibrary.ghost({
+            renderingContext: renderingContext,
+            eyeDirection: "down",
+            canBeEaten: false,
+            ghostColor: "red",
+            mood: "happy",
+            isEaten: false
+        });
+    }
         
     var fruit1 = function (renderingContext){
         SpriteLibrary.fruit({
@@ -73,25 +84,15 @@
                     ease: KeyframeTweener.linear
                 },
 
-                // The last keyframe does not need an easing function.
                 {
-                    frame: 80,
+                    frame: 110,
                     tx: canvasRightEdge + 100,
                     ty: canvasCenterHeight,
-                    ease: KeyframeTweener.linear
-                    //rotate: 60 // Keyframe.rotate uses degrees.
-                },
-
-                {
-                    frame: 100,
-                    tx: canvasRightEdge + 100,
-                    ty: canvasCenterHeight,
-                    isFacingLeft: true,
                     ease: KeyframeTweener.linear
                 },
 
                 {
-                    frame: 140,
+                    frame: 165,
                     tx: canvasCenterWidth,
                     ty: canvasCenterHeight,
                     isFacingLeft: false,
@@ -99,7 +100,7 @@
                 },
 
                 {
-                    frame: 180,
+                    frame: 210,
                     tx: canvasRightEdge + 100,
                     ty: canvasCenterHeight
                 }
@@ -107,31 +108,51 @@
         },
 
         {
-            draw: orangeGhost,
+            draw: redGhost,
             keyframes: [
                 {
-                    frame: 50,
-                    tx: 300,
-                    ty: canvasBottomEdge,
+                    frame: 90,
+                    tx: -50,
+                    ty: canvasCenterHeight,
                     ghostMood: "happy",
+                    eyeDirection: "right",
                     ease: KeyframeTweener.linear
                 },
 
                 {
-                    frame: 100,
-                    tx: 300,
-                    ty: 100,
+                    frame: 165,
+                    tx: canvas.width/2 - 150,
+                    ty: canvasCenterHeight,
+                    ghostMood: "meh",
+                    eyeDirection: "right",
+                    ease: KeyframeTweener.linear
+                },
+
+                {
+                    frame: 210,
+                    tx: canvasRightEdge - 150,
+                    ty: canvasCenterHeight,
                     ghostMood: "sad",
+                    eyeDirection: "right",
                     ease: KeyframeTweener.linear
                 },
 
                 {
-                    frame: 150,
-                    tx: 400,
-                    ty: 100
+                    frame: 220,
+                    tx: canvasRightEdge - 150,
+                    ty: canvasCenterHeight,
+                    ghostMood: "sad",
+                    eyeDirection: "down",
+                    ease: KeyframeTweener.linear
+                },
+
+                {
+                    frame: 230,
+                    tx: canvasRightEdge - 150,
+                    ty: canvasCenterHeight
                 }
             ]
-        }
+        },
 
         // {
         //     draw: pinkGhost,
@@ -195,30 +216,364 @@
         //     ]
         // },
 
-        // {
-        //     draw: ball,
-        //     keyframes: [
-        //         {
-        //             frame: 50,
-        //             tx: 300,
-        //             ty: canvasCenterHeight,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
+        // #1 Left-most ball
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
 
-        //         {
-        //             frame: 100,
-        //             tx: 300,
-        //             ty: canvasCenterHeight,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
+                {
+                    frame: 8,
+                    tx: canvas.width/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
 
-        //         {
-        //             frame: 150,
-        //             tx: 300,
-        //             ty: canvasCenterHeight
-        //         }
-        //     ]
-        // }
+                {
+                    frame: 200,
+                    tx: canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                },
+
+                {
+                    frame: 250,
+                    tx: canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #2
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: canvasRightEdge/6,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 16,
+                    tx: canvas.width/6,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: canvasRightEdge/6,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #3
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: canvasRightEdge/4,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 24,
+                    tx: canvas.width/4,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: canvasRightEdge/4,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #4
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: canvasRightEdge/3,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                },
+
+                {
+                    frame: 32,
+                    tx: canvas.width/3,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: canvasRightEdge/3,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #5
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: 5*canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 40,
+                    tx: 5*canvas.width/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: 5*canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #6 Center ball
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 48,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #7
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: 7*canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 56,
+                    tx: 7*canvas.width/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: 7*canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #8
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: 2*canvasRightEdge/3,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 64,
+                    tx: 2*canvas.width/3,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: 2*canvasRightEdge/3,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #9
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: 3*canvasRightEdge/4,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 72,
+                    tx: 3*canvas.width/4,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: 3*canvasRightEdge/4,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #10
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: 5*canvasRightEdge/6,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 80,
+                    tx: 5*canvas.width/6,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: 5*canvasRightEdge/6,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        },
+
+        // #11 Right-most ball
+        {
+            draw: ball,
+            keyframes: [
+                {
+                    frame: 0,
+                    tx: 11*canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5
+                },
+
+                {
+                    frame: 88,
+                    tx: 11*canvas.width/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: true
+                },
+
+                {
+                    frame: 200,
+                    tx: 11*canvasRightEdge/12,
+                    ty: canvasCenterHeight,
+                    sx: 0.5,
+                    sy: 0.5,
+                    ballIsEaten: false
+                }
+            ]
+        }
     ];
 
     // Finally, we initialize the engine.  Mainly, it needs
