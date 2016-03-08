@@ -11,16 +11,16 @@
 
     SpriteLibrary.heart = function (heartProperties){
         // Some code modified from Mozilla Canvas Tutorial
+        var tweenable = heartProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
+        var howBroken = tweenable.howBroken;
 
-        var renderingContext = heartProperties.renderingContext;
-        var howBroken = heartProperties.howBroken;
-
-        function fillWithColor(color){
+        var fillWithColor = function(color){
             renderingContext.fillStyle = color;
             renderingContext.fill();
         }
 
-        function drawLeftHalfOfHeart(){
+        var drawLeftHalfOfHeart = function(){
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.moveTo(0,0);
@@ -38,7 +38,7 @@
             renderingContext.restore(); 
         }
 
-        function drawRightHalfOfHeart(){
+        var drawRightHalfOfHeart = function(){
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.moveTo(0,0);

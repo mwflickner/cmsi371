@@ -108,8 +108,54 @@
                             ease(currentTweenFrame, rotateStart, rotateDistance, duration)
                         );
 
+                        var keyframe = sprites[i].keyframes[j];
+                        
+                        // Pacman Properties
+                        var movingLeft = false;
+                        if (txStart > endKeyframe.tx){
+                            movingLeft = true
+                        }
+
+                        var mouthAngle = keyframe.mouthDegree || Math.PI/2;
+                        var closing = false;
+                        if (currentFrame%10 > 4){
+                            closing = true;
+                        }
+                        if (closing) {
+                            newMouthAngle = mouthAngle/((currentFrame % 5) + 1);
+                        } else {
+                            newMouthAngle = mouthAngle/((4 - currentFrame % 5) + 1);
+                        }
+                        //console.log(ghostMood);
+
+                        // Ghost Properties
+                        var ghostMood = keyframe.ghostMood;
+                        var eyeDirection = keyframe.eyeDirection;
+                        var ghostIsEaten = keyframe.ghostIsEaten;
+                        var canBeEaten = keyframe.canBeEaten;
+
+                        // Ball Properties
+                        var ballIsEaten = keyframe.ballIsEaten;
+
+                        // Heart Properties
+                        var howBroken = keyframe.howBroken;
+
+                        console.log(ballIsEaten);
+
+                        var isFacingLeft = keyframe.isFacingLeft || movingLeft;
+                        var properties = {
+                            renderingContext: renderingContext,
+                            isFacingLeft: isFacingLeft,
+                            mouthDegree: newMouthAngle,
+                            ghostMood: ghostMood,
+                            ghostIsEaten: ghostIsEaten,
+                            ballIsEaten: ballIsEaten,
+                            eyeDirection: eyeDirection,
+                            howBroken: howBroken
+                        }
+
                         // Draw the sprite.
-                        sprites[i].draw(renderingContext);
+                        sprites[i].draw(properties);
 
                         // Clean up.
                         renderingContext.restore();
@@ -148,6 +194,11 @@
             return (percentComplete < 1) ?
                     (distance / 2) * percentComplete * percentComplete + start :
                     (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
+        },
+
+        chomp: function (currentTime, openAngle, closedAngle, duration){
+            var percentComplete = currentTime / duration;
+
         },
 
         initialize: initializeAnimation

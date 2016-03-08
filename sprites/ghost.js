@@ -4,27 +4,28 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.ghost = function (ghostProperties){
-        var renderingContext = ghostProperties.renderingContext;
-        var eyeDirection = ghostProperties.eyeDirection;
-        var canBeEaten = ghostProperties.canBeEaten || false;
+        var tweenable = ghostProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
+        var eyeDirection = tweenable.eyeDirection;
+        var canBeEaten = tweenable.canBeEaten || false;
         var ghostColor = ghostProperties.ghostColor;
-        var ghostMood = ghostProperties.mood;
-        var isEaten = ghostProperties.isEaten || false;
+        var ghostMood = tweenable.ghostMood;
+        var isEaten = tweenable.ghostIsEaten || false;
 
         var ghostPosition = {xPos: 0, yPos: 0};
         var ghostWidth = 100;
 
-        function fillWithColor(color){
+        var fillWithColor = function(color){
             renderingContext.fillStyle = color;
             renderingContext.fill();
         }
 
-        function strokeWithColor(color){
+        var strokeWithColor = function(color){
             renderingContext.strokeStyle = color;
             renderingContext.stroke();
         }
 
-        function drawPupil(eyePupilX, eyePupilY){
+        var drawPupil = function(eyePupilX, eyePupilY){
             function getPupilDirection(){
                 if(eyeDirection == "left"){
                     return {x: -7/200*ghostWidth, y: 0};
@@ -54,7 +55,7 @@
             renderingContext.restore();
         }
 
-        function drawEye(isLeftEye){
+        var drawEye = function(isLeftEye){
             var eyeCenterY = ghostPosition.yPos - 1/20*ghostWidth;
             var eyeCenterX;
             if (isLeftEye){
@@ -73,7 +74,7 @@
             drawPupil(eyeCenterX, eyeCenterY);
         }
 
-        function drawMouth(){
+        var drawMouth = function(){
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.lineWidth = Math.floor(ghostWidth/100)*2
@@ -118,7 +119,7 @@
             renderingContext.restore();
         }
 
-        function drawBody(){
+        var drawBody = function(){
             renderingContext.save();
             renderingContext.beginPath();
             renderingContext.arc(ghostPosition.xPos, ghostPosition.yPos, ghostWidth/2, 0, Math.PI, true);
@@ -143,7 +144,7 @@
             renderingContext.restore();
         }
 
-        function drawGhost(){
+        var drawGhost = function(){
             if (!isEaten){
                 drawBody();
                 drawMouth();

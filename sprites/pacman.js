@@ -10,32 +10,36 @@
     window.SpriteLibrary = window.SpriteLibrary || { };
 
     SpriteLibrary.pacman = function (pacmanProperties){
-        var renderingContext = pacmanProperties.renderingContext;
-        var isFacingLeft = pacmanProperties.isFacingLeft || false;
-        var mouthDegree = pacmanProperties.mouthDegree;
+
+        var tweenable = pacmanProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
+        var isFacingLeft = tweenable.isFacingLeft || false;
+        var mouthDegree = tweenable.mouthDegree || Math.PI/4;
         var pacmanRadius = pacmanProperties.pacmanRadius || 100;
         var pacmanCenter = {xPos: 0, yPos: 0};
 
-        function fillWithColor(color){
+        var fillWithColor = function(color){
             renderingContext.fillStyle = color;
             renderingContext.fill();
         }
 
-        function strokeWithColor(color){
+        var strokeWithColor = function(color){
             renderingContext.strokeStyle = color;
             renderingContext.stroke();
         }
 
-        function drawPacman(){
+        var drawPacman = function(){
             renderingContext.save();
             renderingContext.beginPath();
             var x = pacmanCenter.xPos;
             var y = pacmanCenter.yPos;
+
             if (isFacingLeft){
                 renderingContext.arc(x, y, pacmanRadius, Math.PI + mouthDegree/2, Math.PI - mouthDegree/2, false);
             } else {
                 renderingContext.arc(x, y, pacmanRadius, mouthDegree/2, -mouthDegree/2, false);
-            }     
+            } 
+                
             renderingContext.lineTo(pacmanCenter.xPos, pacmanCenter.yPos);
             fillWithColor("yellow");
             renderingContext.closePath();
