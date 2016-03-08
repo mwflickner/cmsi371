@@ -18,17 +18,17 @@
         var pacmanRadius = pacmanProperties.pacmanRadius || 100;
         var pacmanCenter = {xPos: 0, yPos: 0};
 
-        function fillWithColor(color){
+        var fillWithColor = function(color){
             renderingContext.fillStyle = color;
             renderingContext.fill();
         }
 
-        function strokeWithColor(color){
+        var strokeWithColor = function(color){
             renderingContext.strokeStyle = color;
             renderingContext.stroke();
         }
 
-        function drawPacman(){
+        var drawPacman = function(){
             renderingContext.save();
             renderingContext.beginPath();
             var x = pacmanCenter.xPos;

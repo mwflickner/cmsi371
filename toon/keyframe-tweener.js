@@ -137,6 +137,9 @@
                         // Ball Properties
                         var ballIsEaten = keyframe.ballIsEaten;
 
+                        // Heart Properties
+                        var howBroken = keyframe.howBroken;
+
                         console.log(ballIsEaten);
 
                         var isFacingLeft = keyframe.isFacingLeft || movingLeft;
@@ -147,8 +150,8 @@
                             ghostMood: ghostMood,
                             ghostIsEaten: ghostIsEaten,
                             ballIsEaten: ballIsEaten,
-                            eyeDirection: eyeDirection
-
+                            eyeDirection: eyeDirection,
+                            howBroken: howBroken
                         }
 
                         // Draw the sprite.
