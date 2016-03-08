@@ -120,6 +120,7 @@
                 },
 
                 {
+                    
                     frame: 165,
                     tx: canvas.width/2 - 150,
                     ty: canvasCenterHeight,
