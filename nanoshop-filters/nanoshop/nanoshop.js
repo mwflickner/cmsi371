@@ -10,6 +10,10 @@ var Nanoshop = {
         return [ r / 2, g / 2, b / 2, a ];
     },
 
+    alienBeam: function (x, y, r, g, b, a) {
+        return [r, g*1.2, b*1.5, a*1.2];
+    },
+
     /*
      * Applies the given filter to the given ImageData object,
      * then modifies its pixels according to the given filter.

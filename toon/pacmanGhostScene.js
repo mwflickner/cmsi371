@@ -132,7 +132,7 @@
 
                 {
                     frame: 165,
-                    tx: canvas.width/2 - 150,
+                    tx: canvas.width/2 - 170,
                     ty: canvasCenterHeight,
                     ghostColor: "orange",
                     ghostMood: "meh",
@@ -291,6 +291,17 @@
                     howBroken: 3
                 }
             ]
+        },
+
+        {
+            draw: heart,
+            keyframes: [
+                {
+                    frame: 90,
+                    tx: -40,
+                    ty: heartHeight,
+                    howBroken: 0
+                }
         },
 
         {

@@ -147,18 +147,8 @@
                         // Fruit
                         var fruitType = keyframe.fruitType;
                         var fruitIsEaten = keyframe.fruitIsEaten;
-                        console.log(movingLeft + "pls");
                         var isFacingLeft = startKeyframe.isFacingLeft || movingLeft;
-                        renderingContext.isFacingLeft = isFacingLeft;
-                        renderingContext.mouthDegree = newMouthAngle;
-                        renderingContext.ghostColor = ghostColor;
-                        renderingContext.ghostMood = ghostMood;
-                        renderingContext.ghostIsEaten = ghostIsEaten;
-                        renderingContext.canBeEaten = canBeEaten;
-                        renderingContext.ballIsEaten = ballIsEaten;
-                        renderingContext.eyeDirection = eyeDirection;
-                        renderingContext.howBroken = howBroken;
-                        renderingContext.fruitType = fruitType;
+                        
                         //console.log(startKeyframe);
 
                         var properties = {
