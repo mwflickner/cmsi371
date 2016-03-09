@@ -14,6 +14,10 @@ var Nanoshop = {
         return [r, g*1.2, b*1.5, a*1.2];
     },
 
+    deathStar: function (x, y, r, g, b, a) {
+        return [r*1.01, g*1.3, b, a];
+    },
+
     /*
      * Applies the given filter to the given ImageData object,
      * then modifies its pixels according to the given filter.

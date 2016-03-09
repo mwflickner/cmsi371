@@ -92,7 +92,7 @@
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                Nanoshop.alienBeam
+                Nanoshop.deathStar
             ),
             0, 0
         );
