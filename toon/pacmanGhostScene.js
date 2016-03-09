@@ -297,11 +297,26 @@
             draw: heart,
             keyframes: [
                 {
-                    frame: 90,
-                    tx: -40,
+                    frame: 340,
+                    tx: canvasRightEdge + 40,
+                    ty: heartHeight,
+                    howBroken: 0
+                },
+
+                {
+                    frame: 370,
+                    tx: canvasRightEdge - 140,
+                    ty: heartHeight,
+                    howBroken: 0
+                },
+
+                {
+                    frame: 400,
+                    tx: canvasRightEdge + 40,
                     ty: heartHeight,
                     howBroken: 0
                 }
+            ]
         },
 
         {
