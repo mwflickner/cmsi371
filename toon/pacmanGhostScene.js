@@ -16,7 +16,7 @@
         });
     }
 
-    var orangeGhost = function (renderingContext){
+    var leftGhost = function (renderingContext){
         SpriteLibrary.ghost({
             renderingContext: renderingContext,
             eyeDirection: "down",
@@ -27,7 +27,7 @@
         });
     }
 
-    var pinkGhost = function (renderingContext){
+    var rightGhost = function (renderingContext){
         SpriteLibrary.ghost({
             renderingContext: renderingContext,
             eyeDirection: "down",
@@ -37,19 +37,8 @@
             isEaten: false
         });
     }
-
-    var redGhost = function (renderingContext){
-        SpriteLibrary.ghost({
-            renderingContext: renderingContext,
-            eyeDirection: "down",
-            canBeEaten: false,
-            ghostColor: "red",
-            mood: "happy",
-            isEaten: false
-        });
-    }
         
-    var fruit1 = function (renderingContext){
+    var fruit = function (renderingContext){
         SpriteLibrary.fruit({
             renderingContext: renderingContext,
             fruitType: "cherry",
@@ -112,17 +101,30 @@
                     frame: 210,
                     tx: canvasRightEdge + 100,
                     ty: canvasCenterHeight
+                },
+
+                {
+                    frame: 420,
+                    tx: canvasRightEdge + 100,
+                    ty: canvasCenterHeight
+                },
+
+                {
+                    frame: 530,
+                    tx: -100,
+                    ty: canvasCenterHeight
                 }
             ]
         },
 
         {
-            draw: orangeGhost,
+            draw: leftGhost,
             keyframes: [
                 {
                     frame: 90,
                     tx: -50,
                     ty: canvasCenterHeight,
+                    ghostColor: "orange",
                     ghostMood: "happy",
                     eyeDirection: "right",
                     ease: KeyframeTweener.linear
@@ -132,6 +134,7 @@
                     frame: 165,
                     tx: canvas.width/2 - 150,
                     ty: canvasCenterHeight,
+                    ghostColor: "orange",
                     ghostMood: "meh",
                     eyeDirection: "right",
                     ease: KeyframeTweener.sineEaseInAndOut
@@ -141,6 +144,7 @@
                     frame: 210,
                     tx: canvasRightEdge - 175,
                     ty: canvasCenterHeight,
+                    ghostColor: "orange",
                     ghostMood: "sad",
                     eyeDirection: "right",
                     ease: KeyframeTweener.linear
@@ -150,6 +154,7 @@
                     frame: 220,
                     tx: canvasRightEdge - 150,
                     ty: canvasCenterHeight,
+                    ghostColor: "orange",
                     ghostMood: "sad",
                     eyeDirection: "down",
                     ease: KeyframeTweener.linear
@@ -159,6 +164,7 @@
                     frame: 240,
                     tx: canvasRightEdge - 150,
                     ty: canvasCenterHeight,
+                    ghostColor: "orange",
                     ghostMood: "sad",
                     eyeDirection: "left",
                     ease: KeyframeTweener.linear
@@ -167,8 +173,74 @@
                 {
                     frame: 330,
                     tx: -100,
-                    ty: canvasCenterHeight
-                }
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "right"
+                },
+
+                {
+                    frame: 420,
+                    tx: -120,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "right"
+                },
+
+                {
+                    frame: 440,
+                    tx: canvas.width/8,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "shocked",
+                    eyeDirection: "right",
+                    canBeEaten: false
+                },
+
+                {
+                    frame: 468,
+                    tx: canvas.width/4,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "sad",
+                    eyeDirection: "right",
+                    canBeEaten: true
+                },
+
+                {
+                    frame: 485,
+                    tx: canvas.width/4 + 50,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "right",
+                    canBeEaten: false,
+                    ghostIsEaten: true
+                },
+
+                {
+                    frame: 520,
+                    tx: canvas.width/4 + 50,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "sad",
+                    eyeDirection: "down",
+                    canBeEaten: false,
+                    ghostIsEaten: true
+                },
+
+                {
+                    frame: 600,
+                    tx: canvas.width/4 + 50,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "sad",
+                    eyeDirection: "down",
+                    canBeEaten: false,
+                    ghostIsEaten: true
+                },
+
             ]
         },
 
@@ -221,69 +293,93 @@
             ]
         },
 
-        // {
-        //     draw: pinkGhost,
-        //     keyframes: [
-        //         {
-        //             frame: 50,
-        //             tx: 300,
-        //             ty: canvasBottomEdge + 100,
-        //             //sx: 0.5,
-        //             //sy: 0.5,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
+        {
+            draw: rightGhost,
+            keyframes: [
+                {
+                    frame: 340,
+                    tx: canvasRightEdge + 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "left",
+                    ease: KeyframeTweener.sineEaseInAndOut
+                },
 
-        //         {
-        //             frame: 100,
-        //             tx: 300,
-        //             ty: 200,
-        //             //sx: 3,
-        //             //sy: 0.25,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
+                {
+                    frame: 370,
+                    tx: 3*canvas.width/4,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "right",
+                    ease: KeyframeTweener.quadEaseOut
+                },
 
-        //         {
-        //             frame: 150,
-        //             tx: 300,
-        //             ty: 100,
-        //             //sx: 0.5,
-        //             //sy: 0.5
-        //         }
-        //     ]
-        // },
+                {
+                    frame: 400,
+                    tx: canvasRightEdge + 50,
+                    ty: canvasCenterHeight,
+                }
+            ]
+        },
 
-        // {
-        //     draw: fruit1,
-        //     keyframes: [
-        //         {
-        //             frame: 50,
-        //             tx: 300,
-        //             ty: canvasBottomEdge + 100,
-        //             sx: 0.25,
-        //             sy: 0.25,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
+        {
+            draw: fruit,
+            keyframes: [
+                {
+                    frame: 340,
+                    tx: 3*canvas.width/4 + 50,
+                    ty: canvasCenterHeight - 33,
+                    fruitType: "cherry",
+                    sx: 0.33,
+                    sy: 0.33
+                },
 
-        //         {
-        //             frame: 100,
-        //             tx: 300,
-        //             ty: 200,
-        //             sx: 0.25,
-        //             sy: 0.25,
-        //             ease: KeyframeTweener.quadEaseOut
-        //         },
+                {
+                    frame: 370,
+                    tx: 3*canvas.width/4 + 50,
+                    ty: canvasCenterHeight - 33,
+                    sx: 0.33,
+                    sy: 0.33,
+                    ease: KeyframeTweener.quadEaseOut
+                },
 
-        //         {
-        //             frame: 150,
-        //             tx: 300,
-        //             ty: 100,
-        //             sx: 0.25,
-        //             sy: 0.25
-        //         }
-        //     ]
-        // },
+                {
+                    frame: 400,
+                    tx: canvasRightEdge + 100,
+                    ty: canvasCenterHeight - 33,
+                    sx: 0.33,
+                    sy: 0.33
+                }
+            ]
+        },
+
+        {
+            draw: fruit,
+            keyframes: [
+                {
+                    frame: 430,
+                    tx: -50,
+                    ty: canvasCenterHeight - 33,
+                    fruitType: "cherry",
+                    sx: 0.33,
+                    sy: 0.33
+                },
+
+                {
+                    frame: 476,
+                    tx: canvas.width/4 + 60,
+                    ty: canvasCenterHeight - 33,
+                    sx: 0.33,
+                    sy: 0.33,
+                    ease: KeyframeTweener.quadEaseOut
+                }
+            ]
+        },
 
         // #1 Left-most ball
+        
         {
             draw: ball,
             keyframes: [
@@ -305,7 +401,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -314,12 +410,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 508,
                     tx: canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
                     sy: 0.5,
-                    ballIsEaten: false
+                    ballIsEaten: true
                 }
             ]
         },
@@ -346,7 +442,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: canvasRightEdge/6,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -355,7 +451,7 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 500,
                     tx: canvasRightEdge/6,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -386,7 +482,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: canvasRightEdge/4,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -395,11 +491,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 492,
                     tx: canvasRightEdge/4,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: true
                 }
             ]
         },
@@ -426,7 +523,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: canvasRightEdge/3,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -435,11 +532,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 484,
                     tx: canvasRightEdge/3,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: true
                 }
             ]
         },
@@ -466,7 +564,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: 5*canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -475,11 +573,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 476,
                     tx: 5*canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: false
                 }
             ]
         },
@@ -506,14 +605,15 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: canvas.width/2,
                     ty: canvasCenterHeight,
-                    ballIsEaten: false
+                    ballIsEaten: false,
+                    isPowerball: true
                 },
 
                 {
-                    frame: 450,
+                    frame: 468,
                     tx: canvasRightEdge/2,
                     ty: canvasCenterHeight
                 }
@@ -542,7 +642,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: 7*canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -551,7 +651,7 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 460,
                     tx: 7*canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -582,7 +682,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: 2*canvasRightEdge/3,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -591,11 +691,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 454,
                     tx: 2*canvasRightEdge/3,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: true
                 }
             ]
         },
@@ -622,7 +723,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: 3*canvasRightEdge/4,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -631,11 +732,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 446,
                     tx: 3*canvasRightEdge/4,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: true
                 }
             ]
         },
@@ -662,7 +764,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: 5*canvasRightEdge/6,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -671,11 +773,12 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 438,
                     tx: 5*canvasRightEdge/6,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: true
                 }
             ]
         },
@@ -702,7 +805,7 @@
                 },
 
                 {
-                    frame: 350,
+                    frame: 410,
                     tx: 11*canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
@@ -711,14 +814,16 @@
                 },
 
                 {
-                    frame: 450,
+                    frame: 430,
                     tx: 11*canvasRightEdge/12,
                     ty: canvasCenterHeight,
                     sx: 0.5,
-                    sy: 0.5
+                    sy: 0.5,
+                    ballIsEaten: true
                 }
             ]
         }
+        
     ];
 
     // Finally, we initialize the engine.  Mainly, it needs

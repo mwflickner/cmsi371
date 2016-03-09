@@ -22,14 +22,15 @@
           function createGhost(x,y,eyeDirection,color,mood,canBeEaten,isEaten){
             renderingContext.save();
             renderingContext.translate(x,y);
-            SpriteLibrary.ghost({
+            var properties = {
               renderingContext: renderingContext,
               eyeDirection: eyeDirection,
               canBeEaten: canBeEaten,
               ghostColor: color,
-              mood: mood,
+              ghostMood: mood,
               isEaten: isEaten
-            });
+            }
+            SpriteLibrary.ghost({renderingContext: properties});
             renderingContext.restore();
           }
 

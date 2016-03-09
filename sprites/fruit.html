@@ -24,10 +24,13 @@
             renderingContext.save();
             renderingContext.translate(x,y);
             renderingContext.scale(.5,.5);
-            SpriteLibrary.fruit({
+            var properties = {
               renderingContext: renderingContext,
               fruitType: fruitType,
               isEaten: isEaten
+            }
+            SpriteLibrary.fruit({
+              renderingContext: properties
             });
             renderingContext.restore();
           }

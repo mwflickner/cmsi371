@@ -126,32 +126,53 @@
                         } else {
                             newMouthAngle = mouthAngle/((4 - currentFrame % 5) + 1);
                         }
-                        //console.log(ghostMood);
 
                         // Ghost Properties
-                        var ghostMood = keyframe.ghostMood;
-                        var eyeDirection = keyframe.eyeDirection;
-                        var ghostIsEaten = keyframe.ghostIsEaten;
-                        var canBeEaten = keyframe.canBeEaten;
+                        var ghostColor = startKeyframe.ghostColor;
+                        var ghostMood = startKeyframe.ghostMood;
+                        var eyeDirection = startKeyframe.eyeDirection;
+                        var ghostIsEaten = startKeyframe.ghostIsEaten;
+                        var canBeEaten = startKeyframe.canBeEaten;
+
+                        //console.log(eyeDirection + " " + ghostMood);
 
                         // Ball Properties
-                        var ballIsEaten = keyframe.ballIsEaten;
+                        var ballIsEaten = startKeyframe.ballIsEaten;
 
                         // Heart Properties
+                        var brokenStart = startKeyframe.howBroken || 0;
+                        var brokenEnd = (endKeyframe.howBroken || 0) - tyStart;
                         var howBroken = keyframe.howBroken;
 
-                        console.log(ballIsEaten);
+                        // Fruit
+                        var fruitType = keyframe.fruitType;
+                        var fruitIsEaten = keyframe.fruitIsEaten;
+                        console.log(movingLeft + "pls");
+                        var isFacingLeft = startKeyframe.isFacingLeft || movingLeft;
+                        renderingContext.isFacingLeft = isFacingLeft;
+                        renderingContext.mouthDegree = newMouthAngle;
+                        renderingContext.ghostColor = ghostColor;
+                        renderingContext.ghostMood = ghostMood;
+                        renderingContext.ghostIsEaten = ghostIsEaten;
+                        renderingContext.canBeEaten = canBeEaten;
+                        renderingContext.ballIsEaten = ballIsEaten;
+                        renderingContext.eyeDirection = eyeDirection;
+                        renderingContext.howBroken = howBroken;
+                        renderingContext.fruitType = fruitType;
+                        //console.log(startKeyframe);
 
-                        var isFacingLeft = keyframe.isFacingLeft || movingLeft;
                         var properties = {
                             renderingContext: renderingContext,
                             isFacingLeft: isFacingLeft,
                             mouthDegree: newMouthAngle,
+                            ghostColor: ghostColor,
                             ghostMood: ghostMood,
                             ghostIsEaten: ghostIsEaten,
+                            canBeEaten: canBeEaten,
                             ballIsEaten: ballIsEaten,
                             eyeDirection: eyeDirection,
-                            howBroken: howBroken
+                            howBroken: howBroken,
+                            fruitType: fruitType
                         }
 
                         // Draw the sprite.
@@ -199,6 +220,11 @@
         sineEaseInAndOut: function (currentTime, start, distance, duration) {
             var percentComplete = currentTime/ (duration / 2);
             return -distance/2 * (Math.cos(Math.PI*currentTime/duration) - 1) + start;
+        },
+
+        easeOutBack: function(currentTime, start, distance, duration) {
+            s=1.70158;
+            return distance*((currentTime=currentTime/duration-1)*currentTime*((s+1)*currentTime + s) +1) + b;
         },
 
         initialize: initializeAnimation

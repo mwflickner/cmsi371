@@ -20,11 +20,12 @@
         var drawScene = function() {
           renderingContext.save();
           renderingContext.translate(250,250);
-          SpriteLibrary.pacman({
+          var properties = {
             renderingContext: renderingContext,
             isFacingLeft: false,
             mouthDegree: 1/3*Math.PI
-          });
+          }
+          SpriteLibrary.pacman({renderingContext: properties});
 
           renderingContext.restore();
           window.requestAnimationFrame(drawScene);

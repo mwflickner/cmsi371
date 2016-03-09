@@ -24,9 +24,12 @@
           function createHeart(x,y,howBroken){
             renderingContext.save();
             renderingContext.translate(x,y);
-            SpriteLibrary.heart({
+            var properties = {
               renderingContext: renderingContext,
               howBroken: howBroken // lol this is dark
+            }
+            SpriteLibrary.heart({
+              renderingContext: properties
             });
             renderingContext.restore();
           }

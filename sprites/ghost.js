@@ -5,12 +5,13 @@
 
     SpriteLibrary.ghost = function (ghostProperties){
         var tweenable = ghostProperties.renderingContext;
+        //console.log(ghostProperties);
         var renderingContext = tweenable.renderingContext;
         var eyeDirection = tweenable.eyeDirection;
         var canBeEaten = tweenable.canBeEaten || false;
-        var ghostColor = ghostProperties.ghostColor;
+        var ghostColor = tweenable.ghostColor || "red";
         var ghostMood = tweenable.ghostMood;
-        var isEaten = tweenable.ghostIsEaten || false;
+        var isEaten = tweenable.ghostIsEaten;
 
         var ghostPosition = {xPos: 0, yPos: 0};
         var ghostWidth = 100;

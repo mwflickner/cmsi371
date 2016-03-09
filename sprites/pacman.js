@@ -13,9 +13,9 @@
 
         var tweenable = pacmanProperties.renderingContext;
         var renderingContext = tweenable.renderingContext;
-        var isFacingLeft = tweenable.isFacingLeft || false;
+        var isFacingLeft = tweenable.isFacingLeft;
         var mouthDegree = tweenable.mouthDegree || Math.PI/4;
-        var pacmanRadius = pacmanProperties.pacmanRadius || 100;
+        var pacmanRadius = tweenable.pacmanRadius || 100;
         var pacmanCenter = {xPos: 0, yPos: 0};
 
         var fillWithColor = function(color){

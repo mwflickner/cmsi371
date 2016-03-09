@@ -26,13 +26,14 @@
         myFruitImages["cherry"] = cherryImage;
         cherryLoaded = true;
     }, false);
-    cherryImage.src = "/sprites/cherry.png";
+    cherryImage.src = "/sprites/cherry1.png";
 
 
     SpriteLibrary.fruit = function (fruitProperties){
-        var renderingContext = fruitProperties.renderingContext;
-        var fruitType = fruitProperties.fruitType;
-        var isEaten = fruitProperties.isEaten || false;
+        var tweenable = fruitProperties.renderingContext;
+        var renderingContext = tweenable.renderingContext;
+        var fruitType = tweenable.fruitType || "cherry";
+        var isEaten = tweenable.fruitIsEaten || false;
 
         function drawFruit(){
             var noDraw = isEaten || !cherryLoaded || !strawberryLoaded
