@@ -134,15 +134,21 @@
                         var ghostIsEaten = startKeyframe.ghostIsEaten;
                         var canBeEaten = startKeyframe.canBeEaten;
 
-                        //console.log(eyeDirection + " " + ghostMood);
-
                         // Ball Properties
                         var ballIsEaten = startKeyframe.ballIsEaten;
 
                         // Heart Properties
-                        var brokenStart = startKeyframe.howBroken || 0;
-                        var brokenEnd = (endKeyframe.howBroken || 0) - tyStart;
-                        var howBroken = keyframe.howBroken;
+                        var brokenStart = startKeyframe.howBroken;
+                        var brokenEnd = endKeyframe.howBroken;
+                        var percentComplete = currentTweenFrame/duration;
+                        var howBroken;
+                        if (brokenStart == brokenEnd) {
+                            howBroken = brokenEnd;
+                        } else if (brokenEnd < brokenStart) {
+                            howBroken = Math.floor((1-percentComplete)*brokenStart);
+                        } else {
+                            howBroken = Math.floor(percentComplete*brokenEnd);
+                        }
 
                         // Fruit
                         var fruitType = keyframe.fruitType;

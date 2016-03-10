@@ -132,7 +132,7 @@
 
                 {
                     frame: 165,
-                    tx: canvas.width/2 - 170,
+                    tx: canvasCenterWidth - 170,
                     ty: canvasCenterHeight,
                     ghostColor: "orange",
                     ghostMood: "meh",
@@ -241,6 +241,55 @@
                     ghostIsEaten: true
                 },
 
+
+                {
+                    frame: 690,
+                    tx: canvas.width/2 - 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "sad",
+                    eyeDirection: "down",
+                    ghostIsEaten: true
+                },
+
+                {
+                    frame: 710,
+                    tx: canvas.width/2 - 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "sad",
+                    eyeDirection: "right",
+                    ghostIsEaten: true
+                },
+
+                {
+                    frame: 800,
+                    tx: canvas.width/2 - 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "sad",
+                    eyeDirection: "right",
+                    ghostIsEaten: true
+                },
+
+                {
+                    frame: 815,
+                    tx: canvas.width/2 - 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "right",
+                },
+
+                {
+                    frame: 860,
+                    tx: canvas.width/2 - 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "pink",
+                    ghostMood: "happy",
+                    eyeDirection: "right",
+                },
+
             ]
         },
 
@@ -266,21 +315,14 @@
                     frame: 210,
                     tx: canvasRightEdge - 165,
                     ty: heartHeight,
-                    howBroken: 1
-                },
-
-                {
-                    frame: 220,
-                    tx: canvasRightEdge - 140,
-                    ty: heartHeight,
-                    howBroken: 2
+                    howBroken: 0
                 },
 
                 {
                     frame: 240,
                     tx: canvasRightEdge - 140,
                     ty: heartHeight,
-                    howBroken: 2,
+                    howBroken: 3,
                     ease: KeyframeTweener.linear
                 },
 
@@ -289,7 +331,78 @@
                     tx: -90,
                     ty: heartHeight,
                     howBroken: 3
-                }
+                },
+
+                {
+                    frame: 420,
+                    tx: -120,
+                    ty: heartHeight,
+                    howBroken: 0
+                },
+
+                {
+                    frame: 485,
+                    tx: canvas.width/4 + 50,
+                    ty: heartHeight,
+                    howBroken: 0
+                },
+
+                {
+                    frame: 520,
+                    tx: canvas.width/4 + 60,
+                    ty: heartHeight,
+                    howBroken: 1
+                },
+
+                {
+                    frame: 580,
+                    tx: canvas.width/4 + 60,
+                    ty: heartHeight,
+                    howBroken: 8
+                },
+
+                {
+                    frame: 600,
+                    tx: canvas.width/4 + 60,
+                    ty: heartHeight,
+                    howBroken: 8
+                },
+
+                {
+                    frame: 690,
+                    tx: canvas.width/2 - 100,
+                    ty: heartHeight,
+                    howBroken: 8
+                },
+
+                {
+                    frame: 730,
+                    tx: canvas.width/2 - 100,
+                    ty: heartHeight,
+                    howBroken: 8
+                },
+
+                {
+                    frame: 770,
+                    tx: canvas.width/2,
+                    ty: heartHeight,
+                    howBroken: 8
+                },
+
+                {
+                    frame: 800,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
+                    howBroken: 0
+                },
+
+                {
+                    frame: 860,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
+                    howBroken: 0
+                },
+
             ]
         },
 
@@ -298,22 +411,64 @@
             keyframes: [
                 {
                     frame: 340,
-                    tx: canvasRightEdge + 40,
+                    tx: canvasRightEdge + 100,
                     ty: heartHeight,
                     howBroken: 0
                 },
 
                 {
                     frame: 370,
-                    tx: canvasRightEdge - 140,
+                    tx: 3*canvas.width/4,
                     ty: heartHeight,
                     howBroken: 0
                 },
 
                 {
                     frame: 400,
-                    tx: canvasRightEdge + 40,
+                    tx: canvasRightEdge + 50,
                     ty: heartHeight,
+                    howBroken: 0
+                },
+
+                {
+                    frame: 610,
+                    tx: canvasRightEdge + 100,
+                    ty: heartHeight,
+                    howBroken: 3
+                },
+
+                {
+                    frame: 690,
+                    tx: canvas.width/2 + 100,
+                    ty: heartHeight,
+                    howBroken: 3
+                },
+
+                {
+                    frame: 730,
+                    tx: canvas.width/2 + 100,
+                    ty: heartHeight,
+                    howBroken: 3
+                },
+
+                {
+                    frame: 770,
+                    tx: canvas.width/2,
+                    ty: heartHeight,
+                    howBroken: 3
+                },
+
+                {
+                    frame: 800,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
+                    howBroken: 3
+                },
+
+                {
+                    frame: 860,
+                    tx: canvas.width/2,
+                    ty: canvasCenterHeight,
                     howBroken: 0
                 }
             ]
@@ -346,7 +501,62 @@
                     frame: 400,
                     tx: canvasRightEdge + 50,
                     ty: canvasCenterHeight,
+                },
+
+                {
+                    frame: 610,
+                    tx: canvasRightEdge + 50,
+                    ty: canvasCenterHeight,
+                    ghostColor: "orange",
+                    ghostMood: "sad",
+                    eyeDirection: "down"
+                },
+
+                {
+                    frame: 690,
+                    tx: canvas.width/2 + 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "orange",
+                    ghostMood: "sad",
+                    eyeDirection: "down"
+                },
+
+                {
+                    frame: 700,
+                    tx: canvas.width/2 + 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "orange",
+                    ghostMood: "sad",
+                    eyeDirection: "left"
+                },
+
+                {
+                    frame: 730,
+                    tx: canvas.width/2 + 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "orange",
+                    ghostMood: "happy",
+                    eyeDirection: "left"
+                },
+
+                {
+                    frame: 800,
+                    tx: canvas.width/2 + 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "orange",
+                    ghostMood: "happy",
+                    eyeDirection: "left"
+                },
+
+                {
+                    frame: 860,
+                    tx: canvas.width/2 + 100,
+                    ty: canvasCenterHeight,
+                    ghostColor: "orange",
+                    ghostMood: "happy",
+                    eyeDirection: "left"
                 }
+
             ]
         },
 
