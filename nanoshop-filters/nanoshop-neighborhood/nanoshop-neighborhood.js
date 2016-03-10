@@ -22,7 +22,7 @@ var NanoshopNeighborhood = {
             rgbaNeighborhood[z].r,
             rgbaNeighborhood[z].g,
             rgbaNeighborhood[z].b,
-            rgbaNeighborhood[z].a
+            rgbaNeighborhood[4].a
         ];
     },
 
@@ -32,7 +32,7 @@ var NanoshopNeighborhood = {
             rgbaNeighborhood[z].r,
             rgbaNeighborhood[z].g,
             rgbaNeighborhood[z].b,
-            rgbaNeighborhood[z].a
+            rgbaNeighborhood[1].a
         ];
     },
 

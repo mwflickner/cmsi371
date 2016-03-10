@@ -162,7 +162,8 @@
                 //NanoshopNeighborhood.darkener
                 //NanoshopNeighborhood.averager
                 //NanoshopNeighborhood.basicEdgeDetector
-                NanoshopNeighborhood.glitch // Convenience comment for easy switching.
+                NanoshopNeighborhood.glitch 
+                //NanoshopNeighborhood.moveDownRight // Convenience comment for easy switching.
             ),
             0, 0
         );
