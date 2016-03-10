@@ -16,6 +16,27 @@ var NanoshopNeighborhood = {
         ];
     },
 
+    glitch: function (x, y, rgbaNeighborhood){
+        var z = x%5 + y%5;
+        return [
+            rgbaNeighborhood[z].r,
+            rgbaNeighborhood[z].g,
+            rgbaNeighborhood[z].b,
+            rgbaNeighborhood[z].a
+        ];
+    },
+
+    moveDownRight: function (x, y, rgbaNeighborhood){
+        var z = x%1 + y%1;
+        return [
+            rgbaNeighborhood[z].r,
+            rgbaNeighborhood[z].g,
+            rgbaNeighborhood[z].b,
+            rgbaNeighborhood[z].a
+        ];
+    },
+
+
     /*
      * A basic "averager"---this one returns the average of all the pixels in the
      * given neighborhood.

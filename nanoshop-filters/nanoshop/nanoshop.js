@@ -10,12 +10,12 @@ var Nanoshop = {
         return [ r / 2, g / 2, b / 2, a ];
     },
 
-    alienBeam: function (x, y, r, g, b, a) {
-        return [r, g*1.2, b*1.5, a*1.2];
+    blueEyes: function (x, y, r, g, b, a){
+        return [ r/1.5, g/1.5, b, a];
     },
 
-    deathStar: function (x, y, r, g, b, a) {
-        return [r*1.01, g*1.3, b, a];
+    yellowEyes: function (x, y, r, g, b, a){
+        return [ r*1.5, g, b/1.5, a]
     },
 
     /*
