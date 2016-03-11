@@ -273,7 +273,9 @@ var Primitives = {
      * function that all of the circle implementations will use...
      */
     plotCirclePoints: function (context, xc, yc, x, y, color) {
-        color = color || [0, 0, 0];
+        var module = this;
+
+        color = color[0] || [0, 0, 0];
         this.setPixel(context, xc + x, yc + y, color[0], color[1], color[2]);
         this.setPixel(context, xc + x, yc - y, color[0], color[1], color[2]);
         this.setPixel(context, xc + y, yc + x, color[0], color[1], color[2]);
@@ -282,6 +284,21 @@ var Primitives = {
         this.setPixel(context, xc - x, yc - y, color[0], color[1], color[2]);
         this.setPixel(context, xc - y, yc + x, color[0], color[1], color[2]);
         this.setPixel(context, xc - y, yc - x, color[0], color[1], color[2]);
+        for (var i = -x; i < x; i += 1){
+            module.setPixel(context, xc-i, yc+y, ...color);
+            module.setPixel(context, xc-i, yc-y, ...color);
+        }
+        for (var j = -y; j < y; j += 1){
+            var theColor;
+            if (j < y/2){
+                theColor = color[0];
+            }
+            else {
+                theColor = color[1];
+            }
+            module.setPixel(context, xc+j, yc+x, theColor);
+            module.setPixel(context, xc+j, yc-x, theColor);
+        }
     },
 
     // First, the most naive possible implementation: circle by trigonometry.
