@@ -485,7 +485,7 @@ var Primitives = {
         var u = 1;
         var v = e - r;
         var dict = {};
-        console.log("bres2");
+    
         while (x <= y) {
             dict[Math.floor(r-y)] = [-x,x];
             dict[Math.floor(r+y)] = [-x,x];
@@ -513,7 +513,7 @@ var Primitives = {
         var y = 0;
         var e = 0;
         var dict = {};
-        console.log("bres3");
+        
         while (y <= x) {
             dict[Math.floor(r+y)] = [-x,x];
             dict[Math.floor(r-y)] = [-x,x];
