@@ -289,15 +289,8 @@ var Primitives = {
             module.setPixel(context, xc-i, yc-y, ...color);
         }
         for (var j = -y; j < y; j += 1){
-            var theColor;
-            if (j < y/2){
-                theColor = color[0];
-            }
-            else {
-                theColor = color[1];
-            }
-            module.setPixel(context, xc+j, yc+x, theColor);
-            module.setPixel(context, xc+j, yc-x, theColor);
+            module.setPixel(context, xc+j, yc+x, ...color);
+            module.setPixel(context, xc+j, yc-x, ...color);
         }
     },
 
