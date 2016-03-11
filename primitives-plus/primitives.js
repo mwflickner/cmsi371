@@ -385,7 +385,6 @@ var Primitives = {
                       (c2[2] - c1[2]) / right];
             fillCircleTwoColors();
         } else {
-            console.log('here');
             // The four-color case, with a quick assignment in case
             // there are only three colors.
             c4 = c4 || c3;
