@@ -276,8 +276,8 @@ var Primitives = {
         var module = this;
         var i;
         var j;
-        var bottom = y + h;
-        var right = x + w;
+        var bottom = 2*r;
+        var right = 2*r;
         var leftColor = c1 ? [c1[0], c1[1], c1[2]] : c1;
         var rightColor = c2 ? [c2[0], c2[1], c2[2]] : c2;
         var leftVDelta;
@@ -293,33 +293,43 @@ var Primitives = {
         // and simplifies reading the code.  There *is* some
         // duplicate code, but in this case the benefits outweigh
         // the cost.
+        var pointIsInCircle = function(i,j){
+            return j >= dict[i][0] && j <= dict[i][1];
+        }
+
         var fillCircleNoColor = function () {
             // The rendering context will just ignore the
             // undefined colors in this case.
-            for (i = y; i < bottom; i += 1) {
-                for (j = x; j < right; j += 1) {
-                    module.setPixel(context, j, i);
+            for (i = 0; i < bottom; i += 1) {
+                for (j = -right; j < right; j += 1) {
+                    if (j >= dict[i][0] && j <= dict[i][1]){
+                        module.setPixel(context, j+x, i+y-r);
+                    }
                 }
             }
         };
 
         var fillCircleOneColor = function () {
             // Single color all the way through.
-            for (i = y; i < bottom; i += 1) {
-                for (j = x; j < right; j += 1) {
-                    module.setPixel(context, j, i, c1[0], c1[1], c1[2]);
+            for (i = 0; i < bottom; i += 1) {
+                for (j = -right; j < right; j += 1) {
+                    if (j >= dict[i][0] && j <= dict[i][1]){
+                        module.setPixel(context, j+x, i+y-r, c1[0], c1[1], c1[2]);
+                    }
                 }
             }
         };
 
         var fillCircleTwoColors = function () {
             // This modifies the color vertically only.
-            for (i = y; i < bottom; i += 1) {
-                for (j = x; j < right; j += 1) {
-                    module.setPixel(context, j, i,
-                            leftColor[0],
-                            leftColor[1],
-                            leftColor[2]);
+            for (i = 0; i < bottom; i += 1) {
+                for (j = -right; j < right; j += 1) {
+                    if (j >= dict[i][0] && j <= dict[i][1]){
+                        module.setPixel(context, j+x, i+y-r,
+                                leftColor[0],
+                                leftColor[1],
+                                leftColor[2]);
+                    }
                 }
 
                 // Move to the next level of the gradient.
@@ -330,18 +340,21 @@ var Primitives = {
         };
 
         var fillCircleFourColors = function () {
-            for (i = y; i < bottom; i += 1) {
+            for (i = 0; i < bottom; i += 1) {
                 // Move to the next "vertical" color level.
                 currentColor = [leftColor[0], leftColor[1], leftColor[2]];
-                hDelta = [(rightColor[0] - leftColor[0]) / w,
-                          (rightColor[1] - leftColor[1]) / w,
-                          (rightColor[2] - leftColor[2]) / w];
+                hDelta = [(rightColor[0] - leftColor[0]) / r,
+                          (rightColor[1] - leftColor[1]) / r,
+                          (rightColor[2] - leftColor[2]) / r];
 
-                for (j = x; j < right; j += 1) { 
-                    module.setPixel(context, j, i,
-                            currentColor[0],
-                            currentColor[1],
-                            currentColor[2]);
+                for (j = -right; j < right; j += 1) { 
+                    if (j >= dict[i][0] && j <= dict[i][1]){
+                        module.setPixel(context, j+x, i+y-r,
+                                currentColor[0],
+                                currentColor[1],
+                                currentColor[2]);
+                    }
+                    
 
                     // Move to the next color horizontally.
                     currentColor[0] += hDelta[0];
@@ -362,16 +375,17 @@ var Primitives = {
         // Depending on which colors are supplied, we call a different
         // version of the fill code.
         if (!c1) {
-            fillRectNoColor();
+            fillCircleNoColor();
         } else if (!c2) {
-            fillRectOneColor();
+            fillCircleOneColor();
         } else if (!c3) {
             // For this case, we set up the left vertical deltas.
-            leftVDelta = [(c2[0] - c1[0]) / h,
-                      (c2[1] - c1[1]) / h,
-                      (c2[2] - c1[2]) / h];
-            fillRectTwoColors();
+            leftVDelta = [(c2[0] - c1[0]) / right,
+                      (c2[1] - c1[1]) / right,
+                      (c2[2] - c1[2]) / right];
+            fillCircleTwoColors();
         } else {
+            console.log('here');
             // The four-color case, with a quick assignment in case
             // there are only three colors.
             c4 = c4 || c3;
@@ -380,12 +394,12 @@ var Primitives = {
             // often than function calls, because this is the rare
             // situation where function call overhead costs more
             // than repeated code.
-            leftVDelta = [(c3[0] - c1[0]) / h,
-                      (c3[1] - c1[1]) / h,
-                      (c3[2] - c1[2]) / h];
-            rightVDelta = [(c4[0] - c2[0]) / h,
-                      (c4[1] - c2[1]) / h,
-                      (c4[2] - c2[2]) / h];
+            leftVDelta = [(c3[0] - c1[0]) / right,
+                      (c3[1] - c1[1]) / right,
+                      (c3[2] - c1[2]) / right];
+            rightVDelta = [(c4[0] - c2[0]) / right,
+                      (c4[1] - c2[1]) / right,
+                      (c4[2] - c2[2]) / right];
             fillCircleFourColors();
         }
         
@@ -405,10 +419,10 @@ var Primitives = {
 
         var dict = {};
         while (x >= y) {
-            dict[y] = [-x,x];
-            dict[r-y] = [-x,x];
-            dict[x] = [-y,y];
-            dict[r-x] = [-y,y];
+            dict[Math.floor(r+y)] = [-x,x];
+            dict[Math.floor(r-y)] = [-x,x];
+            dict[Math.floor(r+x)] = [-y,y];
+            dict[Math.floor(r-x)] = [-y,y];
             x = x * c - y * s;
             y = x * s + y * c;
         }
@@ -421,11 +435,12 @@ var Primitives = {
         var x = r;
         var y = 0;
         var dict = {};
+
         while (x >= y) {
-            dict[y] = [-x,x];
-            dict[r-y] = [-x,x];
-            dict[x] = [-y,y];
-            dict[r-x] = [-y,y];
+            dict[Math.floor(r+y)] = [-x,x];
+            dict[Math.floor(r-y)] = [-x,x];
+            dict[Math.floor(r+x)] = [-y,y];
+            dict[Math.floor(r-x)] = [-y,y];
             x = x - (epsilon * y);
             y = y + (epsilon * x);
         }
@@ -437,12 +452,13 @@ var Primitives = {
         var p = 3 - 2 * r;
         var x = 0;
         var y = r;
+        var dict = {};
 
         while (x < y) {
-            dict[y] = [-x,x];
-            dict[r-y] = [-x,x];
-            dict[x] = [-y,y];
-            dict[r-x] = [-y,y];
+            dict[Math.floor(r+y)] = [-x,x];
+            dict[Math.floor(r-y)] = [-x,x];
+            dict[Math.floor(r+x)] = [-y,y];
+            dict[Math.floor(r-x)] = [-y,y];
             if (p < 0) {
                 p = p + 4 * x + 6;
             } else {
@@ -469,12 +485,12 @@ var Primitives = {
         var u = 1;
         var v = e - r;
         var dict = {};
-
+        console.log("bres2");
         while (x <= y) {
-            dict[y] = [-x,x];
-            dict[r-y] = [-x,x];
-            dict[x] = [-y,y];
-            dict[r-x] = [-y,y];
+            dict[Math.floor(r-y)] = [-x,x];
+            dict[Math.floor(r+y)] = [-x,x];
+            dict[Math.floor(r+x)] = [-y,y];
+            dict[Math.floor(r-x)] = [-y,y];
             if (e < 0) {
                 x += 1;
                 u += 2;
@@ -488,6 +504,7 @@ var Primitives = {
                 e += v;
             }
         }
+        this.plotCirclePoints(context, xc, yc, r, dict, color1, color2, color3, color4);
     },
 
     // Last but not least...
@@ -496,12 +513,12 @@ var Primitives = {
         var y = 0;
         var e = 0;
         var dict = {};
-
+        console.log("bres3");
         while (y <= x) {
-            dict[y] = [-x,x];
-            dict[r-y] = [-x,x];
-            dict[x] = [-y,y];
-            dict[r-x] = [-y,y];
+            dict[Math.floor(r+y)] = [-x,x];
+            dict[Math.floor(r-y)] = [-x,x];
+            dict[Math.floor(r+x)] = [-y,y];
+            dict[Math.floor(r-x)] = [-y,y];
             y += 1;
             e += (2 * y - 1);
             if (e > x) {
