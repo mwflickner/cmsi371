@@ -17,7 +17,7 @@
         myFruitImages["strawberry"] = strawberryImage;
         strawberryLoaded = true;
     }, false);
-    strawberryImage.src = "/sprites/strawberry.png";
+    strawberryImage.src = "../sprites/strawberry.png";
 
 
     var cherryImage = new Image();
@@ -26,7 +26,7 @@
         myFruitImages["cherry"] = cherryImage;
         cherryLoaded = true;
     }, false);
-    cherryImage.src = "/sprites/cherry1.png";
+    cherryImage.src = "../sprites/cherry1.png";
 
 
     SpriteLibrary.fruit = function (fruitProperties){
