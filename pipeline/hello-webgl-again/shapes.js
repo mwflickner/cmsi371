@@ -3,7 +3,7 @@
  * The "shapes" are returned as indexed vertices, with utility functions for
  * converting these into "raw" coordinate arrays.
  */
-var Shape = class Shape {
+var Shape = class Shape3D {
 
     constructor(polygonMesh,x,y,z){
         this.polygonMesh = polygonMesh;
@@ -27,13 +27,19 @@ var Cube = class Cube extends Shape {
         this.y = y;
         this.z = z;
         this.l = l;
+        this.vertices = calculateVertices();
+        this.indices = calculateIndices();
     }
 
     get volume(){
         return l*l*l;
     }
 
-}
+    calculateVertices(){
+        
+    }
+
+};
 
 var Sphere = class Sphere extends Shape {
     constructor(x,y,z,r){
@@ -46,14 +52,14 @@ var Sphere = class Sphere extends Shape {
     get volume(){
         return 4*Math.PI*r*r*r;
     }
-}
+};
 
 var Pyramid = class Pyramid extends Shape {
-    constructor(base, triangle){
-        this.base = base;
-        this.triangle = triangle
+    constructor(baseLength, height){
+        this.baseLength = baseLength;
+        this.height = height
     }
-}
+};
 
 var Shapes = {
     /*
