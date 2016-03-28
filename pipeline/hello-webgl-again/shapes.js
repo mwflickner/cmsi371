@@ -32,7 +32,7 @@ var Shape = class Shape {
 
 };
 
-var polygonMesh = {
+var Shapes = {
     /*
      * Returns the vertices for a small icosahedron.
      */
@@ -81,6 +81,37 @@ var polygonMesh = {
             ]
         };
     },
+
+    cube: function(x,y,z,length){
+        return {
+            vertices: [
+                [x, y, z],
+                [x+length, y, z],
+                [x, y+length, z],
+                [x, y, z+length],
+                [x+length, y+length, z],
+                [x+length, y, z+length],
+                [x, y+length, z+length],
+                [x+length, y+length, z+length]
+            ],
+
+            indices: [
+
+            ]
+        };
+    }
+
+    sphere: function(centerX, centerY, centerZ, radius){
+        return {
+            vertices: [
+                
+            ],
+
+            indices: [
+
+            ]
+        };
+    }
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
