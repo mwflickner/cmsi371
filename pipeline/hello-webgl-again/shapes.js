@@ -82,24 +82,36 @@ var Shapes = {
         };
     },
 
-    cube: function(x,y,z,length){
+    cube: function(x,y,z,l){
+        var x = 0, y = 0, z = 0, l = 0.75;
         return {
             vertices: [
                 [x, y, z],
-                [x+length, y, z],
-                [x, y+length, z],
-                [x, y, z+length],
-                [x+length, y+length, z],
-                [x+length, y, z+length],
-                [x, y+length, z+length],
-                [x+length, y+length, z+length]
+                [x + l, y, z],
+                [x, y + l , z],
+                [x, y, z + l],
+                [x + l, y + l, z],
+                [x + l, y, z + l],
+                [x, y + l, z + l],
+                [x + l, y + l, z + l]
             ],
 
             indices: [
-
+                [2, 3, 0],
+                [2, 0, 1],
+                [6, 2, 1],
+                [6, 1, 5],
+                [3, 7, 4],
+                [3, 4, 0],
+                [7, 6, 5],
+                [7, 5, 4],
+                [6, 7, 3],
+                [6, 3, 2],
+                [1, 0, 4],
+                [1, 4, 5]
             ]
         };
-    }
+    },
 
     sphere: function(centerX, centerY, centerZ, radius){
         return {
@@ -111,7 +123,7 @@ var Shapes = {
 
             ]
         };
-    }
+    },
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
