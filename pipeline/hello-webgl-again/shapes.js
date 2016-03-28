@@ -3,7 +3,36 @@
  * The "shapes" are returned as indexed vertices, with utility functions for
  * converting these into "raw" coordinate arrays.
  */
-var Shapes = {
+var Shape = class Shape {
+
+    constructor(polygonMesh){
+        this.polygonMesh = polygonMesh;
+        this.children = [];
+    }
+    
+    get polygonMesh(){
+        return this.polygonMesh;
+    }
+
+    get children(){
+        return this.children;
+    }
+
+    addChild(childShape){
+        this.children.push(childShape);
+    }
+
+    translate(x, y, z){
+        console.log("translate not yet supported");
+    }
+
+    rotate(){
+        console.log("rotate not yet supported");
+    }
+
+};
+
+var polygonMesh = {
     /*
      * Returns the vertices for a small icosahedron.
      */

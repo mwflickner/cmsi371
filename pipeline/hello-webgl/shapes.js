@@ -3,6 +3,7 @@
  * The "shapes" are returned as indexed vertices, with utility functions for
  * converting these into "raw" coordinate arrays.
  */
+
 var Shapes = {
     /*
      * Returns the vertices for a small icosahedron.
@@ -52,6 +53,26 @@ var Shapes = {
             ]
         };
     },
+
+    cube: function(x, y, z, length){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.length = length;
+
+        this.vertices = [
+            [x,y,z],
+            [x+length,y,z],
+            [x,y+length,z],
+            [x,y,z+length],
+
+        ]
+
+    },
+
+    sphere: function(){
+
+    }
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
