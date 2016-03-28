@@ -5,32 +5,55 @@
  */
 var Shape = class Shape {
 
-    constructor(polygonMesh){
+    constructor(polygonMesh,x,y,z){
         this.polygonMesh = polygonMesh;
-        this.children = [];
+        this.x = x || 0;
+        this.y = y || 0;
+        this.z = z || 0;
+    }
+
+    get coordinates(){
+        return [x,y,z];
     }
     
     get polygonMesh(){
         return this.polygonMesh;
     }
-
-    get children(){
-        return this.children;
-    }
-
-    addChild(childShape){
-        this.children.push(childShape);
-    }
-
-    translate(x, y, z){
-        console.log("translate not yet supported");
-    }
-
-    rotate(){
-        console.log("rotate not yet supported");
-    }
-
 };
+
+var Cube = class Cube extends Shape {
+    constructor(x,y,z,l){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.l = l;
+    }
+
+    get volume(){
+        return l*l*l;
+    }
+
+}
+
+var Sphere = class Sphere extends Shape {
+    constructor(x,y,z,r){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.r = r;
+    }
+
+    get volume(){
+        return 4*Math.PI*r*r*r;
+    }
+}
+
+var Pyramid = class Pyramid extends Shape {
+    constructor(base, triangle){
+        this.base = base;
+        this.triangle = triangle
+    }
+}
 
 var Shapes = {
     /*
