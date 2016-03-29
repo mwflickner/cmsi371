@@ -91,7 +91,7 @@
         };
     };
 
-    sphere: function(){
+    sphere = function(){
         var latitudeBands = 10;
         var longitudeBands = 10;
         var radius = 2;
@@ -141,7 +141,7 @@
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as triangles.
      */
-    Shape.toRawTriangleArray = function (indexedVertices) {
+    Shape.prototype.toRawTriangleArray = function (indexedVertices) {
         var result = [];
 
         for (var i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
@@ -161,7 +161,7 @@
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as line segments.
      */
-    Shape.toRawLineArray = function (indexedVertices) {
+    Shape.prototype.toRawLineArray = function (indexedVertices) {
         var result = [];
 
         for (var i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
