@@ -1,71 +1,15 @@
-/*
- * This module defines/generates vertex arrays for certain predefined shapes.
- * The "shapes" are returned as indexed vertices, with utility functions for
- * converting these into "raw" coordinate arrays.
- */
-var Shape = class Shape3D {
+(function(){
+    window.Shape = window.Shape || {};
 
-    constructor(polygonMesh,x,y,z){
-        this.polygonMesh = polygonMesh;
-        this.x = x || 0;
-        this.y = y || 0;
-        this.z = z || 0;
-    }
+    Shape = function(properties){
+        this.x = properties.x;
+        this.y = properties.y; 
+        this.z = properties.z;
+        this.vertices = vertices;
+        this.indices = indices;
+    };
 
-    get coordinates(){
-        return [x,y,z];
-    }
-    
-    get polygonMesh(){
-        return this.polygonMesh;
-    }
-};
-
-var Cube = class Cube extends Shape {
-    constructor(x,y,z,l){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.l = l;
-        this.vertices = calculateVertices();
-        this.indices = calculateIndices();
-    }
-
-    get volume(){
-        return l*l*l;
-    }
-
-    calculateVertices(){
-        
-    }
-
-};
-
-var Sphere = class Sphere extends Shape {
-    constructor(x,y,z,r){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.r = r;
-    }
-
-    get volume(){
-        return 4*Math.PI*r*r*r;
-    }
-};
-
-var Pyramid = class Pyramid extends Shape {
-    constructor(baseLength, height){
-        this.baseLength = baseLength;
-        this.height = height
-    }
-};
-
-var Shapes = {
-    /*
-     * Returns the vertices for a small icosahedron.
-     */
-    icosahedron: function () {
+    Shape.icosahedron = function () {
         // These variables are actually "constants" for icosahedron coordinates.
         var X = 0.525731112119133606;
         var Z = 0.850650808352039932;
@@ -109,9 +53,9 @@ var Shapes = {
                 [ 11, 2, 7 ]
             ]
         };
-    },
+    };
 
-    cube: function(x,y,z,l){
+    Shape.cube = function(x,y,z,l){
         var x = 0, y = 0, z = 0, l = 0.75;
         return {
             vertices: [
@@ -145,13 +89,13 @@ var Shapes = {
                 [1, 4, 5]
             ]
         };
-    },
+    };
 
     sphere: function(){
         var latitudeBands = 10;
         var longitudeBands = 10;
         var radius = 2;
-        
+
         var vertexPositionData = [];
         var colors = [];
         var indexData = [];
@@ -191,13 +135,13 @@ var Shapes = {
             vertices: vertexPositionData,
             indices: indexData
         };
-    },
+    };
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as triangles.
      */
-    toRawTriangleArray: function (indexedVertices) {
+    Shape.toRawTriangleArray = function (indexedVertices) {
         var result = [];
 
         for (var i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
@@ -211,13 +155,13 @@ var Shapes = {
         }
 
         return result;
-    },
+    };
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as line segments.
      */
-    toRawLineArray: function (indexedVertices) {
+    Shape.toRawLineArray = function (indexedVertices) {
         var result = [];
 
         for (var i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
@@ -233,8 +177,6 @@ var Shapes = {
                 );
             }
         }
-
         return result;
-    }
-
-};
+    };
+}());

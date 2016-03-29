@@ -1,3 +1,7 @@
+(function(){
+    window.Matrix = window.Matrix || {};
+
+}());
 var Matrix = class Matrix {
     constructor(){
         this.elements = arguments.length ?
@@ -50,9 +54,9 @@ var Matrix = class Matrix {
 
     get transpose(){
 
-    }  
+    }
 
-    get rotationMatrix(angle, x, y, z){
+    var getRotationMatrix = function (angle, x, y, z) {
         // In production code, this function should be associated
         // with a matrix object with associated functions.
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
@@ -60,25 +64,36 @@ var Matrix = class Matrix {
         var c = Math.cos(angle * Math.PI / 180.0);
         var oneMinusC = 1.0 - c;
 
+        // We can't calculate this until we have normalized
+        // the axis vector of rotation.
+        var x2; // "2" for "squared."
+        var y2;
+        var z2;
+        var xy;
+        var yz;
+        var xz;
+        var xs;
+        var ys;
+        var zs;
+
         // Normalize the axis vector of rotation.
         x /= axisLength;
         y /= axisLength;
         z /= axisLength;
 
-        // Now we can calculate the other terms.
-        // "2" for "squared."
-        var x2 = x * x;
-        var y2 = y * y;
-        var z2 = z * z;
-        var xy = x * y;
-        var yz = y * z;
-        var xz = x * z;
-        var xs = x * s;
-        var ys = y * s;
-        var zs = z * s;
+        // *Now* we can calculate the other terms.
+        x2 = x * x;
+        y2 = y * y;
+        z2 = z * z;
+        xy = x * y;
+        yz = y * z;
+        xz = x * z;
+        xs = x * s;
+        ys = y * s;
+        zs = z * s;
 
         // GL expects its matrices in column major order.
-        return Matrix(
+        return [
             (x2 * oneMinusC) + c,
             (xy * oneMinusC) + zs,
             (xz * oneMinusC) - ys,
@@ -98,10 +113,10 @@ var Matrix = class Matrix {
             0.0,
             0.0,
             1.0
-        );
-    }
+        ];
+    };
 
-    equals(){
+    equals(matrix){
         
     }
 }
