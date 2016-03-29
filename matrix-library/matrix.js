@@ -35,8 +35,8 @@
     }
 
     Matrix.multiply = function(matrix){
-        var a = this;
-        var b = matrix;
+        var a = this.elements;
+        var b = matrix.elements;
 
         if (!isSameDimension(a,b)){
             throw "Multiplication operation not allowed. Different dimensions";
@@ -128,7 +128,7 @@
         zs = z * s;
 
         // GL expects its matrices in column major order.
-        return [
+        return new Matrix(
             (x2 * oneMinusC) + c,
             (xy * oneMinusC) + zs,
             (xz * oneMinusC) - ys,
@@ -148,7 +148,15 @@
             0.0,
             0.0,
             1.0
-        ];
+        );
+    };
+
+    Matrix.getProjectionMatrix = function(){
+
+    };
+
+    Matrix.getFrutsumMatrix = function (){
+
     };
 
 
