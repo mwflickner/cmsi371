@@ -7,7 +7,7 @@ var GLSLUtilities = {
      * Returns the WebGL rendering context.
      */
     getGL: function (canvas) {
-        return canvas.getContext("webgl");
+        return canvas.getContext("experimental-webgl");
     },
 
     /*
@@ -67,9 +67,9 @@ var GLSLUtilities = {
      */
     initSimpleShaderProgram: function (gl, vertexShaderSource,
             fragmentShaderSource, compileError, linkError) {
-        var vertexShader;
-        var fragmentShader;
-        var shaderProgram;
+        var vertexShader,
+            fragmentShader,
+            shaderProgram;
 
         vertexShader = this.compileShader(gl, vertexShaderSource,
                 gl.VERTEX_SHADER, compileError);

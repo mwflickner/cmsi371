@@ -5,8 +5,8 @@
         this.x = properties.x;
         this.y = properties.y; 
         this.z = properties.z;
-        this.vertices = vertices;
-        this.indices = indices;
+        this.vertices = properties.vertices;
+        this.indices = properties.indices;
     };
 
     Shape.icosahedron = function () {
@@ -141,14 +141,14 @@
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as triangles.
      */
-    Shape.prototype.toRawTriangleArray = function (indexedVertices) {
+    Shape.prototype.toRawTriangleArray = function () {
         var result = [];
 
-        for (var i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
-            for (var j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
+        for (var i = 0, maxi = this.indices.length; i < maxi; i += 1) {
+            for (var j = 0, maxj = this.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
-                    indexedVertices.vertices[
-                        indexedVertices.indices[i][j]
+                    this.vertices[
+                        this.indices[i][j]
                     ]
                 );
             }
@@ -161,18 +161,18 @@
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as line segments.
      */
-    Shape.prototype.toRawLineArray = function (indexedVertices) {
+    Shape.prototype.toRawLineArray = function () {
         var result = [];
 
-        for (var i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
-            for (var j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
+        for (var i = 0, maxi = this.indices.length; i < maxi; i += 1) {
+            for (var j = 0, maxj = this.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
-                    indexedVertices.vertices[
-                        indexedVertices.indices[i][j]
+                    this.vertices[
+                        this.indices[i][j]
                     ],
 
-                    indexedVertices.vertices[
-                        indexedVertices.indices[i][(j + 1) % maxj]
+                    this.vertices[
+                        this.indices[i][(j + 1) % maxj]
                     ]
                 );
             }
