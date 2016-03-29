@@ -237,7 +237,7 @@
             axis: { x: -0.5, y: 1.0, z: 0.0 }
         },
 
-        // Show off the new shape.
+        //Show off the new shape.
         {
             vertices: new Shape(Shape.cube()).toRawTriangleArray(),
             // 12 triangles in all.
@@ -281,6 +281,13 @@
             ),
             mode: gl.TRIANGLES,
             axis: { x: 1.0, y: 1.0, z: 1.0 }
+        },
+
+        {
+            vertices: new Shape(Shape.sphere()).toRawLineArray(),
+            mode: gl.LINES,
+            color: {r: 0.0, g: 0.0, b:0.75},
+            axis: { x:1.0, y:1.0, z:1.0}
         }
     ];
 

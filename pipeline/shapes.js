@@ -55,85 +55,73 @@
         };
     };
 
-    Shape.cube = function(x,y,z,l){
-        var x = 0, y = 0, z = 0, l = 0.75;
+    Shape.cube = function () {
         return {
             vertices: [
-                [x, y, z],            // 0
-                [x + l, y, z],        // 1
-                [x, y + l , z],       // 2
-                [x, y, z + l],        // 3
-                [x + l, y + l, z],    // 4
-                [x + l, y, z + l],    // 5
-                [x, y + l, z + l],    // 6
-                [x + l, y + l, z + l] // 7
+                [ 0.5, 0.5, 0.5 ],
+                [ 0.5, 0.5, -0.5 ],
+                [ -0.5, 0.5, -0.5 ],
+                [ -0.5, 0.5, 0.5 ],
+                [ 0.5, -0.5, 0.5 ],
+                [ 0.5, -0.5, -0.5 ],
+                [ -0.5, -0.5, -0.5 ],
+                [ -0.5, -0.5, 0.5 ]
             ],
 
             indices: [
-                [2, 3, 0],
-                [2, 0, 1],
-
-                [6, 2, 1],
-                [6, 1, 5],
-
-                [3, 7, 4],
-                [3, 4, 0],
-
-                [7, 6, 5],
-                [7, 5, 4],
-
-                [6, 7, 3],
-                [6, 3, 2],
-
-                [1, 0, 4],
-                [1, 4, 5]
+                [ 0, 1, 3 ],
+                [ 2, 3, 1 ],
+                [ 0, 3, 4 ],
+                [ 7, 4, 3 ],
+                [ 0, 4, 1 ],
+                [ 5, 1, 4 ],
+                [ 1, 5, 6 ],
+                [ 2, 1, 6 ],
+                [ 2, 7, 3 ],
+                [ 6, 7, 2 ],
+                [ 4, 7, 6 ],
+                [ 5, 4, 6 ]
             ]
         };
     };
 
-    sphere = function(){
-        var latitudeBands = 10;
-        var longitudeBands = 10;
-        var radius = 2;
+    Shape.sphere = function () {
+        var vertices = [],
+            indices = [],
+            radius = 1,
+            latitude = 15, 
+            longitude = 15;
 
-        var vertexPositionData = [];
-        var colors = [];
-        var indexData = [];
-
-        for (var latNumber=0; latNumber <= latitudeBands; latNumber++) {
-            var theta = latNumber * Math.PI / latitudeBands;
+        for (var i = 0; i < latitude + 1; i += 1) {
+            var theta = (i * Math.PI) / latitude;
             var sinTheta = Math.sin(theta);
             var cosTheta = Math.cos(theta);
 
-            for (var longNumber=0; longNumber <= longitudeBands; longNumber++) {
-                var phi = longNumber * 2 * Math.PI / longitudeBands;
-                var sinPhi = Math.sin(phi);
-                var cosPhi = Math.cos(phi);
+            for (var j = 0; j < longitude + 1; j += 1) {
+                var phi = (j * 2 * Math.PI) / longitude;
+                var x = radius * Math.cos(phi) * sinTheta;
+                var y = radius * cosTheta;
+                var z = radius * Math.sin(phi) * sinTheta;
 
-                var x = cosPhi * sinTheta;
-                var y = cosTheta;
-                var z = sinPhi * sinTheta;
-
-                colors = [[1.0, 1.0, 0.3, 1.0]];
-                vertexPositionData.push(radius * x);
-                vertexPositionData.push(radius * y);
-                vertexPositionData.push(radius * z);
-
-                var first = (latNumber * (longitudeBands + 1)) + longNumber;
-                var second = first + longitudeBands + 1;
-                indexData.push(first);
-                indexData.push(second);
-                indexData.push(first + 1);
-
-                indexData.push(second);
-                indexData.push(second + 1);
-                indexData.push(first + 1);
+                vertices.push([x, y, z]);
             }
         }
 
+        for (var i = 0; i < latitude; i += 1) {
+
+            for (var j = 0; j < longitude; j += 1) {
+                var top = (i * (longitude + 1)) + j;
+                var bottom = top + longitude + 1;
+
+                indices.push([top, bottom, top + 1]);
+                indices.push([bottom, bottom + 1, top + 1]);
+            }
+        }
+
+
         return {
-            vertices: vertexPositionData,
-            indices: indexData
+            vertices: vertices,
+            indices: indices
         };
     };
 
