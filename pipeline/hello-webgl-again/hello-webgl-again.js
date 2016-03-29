@@ -129,6 +129,13 @@
             vertices: Shapes.toRawLineArray(Shapes.cube()),
             //vertices: new Shape(polygonMesh.toRawLineArray(polygonMesh.icosahedron())).getPolygonMesh(),
             mode: gl.LINES
+        },
+
+        {
+            color: { r: 0.0, g: 0.5, b: 0.0 },
+            vertices: Shapes.toRawLineArray(Shapes.cube()),
+            //vertices: new Shape(polygonMesh.toRawLineArray(polygonMesh.icosahedron())).getPolygonMesh(),
+            mode: gl.TRIANGLES
         }
     ];
 

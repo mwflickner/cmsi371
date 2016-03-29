@@ -44,6 +44,8 @@ var Matrix = class Matrix {
     }   
 
     rotate(theta){
+
+
         x * cos theta - y* sin theta,
         x * sin theta - y* cos theta
 
