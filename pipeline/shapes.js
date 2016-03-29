@@ -7,6 +7,7 @@
         this.z = properties.z;
         this.vertices = properties.vertices;
         this.indices = properties.indices;
+        this.children = []
     };
 
     Shape.icosahedron = function () {
@@ -124,6 +125,12 @@
             indices: indices
         };
     };
+
+    Shape.prototype.pushChild = function (childShape) {
+        this.children.push(childShape);
+    }
+
+    Shape.prototype.pop
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
