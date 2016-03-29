@@ -14,15 +14,31 @@
         return this.elements.length
     };
 
-    var multiplicationAllowed = function(a,b){
+    var isSameDimension = function(a,b){
+        // 
         return a.dimension() === b.dimension();
     };
+
+    Matrix.equals = function(matrix){
+        var a = this;
+        var b = matrix;
+
+        if (!isSameDimension(a,b)){
+            return false;
+        }
+        for (var i = 0; i < a.elements.length; i++){
+            if a[i] !== b[i]{
+                return false;
+            }
+        }
+        return true;
+    }
 
     Matrix.multiply = function(matrix){
         var a = this;
         var b = matrix;
 
-        if (!multiplicationAllowed(a,b)){
+        if (!isSameDimension(a,b)){
             throw "Multiplication operation not allowed. Different dimensions";
         } else {
             /*
@@ -55,7 +71,7 @@
                 );
         }
 
-    }
+    };
 
     Matrix.getTranslationMatrix = function(tx,ty,tz){
         return new Matrix(
