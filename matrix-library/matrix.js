@@ -74,63 +74,8 @@
             );
     };
 
-
-}());
-var Matrix = class Matrix {
-    constructor(){
-        this.elements = arguments.length ?
-            [].slice.call(arguments) :
-            [1, 0, 0, 0,
-             0, 1, 0, 0,
-             0, 0, 1, 0,
-             0, 0, 0, 1];
-    }
-
-    multiply(Matrix m){
-
-    }
-
-    get scaleMatrix(sx, sy, sz){
-        return new Matrix(
-                sx, 0, 0, 0,
-                0, sy, 0, 0,
-                0, 0, sz, 0,
-                0, 0, 0, 1
-            );
-    }
-
-    get translationMatrix(tx, ty, tz){
-        return new Matrix(
-                1, 0, 0, tx,
-                0, 1, 0, ty,
-                0, 0, 1, tz,
-                0, 0, 0, 1
-            );
-
-        /*
-        x + tx, y+ty, z + tz
-
-        1*x + 0*x + tx --> 1  0  tx
-        0*x + 1*y + ty --> 0  1  ty
-
-       -2  0  0    1  0  5   x
-        0 -2  0    0  1  2   y
-        0  0  1    0  0  0   1
-
-            \       /
-             \     /
-            -2  0 -10  |  x     -2x - 10
-             0 -2  -4  |  y  =  -2y - 4
-             0  0   1  |  1         1
-
-        */
-    } 
-
-    get transpose(){
-
-    }
-
-    var getRotationMatrix = function (angle, x, y, z) {
+    Matrix.getRotationMatrix = function (angle, x, y, z) {
+        // Thx 4 code, Dondi
         // In production code, this function should be associated
         // with a matrix object with associated functions.
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
@@ -190,7 +135,5 @@ var Matrix = class Matrix {
         ];
     };
 
-    equals(matrix){
-        
-    }
-}
+
+}());
