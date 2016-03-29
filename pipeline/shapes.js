@@ -86,6 +86,27 @@
         };
     };
 
+    Shape.pyramid = function(){
+        return {
+            vertices: [
+                [-0.5, -0.5, -0.5],
+                [-0.5, -0.5, 0.5],
+                [0.5, -0.5, 0.5],
+                [0.5, -0.5, -0.5],
+                [0.0, 0.5, 0.0]
+            ],
+
+            indices: [
+                [0,1,2],
+                [0,2,3],
+                [0,4,1],
+                [0,4,3],
+                [3,4,2],
+                [2,4,1]
+            ]
+        }
+    };
+
     Shape.sphere = function () {
         var vertices = [],
             indices = [],
@@ -129,8 +150,6 @@
     Shape.prototype.pushChild = function (childShape) {
         this.children.push(childShape);
     }
-
-    Shape.prototype.pop
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
