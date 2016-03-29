@@ -140,22 +140,56 @@ var Shapes = {
 
                 [6, 7, 3],
                 [6, 3, 2],
-                
+
                 [1, 0, 4],
                 [1, 4, 5]
             ]
         };
     },
 
-    sphere: function(centerX, centerY, centerZ, radius){
+    sphere: function(){
+        var latitudeBands = 10;
+        var longitudeBands = 10;
+        var radius = 2;
+        
+        var vertexPositionData = [];
+        var colors = [];
+        var indexData = [];
+
+        for (var latNumber=0; latNumber <= latitudeBands; latNumber++) {
+            var theta = latNumber * Math.PI / latitudeBands;
+            var sinTheta = Math.sin(theta);
+            var cosTheta = Math.cos(theta);
+
+            for (var longNumber=0; longNumber <= longitudeBands; longNumber++) {
+                var phi = longNumber * 2 * Math.PI / longitudeBands;
+                var sinPhi = Math.sin(phi);
+                var cosPhi = Math.cos(phi);
+
+                var x = cosPhi * sinTheta;
+                var y = cosTheta;
+                var z = sinPhi * sinTheta;
+
+                colors = [[1.0, 1.0, 0.3, 1.0]];
+                vertexPositionData.push(radius * x);
+                vertexPositionData.push(radius * y);
+                vertexPositionData.push(radius * z);
+
+                var first = (latNumber * (longitudeBands + 1)) + longNumber;
+                var second = first + longitudeBands + 1;
+                indexData.push(first);
+                indexData.push(second);
+                indexData.push(first + 1);
+
+                indexData.push(second);
+                indexData.push(second + 1);
+                indexData.push(first + 1);
+            }
+        }
+
         return {
-            vertices: [
-                
-            ],
-
-            indices: [
-
-            ]
+            vertices: vertexPositionData,
+            indices: indexData
         };
     },
 
