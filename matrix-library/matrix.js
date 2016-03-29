@@ -1,29 +1,34 @@
 var Matrix = class Matrix {
-    constructor(x,y,z,tx,ty,tz){
-        this.matrix = [
-                       [x, 0, 0, tx || 0],
-                       [0, y, 0, ty || 0],
-                       [0, 0, z, tz || 0],
-                       [0, 0, 0, 1]
-                      ];
+    constructor(){
+        this.elements = arguments.length ?
+            [].slice.call(arguments) :
+            [1, 0, 0, 0,
+             0, 1, 0, 0,
+             0, 0, 1, 0,
+             0, 0, 0, 1];
     }
 
     multiply(Matrix m){
 
     }
 
-    get scale(sx, sy, sz){
-        return new Matrix(sx,sy,sz);
-        /*
-        x*sx, y*sy, z*sz
-
-        (sx*x) + (0*y) + 0 --> sx  0  0
-        (0*x) + (sy*y) + 0 --> 0  sy  0
-        */
+    get scaleMatrix(sx, sy, sz){
+        return new Matrix(
+                sx, 0, 0, 0,
+                0, sy, 0, 0,
+                0, 0, sz, 0,
+                0, 0, 0, 1
+            );
     }
 
-    get translate(tx, ty, tz){
-        return new Matrix(1,1,1,tx,ty,tz);
+    get translationMatrix(tx, ty, tz){
+        return new Matrix(
+                1, 0, 0, tx,
+                0, 1, 0, ty,
+                0, 0, 1, tz,
+                0, 0, 0, 1
+            );
+
         /*
         x + tx, y+ty, z + tz
 
@@ -41,20 +46,59 @@ var Matrix = class Matrix {
              0  0   1  |  1         1
 
         */
-    }   
+    } 
 
-    rotate(theta){
+    get transpose(){
 
+    }  
 
-        x * cos theta - y* sin theta,
-        x * sin theta - y* cos theta
+    get rotationMatrix(angle, x, y, z){
+        // In production code, this function should be associated
+        // with a matrix object with associated functions.
+        var axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
+        var s = Math.sin(angle * Math.PI / 180.0);
+        var c = Math.cos(angle * Math.PI / 180.0);
+        var oneMinusC = 1.0 - c;
 
-        ((cos theta) * x) + ((-sin theta) * y) + 0
-        ((sin theta) * x) + ((cos theta) * y) + 0
+        // Normalize the axis vector of rotation.
+        x /= axisLength;
+        y /= axisLength;
+        z /= axisLength;
 
-        cos theta   -sin theta   0
-        sin theta   cos theta    0
+        // Now we can calculate the other terms.
+        // "2" for "squared."
+        var x2 = x * x;
+        var y2 = y * y;
+        var z2 = z * z;
+        var xy = x * y;
+        var yz = y * z;
+        var xz = x * z;
+        var xs = x * s;
+        var ys = y * s;
+        var zs = z * s;
 
+        // GL expects its matrices in column major order.
+        return Matrix(
+            (x2 * oneMinusC) + c,
+            (xy * oneMinusC) + zs,
+            (xz * oneMinusC) - ys,
+            0.0,
+
+            (xy * oneMinusC) - zs,
+            (y2 * oneMinusC) + c,
+            (yz * oneMinusC) + xs,
+            0.0,
+
+            (xz * oneMinusC) + ys,
+            (yz * oneMinusC) - xs,
+            (z2 * oneMinusC) + c,
+            0.0,
+
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        );
     }
 
     equals(){
