@@ -176,6 +176,9 @@
     };
 
     Shape.prototype.addChild = function (childShape) {
+        if (!this.children){
+            this.children = [];
+        }
         this.children.push(childShape);
     };
 
