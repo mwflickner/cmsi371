@@ -213,14 +213,13 @@
         //     mode: gl.LINE_LOOP,
         //     axis: { x: 1.0, y: 0.0, z: 1.0 }
         // },
-
-        {
+        new Shape({
             color: { r: 0.0, g: 0.5, b: 0.0 },
             vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
             mode: gl.LINES,
-            axis: { x: 0.0, y: 1.0, z: 1.0 }
-            children: new Shape().children
-        },
+            axis: { x: 0.0, y: 1.0, z: 1.0 },
+            children: []
+        }),
 
         // // Something that would have been clipped before.
         // {
@@ -238,7 +237,7 @@
         //     axis: { x: -0.5, y: 1.0, z: 0.0 }
         // },
 
-        {
+        new Shape ({
             vertices: new Shape(Shape.cube()).toRawTriangleArray(),
             // 12 triangles in all.
             colors: [].concat(
@@ -281,23 +280,23 @@
             ),
             mode: gl.TRIANGLES,
             axis: { x: 1.0, y: 1.0, z: 1.0 }
-        },
+        }),
 
-        {
+        new Shape({
             vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
             mode: gl.TRIANGLES,
             color: {r: 0.0, g: 1.0, b: 0.0},
             axis: { x: 1.0, y: 1.0, z: 1.0 }
-        },
+        }),
 
-        {
+        new Shape({
             vertices: new Shape(Shape.sphere()).toRawLineArray(),
             mode: gl.LINES,
             color: {r: 0.0, g: 0.0, b:0.75},
             axis: { x:1.0, y:1.0, z:1.0}
-        },
+        }),
 
-        {
+        new Shape({
             vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
             mode: gl.TRIANGLES,
             colors: [].concat(
@@ -330,7 +329,7 @@
                 [ 1.0, 1.0, 0.0 ]
             ),
             axis: { x:1.0, y:1.0, z:1.0}
-        }
+        })
     ];
 
     var verticesPasser = function(){
@@ -355,7 +354,7 @@
             objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].colors);
 
-            if (objectsToDraw[i].children.length != 0) {
+            if (objectsToDraw.children && objectsToDraw[i].children.length != 0) {
                 verticesPasser(objectsToDraw[i].children);
             }
         }
@@ -454,6 +453,7 @@
         10
     ).elements));
 
+    verticesPasser(objectsToDraw);
     // Animation initialization/support.
     previousTimestamp = null;
     advanceScene = function (timestamp) {

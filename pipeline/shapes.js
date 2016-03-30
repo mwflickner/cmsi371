@@ -8,6 +8,10 @@
         this.vertices = properties.vertices || [];
         this.indices = properties.indices || [];
         this.children = properties.children || [];
+        this.color = properties.color || {r:0.0,g:0.0,b:0.0};
+        this.colors = properties.colors || null;
+        this.mode = properties.mode;
+        this.axis = properties.axis || {x:0.0, y:0.0, z:0.0};
     };
 
     Shape.icosahedron = function () {
