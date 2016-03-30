@@ -174,7 +174,7 @@
         };
     };
 
-    Shape.prototype.pushChild = function (childShape) {
+    Shape.prototype.addChild = function (childShape) {
         this.children.push(childShape);
     };
 
