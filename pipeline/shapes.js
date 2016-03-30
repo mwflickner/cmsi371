@@ -1,13 +1,13 @@
 (function(){
     window.Shape = window.Shape || {};
 
-    Shape = function(properties){
+    Shape = function(properties) {
         this.x = properties.x;
         this.y = properties.y; 
         this.z = properties.z;
         this.vertices = properties.vertices;
         this.indices = properties.indices;
-        this.children = []
+        this.children = [];
     };
 
     Shape.icosahedron = function () {
@@ -107,6 +107,33 @@
         }
     };
 
+    Shape.ramp = function() {
+        return {
+            vertices: [
+                [-0.5, -0.5, -0.5], // 0
+                [-0.5, -0.5, 0.5],  // 1
+                [-0.5, 0.5, 0.5],   // 2
+                [-0.5, 0.5, -0.5],  // 3
+                [0.5, 0.5, 0.5],    // 4
+                [0.5, 0.5, -0.5]    // 5
+            ],
+
+            indices: [
+                [0,3,5],
+                [1,2,4],
+
+                [0,1,2],
+                [2,3,0],
+
+                [2,3,5],
+                [5,4,2],
+
+                [0,5,1],
+                [1,4,5]
+            ]
+        }
+    }
+
     Shape.sphere = function () {
         var vertices = [],
             indices = [],
@@ -149,7 +176,7 @@
 
     Shape.prototype.pushChild = function (childShape) {
         this.children.push(childShape);
-    }
+    };
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array

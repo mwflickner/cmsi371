@@ -283,17 +283,52 @@
         //     axis: { x: 1.0, y: 1.0, z: 1.0 }
         // },
 
-        {
-            vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
-            mode: gl.TRIANGLES,
-            color: {r: 0.0, g: 1.0, b: 0.0},
-            axis: { x: 1.0, y: 1.0, z: 1.0 }
-        },
+        // {
+        //     vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
+        //     mode: gl.TRIANGLES,
+        //     color: {r: 0.0, g: 1.0, b: 0.0},
+        //     axis: { x: 1.0, y: 1.0, z: 1.0 }
+        // },
+
+        // {
+        //     vertices: new Shape(Shape.sphere()).toRawLineArray(),
+        //     mode: gl.LINES,
+        //     color: {r: 0.0, g: 0.0, b:0.75},
+        //     axis: { x:1.0, y:1.0, z:1.0}
+        // },
 
         {
-            vertices: new Shape(Shape.sphere()).toRawLineArray(),
-            mode: gl.LINES,
-            color: {r: 0.0, g: 0.0, b:0.75},
+            vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+            mode: gl.TRIANGLES,
+            colors: [].concat(
+                [ 1.0, 0.0, 0.0 ],
+                [ 1.0, 0.0, 0.0 ],
+                [ 1.0, 0.0, 0.0 ],
+                [ 1.0, 0.0, 0.0 ],
+                [ 1.0, 0.0, 0.0 ],
+                [ 1.0, 0.0, 0.0 ],
+
+                [ 0.0, 1.0, 0.0 ],
+                [ 0.0, 1.0, 0.0 ],
+                [ 0.0, 1.0, 0.0 ],
+                [ 0.0, 1.0, 0.0 ],
+                [ 0.0, 1.0, 0.0 ],
+                [ 0.0, 1.0, 0.0 ],
+
+                [ 0.0, 0.0, 1.0 ],
+                [ 0.0, 0.0, 1.0 ],
+                [ 0.0, 0.0, 1.0 ],
+                [ 0.0, 0.0, 1.0 ],
+                [ 0.0, 0.0, 1.0 ],
+                [ 0.0, 0.0, 1.0 ],
+
+                [ 1.0, 1.0, 0.0 ],
+                [ 1.0, 1.0, 0.0 ],
+                [ 1.0, 1.0, 0.0 ],
+                [ 1.0, 1.0, 0.0 ],
+                [ 1.0, 1.0, 0.0 ],
+                [ 1.0, 1.0, 0.0 ]
+            ),
             axis: { x:1.0, y:1.0, z:1.0}
         }
     ];
