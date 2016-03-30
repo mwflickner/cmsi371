@@ -41,7 +41,7 @@
                     0,0,0,1
                 );
 
-    QUnit.test("Creation test", function(assert){
+    QUnit.test("Creation Test", function(assert){
         assert.ok(16 === identity.dimension(), "Dimension!");
         assert.deepEqual(identity,identity,"Identity DeepEqual");
         assert.deepEqual(m2.elements, m2Elements, "General DeepEqual");
@@ -86,7 +86,7 @@
 
     // });
 
-    // QUnit.test("Get Projection Test", function(assert){
+    // QUnit.test("Get OrthoProjection Test", function(assert){
 
     // });
 

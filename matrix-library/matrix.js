@@ -156,9 +156,34 @@
         );
     };
 
-    Matrix.getProjectionMatrix = function(){
+    Matrix.getOrthoMatrix = function (left, right, bottom, top, zNear, zFar) {
+        var width = right - left;
+        var height = top - bottom;
+        var depth = zFar - zNear;
 
+        return [
+            2.0 / width,
+            0.0,
+            0.0,
+            0.0,
+
+            0.0,
+            2.0 / height,
+            0.0,
+            0.0,
+
+            0.0,
+            0.0,
+            -2.0 / depth,
+            0.0,
+
+            -(right + left) / width,
+            -(top + bottom) / height,
+            -(zFar + zNear) / depth,
+            1.0
+        ];
     };
+
 
     Matrix.getFrutsumMatrix = function (){
 
