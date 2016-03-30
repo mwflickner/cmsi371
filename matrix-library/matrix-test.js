@@ -82,17 +82,49 @@
         );
     });
 
-    // QUnit.test("Get Rotation Test", function(assert){
+    QUnit.test("Get Rotation Test", function(assert){
+        assert.deepEqual(
+            Matrix.getRotationMatrix(0,0,0,1),
+            identity,
+            "getRotationMatrix"
+        );
+        assert.deepEqual(
+            Matrix.getRotationMatrix(0,0,1,0),
+            identity,
+            "getRotationMatrix"
+        );
+        assert.deepEqual(
+            Matrix.getRotationMatrix(0,1,0,0),
+            identity,
+            "getRotationMatrix"
+        );
+    });
 
-    // });
+    QUnit.test("Get OrthoProjection Test", function(assert){
+        assert.deepEqual(
+            Matrix.getOrthoMatrix(-1,1,-1,1,1,-1),
+            new Matrix(
+                1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                0,0,0,1
+            ),
+            "Get Frutsum Test"
+        );
+    });
 
-    // QUnit.test("Get OrthoProjection Test", function(assert){
-
-    // });
-
-    // QUnit.test("Get Frutsum Test", function(assert){
-
-    // });
+    QUnit.test("Get Frutsum Test", function(assert){
+        assert.deepEqual(
+            Matrix.getFrutsumMatrix(-1,1,-1,1,1,-1),
+            new Matrix(
+                1,0,0,0,
+                0,1,0,0,
+                0,0,0,-1,
+                0,0,-1,0
+            ),
+            "Get Frutsum Test"
+        );
+    });
 
 
 }());

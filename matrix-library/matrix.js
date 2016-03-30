@@ -97,8 +97,6 @@
 
     Matrix.getRotationMatrix = function (angle, x, y, z) {
         // Thx 4 code, Dondi
-        // In production code, this function should be associated
-        // with a matrix object with associated functions.
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
         var s = Math.sin(angle * Math.PI / 180.0);
         var c = Math.cos(angle * Math.PI / 180.0);
@@ -161,7 +159,7 @@
         var height = top - bottom;
         var depth = zFar - zNear;
 
-        return [
+        return new Matrix(
             2.0 / width,
             0.0,
             0.0,
@@ -181,12 +179,36 @@
             -(top + bottom) / height,
             -(zFar + zNear) / depth,
             1.0
-        ];
+        );
     };
 
 
-    Matrix.getFrutsumMatrix = function (){
+    Matrix.getFrutsumMatrix = function (left, right, bottom, top, near, far){
+        var width = right - left;
+        var height = top - bottom;
+        var depth = far - near;
 
+        return new Matrix(
+            2.0*near/width,
+            0,
+            (right+left)/width,
+            0,
+
+            0,
+            2.0*near/height,
+            (top+bottom)/height,
+            0,
+
+            0,
+            0,
+            -(far+near)/(depth),
+            -(2*near*far)/(depth),
+
+            0,
+            0,
+            -1,
+            0
+        );
     };
 
 
