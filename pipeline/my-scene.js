@@ -406,11 +406,8 @@
         // Set up the model-view matrix, if an axis is included.  If not, we
         // specify the identity matrix.
         gl.uniformMatrix4fv(modelViewMatrix, gl.FALSE, new Float32Array(object.axis ?
-                getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z) :
-                [1, 0, 0, 0, // N.B. In a full-fledged matrix library, the identity
-                 0, 1, 0, 0, //      matrix should be available as a function.
-                 0, 0, 1, 0,
-                 0, 0, 0, 1]
+                Matrix.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z) :
+                new Matrix().elements
             ));
 
         // Set the varying vertex coordinates.
