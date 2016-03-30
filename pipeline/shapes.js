@@ -5,9 +5,9 @@
         this.x = properties.x;
         this.y = properties.y; 
         this.z = properties.z;
-        this.vertices = properties.vertices;
-        this.indices = properties.indices;
-        this.children = [];
+        this.vertices = properties.vertices || [];
+        this.indices = properties.indices || [];
+        this.children = properties.children || [];
     };
 
     Shape.icosahedron = function () {
