@@ -213,126 +213,141 @@
         //     mode: gl.LINE_LOOP,
         //     axis: { x: 1.0, y: 0.0, z: 1.0 }
         // },
-        new Shape({
-            color: { r: 0.0, g: 0.5, b: 0.0 },
-            vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
-            mode: gl.LINES,
-            axis: { x: 0.0, y: 1.0, z: 1.0 },
-            children: []
-        }),
+        // new Shape({
+        //     color: { r: 0.0, g: 0.5, b: 0.0 },
+        //     vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
+        //     mode: gl.LINES,
+        //     axis: { x: 0.0, y: 1.0, z: 1.0 },
+        //     children: []
+        // }),
 
-        // // Something that would have been clipped before.
-        // {
-        //     vertices: [].concat(
-        //         [ 3.0, 1.5, 0.0 ],
-        //         [ 2.0, -1.5, 0.0 ],
-        //         [ 4.0, -1.5, 0.0 ]
-        //     ),
+        // // // Something that would have been clipped before.
+        // // {
+        // //     vertices: [].concat(
+        // //         [ 3.0, 1.5, 0.0 ],
+        // //         [ 2.0, -1.5, 0.0 ],
+        // //         [ 4.0, -1.5, 0.0 ]
+        // //     ),
+        // //     colors: [].concat(
+        // //         [ 1.0, 0.5, 0.0 ],
+        // //         [ 0.0, 0.0, 0.5 ],
+        // //         [ 0.5, 0.75, 0.5 ]
+        // //     ),
+        // //     mode: gl.TRIANGLES,
+        // //     axis: { x: -0.5, y: 1.0, z: 0.0 }
+        // // },
+
+        // new Shape ({
+        //     vertices: new Shape(Shape.cube()).toRawTriangleArray(),
+        //     // 12 triangles in all.
         //     colors: [].concat(
-        //         [ 1.0, 0.5, 0.0 ],
-        //         [ 0.0, 0.0, 0.5 ],
-        //         [ 0.5, 0.75, 0.5 ]
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 0.0, 1.0 ],
+        //         [ 1.0, 0.0, 1.0 ],
+        //         [ 1.0, 0.0, 1.0 ],
+        //         [ 1.0, 0.0, 1.0 ],
+        //         [ 1.0, 0.0, 1.0 ],
+        //         [ 1.0, 0.0, 1.0 ],
+        //         [ 0.0, 1.0, 1.0 ],
+        //         [ 0.0, 1.0, 1.0 ],
+        //         [ 0.0, 1.0, 1.0 ],
+        //         [ 0.0, 1.0, 1.0 ],
+        //         [ 0.0, 1.0, 1.0 ],
+        //         [ 0.0, 1.0, 1.0 ]
         //     ),
         //     mode: gl.TRIANGLES,
-        //     axis: { x: -0.5, y: 1.0, z: 0.0 }
-        // },
-
-        new Shape ({
-            vertices: new Shape(Shape.cube()).toRawTriangleArray(),
-            // 12 triangles in all.
-            colors: [].concat(
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 0.0, 1.0 ],
-                [ 1.0, 0.0, 1.0 ],
-                [ 1.0, 0.0, 1.0 ],
-                [ 1.0, 0.0, 1.0 ],
-                [ 1.0, 0.0, 1.0 ],
-                [ 1.0, 0.0, 1.0 ],
-                [ 0.0, 1.0, 1.0 ],
-                [ 0.0, 1.0, 1.0 ],
-                [ 0.0, 1.0, 1.0 ],
-                [ 0.0, 1.0, 1.0 ],
-                [ 0.0, 1.0, 1.0 ],
-                [ 0.0, 1.0, 1.0 ]
-            ),
-            mode: gl.TRIANGLES,
-            axis: { x: 1.0, y: 1.0, z: 1.0 }
-        }),
+        //     axis: { x: 1.0, y: 1.0, z: 1.0 }
+        // }),
 
         new Shape({
             vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
             mode: gl.TRIANGLES,
             color: {r: 0.0, g: 1.0, b: 0.0},
-            axis: { x: 1.0, y: 1.0, z: 1.0 }
-        }),
+            axis: { x: 1.0, y: 1.0, z: 1.0 },
+            children: [
+                    new Shape({
+                        vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
+                        mode: gl.LINES,
+                        color: {r: 0.0, g: 0.0, b: 1.0},
+                        axis: { x: 1.0, y: 1.0, z: 1.0}
+                    }),
 
-        new Shape({
-            vertices: new Shape(Shape.sphere()).toRawLineArray(),
-            mode: gl.LINES,
-            color: {r: 0.0, g: 0.0, b:0.75},
-            axis: { x:1.0, y:1.0, z:1.0}
-        }),
-
-        new Shape({
-            vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-            mode: gl.TRIANGLES,
-            colors: [].concat(
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-                [ 1.0, 0.0, 0.0 ],
-
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-                [ 0.0, 0.0, 1.0 ],
-
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ],
-                [ 1.0, 1.0, 0.0 ]
-            ),
-            axis: { x:1.0, y:1.0, z:1.0}
+                    new Shape({
+                        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+                        mode: gl.TRIANGLES,
+                        color: {r: 0.0, g: 0.0, b:0.75},
+                        axis: { x:1.0, y:1.0, z:1.0}
+                    })
+            ]
         })
+
+        // new Shape({
+        //     vertices: new Shape(Shape.sphere()).toRawLineArray(),
+        //     mode: gl.LINES,
+        //     color: {r: 0.0, g: 0.0, b:0.75},
+        //     axis: { x:1.0, y:1.0, z:1.0}
+        // }),
+
+        // new Shape({
+        //     vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+        //     mode: gl.TRIANGLES,
+        //     colors: [].concat(
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 1.0, 0.0, 0.0 ],
+
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+        //         [ 0.0, 0.0, 1.0 ],
+
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ],
+        //         [ 1.0, 1.0, 0.0 ]
+        //     ),
+        //     axis: { x:1.0, y:1.0, z:1.0}
+        // })
     ];
 
-    var verticesPasser = function(){
+    var verticesPasser = function(objectsToDraw){
         // Pass the vertices to WebGL.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
             objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
@@ -354,7 +369,7 @@
             objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].colors);
 
-            if (objectsToDraw.children && objectsToDraw[i].children.length != 0) {
+            if (objectsToDraw[i].children && objectsToDraw[i].children.length != 0) {
                 verticesPasser(objectsToDraw[i].children);
             }
         }
@@ -420,6 +435,12 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+
+        if (object.children){
+            for(i = 0; i < object.children.length; i++){
+                drawObject(object.children[i]);
+            }
+        }
     };
 
     /*
