@@ -11,32 +11,34 @@
     };
 
     Matrix.prototype.dimension = function (){
-        return this.elements.length
+        return this.elements.length;
     };
 
     var isSameDimension = function(a,b){
-        // 
-        return a.dimension() === b.dimension();
+        if (a.dimension() !== b.dimension()){
+            return false;
+        }
+        return true;
     };
 
-    Matrix.equals = function(matrix){
+    Matrix.prototype.equals = function(matrix){
         var a = this;
         var b = matrix;
 
-        if (!isSameDimension(a,b)){
+        if (!(isSameDimension(a,b))){
             return false;
         }
         for (var i = 0; i < a.elements.length; i++){
-            if a[i] !== b[i]{
+            if (a.elements[i] !== b.elements[i]){
                 return false;
             }
         }
         return true;
     }
 
-    Matrix.multiply = function(matrix){
-        var a = this.elements;
-        var b = matrix.elements;
+    Matrix.prototype.multiply = function(matrix){
+        var a = this;
+        var b = matrix;
 
         if (!isSameDimension(a,b)){
             throw "Multiplication operation not allowed. Different dimensions";
@@ -47,6 +49,8 @@
                 8   9   10  11
                 12  13  14  15
             */
+            a = a.elements;
+            b = b.elements;
 
             return new Matrix(
                     a[0]*b[0] + a[1]*b[4] + a[2]*b[8] + a[3]*b[12],
@@ -59,10 +63,10 @@
                     a[4]*b[2] + a[5]*b[6] + a[6]*b[10]+ a[7]*b[14],
                     a[4]*b[3] + a[5]*b[7] + a[6]*b[11]+ a[7]*b[15],
 
-                    a[8]*b[0] + a[9]*b[4] + a[9]*b[8] + a[10]*b[12],
-                    a[8]*b[1] + a[9]*b[5] + a[9]*b[9] + a[10]*b[13],
-                    a[8]*b[2] + a[9]*b[6] + a[9]*b[10]+ a[10]*b[14],
-                    a[8]*b[3] + a[9]*b[7] + a[9]*b[11]+ a[10]*b[15],
+                    a[8]*b[0] + a[9]*b[4] + a[10]*b[8] + a[11]*b[12],
+                    a[8]*b[1] + a[9]*b[5] + a[10]*b[9] + a[11]*b[13],
+                    a[8]*b[2] + a[9]*b[6] + a[10]*b[10]+ a[11]*b[14],
+                    a[8]*b[3] + a[9]*b[7] + a[10]*b[11]+ a[11]*b[15],
 
                     a[12]*b[0] + a[13]*b[4] + a[14]*b[8] + a[15]*b[12],
                     a[12]*b[1] + a[13]*b[5] + a[14]*b[9] + a[15]*b[13],
@@ -84,9 +88,10 @@
 
     Matrix.getScaleMatrix = function(sx,sy,sz){
         return new Matrix(
-                sx,0,0,0
-                0,sy,0,0
-                0,0,0,sz
+                sx,0,0,0,
+                0,sy,0,0,
+                0,0,sz,0,
+                0,0,0,1
             );
     };
 
