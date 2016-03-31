@@ -22,8 +22,6 @@
     var animationActive = false;
     var currentRotation = 0.0;
     var currentInterval;
-    var modelViewMatrix;
-    var projectionMatrix;
     var vertexPosition;
     var vertexColor;
 
@@ -165,122 +163,6 @@
     // Build the objects to display.  Note how each object may come with a
     // rotation axis now.
     objectsToDraw = [
-        // We move our original triangles a bit to accommodate a new addition
-        // to the scene (yes, a translation will also do the trick, if it
-        // where implemented in this program).
-        // {
-        //     vertices: [].concat(
-        //         [ -2.0, 0.0, 0.0 ],
-        //         [ -1.5, 0.0, -0.75 ],
-        //         [ -2.0, 0.5, 0.0 ]
-        //     ),
-        //     colors: [].concat(
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 0.0, 1.0 ]
-        //     ),
-        //     mode: gl.TRIANGLES
-        // },
-
-        // {
-        //     color: { r: 0.0, g: 1.0, b: 0 },
-        //     vertices: [].concat(
-        //         [ -1.75, 0.0, -0.5 ],
-        //         [ -1.25, 0.0, -0.5 ],
-        //         [ -1.75, 0.5, -0.5 ]
-        //     ),
-        //     mode: gl.TRIANGLES
-        // },
-
-        // {
-        //     color: { r: 0.0, g: 0.0, b: 1.0 },
-        //     vertices: [].concat(
-        //         [ -2.25, 0.0, 0.5 ],
-        //         [ -1.75, 0.0, 0.5 ],
-        //         [ -2.25, 0.5, 0.5 ]
-        //     ),
-        //     mode: gl.TRIANGLES
-        // },
-
-        // {
-        //     color: { r: 0.0, g: 0.0, b: 1.0 },
-        //     vertices: [].concat(
-        //         [ -1.0, -1.0, 0.75 ],
-        //         [ -1.0, -0.1, -1.0 ],
-        //         [ -0.1, -0.1, -1.0 ],
-        //         [ -0.1, -1.0, 0.75 ]
-        //     ),
-        //     mode: gl.LINE_LOOP,
-        //     axis: { x: 1.0, y: 0.0, z: 1.0 }
-        // },
-        // new Shape({
-        //     color: { r: 0.0, g: 0.5, b: 0.0 },
-        //     vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
-        //     mode: gl.LINES,
-        //     axis: { x: 0.0, y: 1.0, z: 1.0 },
-        //     children: []
-        // }),
-
-        // // // Something that would have been clipped before.
-        // // {
-        // //     vertices: [].concat(
-        // //         [ 3.0, 1.5, 0.0 ],
-        // //         [ 2.0, -1.5, 0.0 ],
-        // //         [ 4.0, -1.5, 0.0 ]
-        // //     ),
-        // //     colors: [].concat(
-        // //         [ 1.0, 0.5, 0.0 ],
-        // //         [ 0.0, 0.0, 0.5 ],
-        // //         [ 0.5, 0.75, 0.5 ]
-        // //     ),
-        // //     mode: gl.TRIANGLES,
-        // //     axis: { x: -0.5, y: 1.0, z: 0.0 }
-        // // },
-
-        // new Shape ({
-        //     vertices: new Shape(Shape.cube()).toRawTriangleArray(),
-        //     // 12 triangles in all.
-        //     colors: [].concat(
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 0.0, 1.0 ],
-        //         [ 1.0, 0.0, 1.0 ],
-        //         [ 1.0, 0.0, 1.0 ],
-        //         [ 1.0, 0.0, 1.0 ],
-        //         [ 1.0, 0.0, 1.0 ],
-        //         [ 1.0, 0.0, 1.0 ],
-        //         [ 0.0, 1.0, 1.0 ],
-        //         [ 0.0, 1.0, 1.0 ],
-        //         [ 0.0, 1.0, 1.0 ],
-        //         [ 0.0, 1.0, 1.0 ],
-        //         [ 0.0, 1.0, 1.0 ],
-        //         [ 0.0, 1.0, 1.0 ]
-        //     ),
-        //     mode: gl.TRIANGLES,
-        //     axis: { x: 1.0, y: 1.0, z: 1.0 }
-        // }),
 
         new Shape({
             vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
@@ -299,7 +181,8 @@
                         vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
                         mode: gl.TRIANGLES,
                         color: {r: 0.0, g: 0.0, b:0.75},
-                        axis: { x:1.0, y:1.0, z:1.0}
+                        axis: { x:1.0, y:1.0, z:1.0},
+                        scale: {x:4.0, y:2.0, z:2.0}
                     })
             ]
         })
@@ -412,8 +295,33 @@
 
     // Finally, we come to the typical setup for transformation matrices:
     // model-view and projection, managed separately.
-    modelViewMatrix = gl.getUniformLocation(shaderProgram, "modelViewMatrix");
-    projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    var modelViewMatrix = gl.getUniformLocation(shaderProgram, "modelViewMatrix");
+    var projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    var rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+    var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
+    var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
+    var orthoMatrix = gl.getUniformLocation(shaderProgram, "orthogonalMatrix");
+    var instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
+
+     // Initialize projection matrix
+    gl.uniformMatrix4fv(projectionMatrix, 
+        gl.FALSE,
+        //left, right, bottom, top, near, far
+        new Float32Array(Matrix.getFrutsumMatrix(-2, 2, -2, 2, 20, 2000).getTransposeForConsumption().elements)
+    );
+
+    // Initialize scale matrix
+    gl.uniformMatrix4fv(scaleMatrix, 
+        gl.FALSE, 
+        new Float32Array(Matrix.getScaleMatrix(0.5, 0.5, 0.5).getTransposeForConsumption().elements)
+    );
+
+    // Initialize translation matrix
+    gl.uniformMatrix4fv(translationMatrix, 
+        gl.FALSE, 
+        new Float32Array(Matrix.getTranslationMatrix(0, 0, 0).getTransposeForConsumption().elements)
+    );
+
 
     /*
      * Displays an individual object, including a transformation that now varies
@@ -430,6 +338,40 @@
                 Matrix.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z).elements :
                 new Matrix().elements
             ));
+
+        var instanceMatrix = new Matrix();
+        instanceMatrix = instanceMatrix.multiply(
+                                            Matrix.getTranslationMatrix(
+                                                object.translation.x || 0,
+                                                object.translation.y || 0,
+                                                object.translation.z || 0
+                                            )
+                                        )
+                                        .multiply(
+                                            Matrix.getScaleMatrix(
+                                                object.scale.x || 1,
+                                                object.scale.y || 1,
+                                                object.scale.z || 1
+                                            )
+                                        )
+                                        .multiply(
+                                                Matrix.getRotationMatrix(
+                                                    object.rotation.angle || 0,
+                                                    object.rotation.x || 1,
+                                                    object.rotation.y || 0,
+                                                    object.rotation.z || 0
+                                                )
+                                        );
+
+        console.log(instanceMatrix);
+        // Set up the model-view matrix, if an axis is included.  If not, we
+        // specify the identity matrix.
+        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
+                gl.FALSE,
+                new Float32Array(instanceMatrix.getTransposeForConsumption().elements)
+            );
+
+
 
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
@@ -449,6 +391,15 @@
     drawScene = function () {
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        gl.uniformMatrix4fv(
+            rotationMatrix,
+            gl.FALSE,
+            new Float32Array(Matrix.getRotationMatrix(
+                currentRotation, 
+                0, 1, 0
+            ).getTransposeForConsumption().elements)
+        );
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
