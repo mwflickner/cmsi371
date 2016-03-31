@@ -176,10 +176,13 @@
     };
 
     Shape.prototype.addChild = function (childShape) {
-        if (!this.children){
-            this.children = [];
-        }
         this.children.push(childShape);
+    };
+
+    Shape.prototype.removeChild = function (childShape) {
+        if (this.children.length > 0){
+            this.children.pop();
+        }
     };
 
     /*
