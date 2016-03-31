@@ -169,6 +169,7 @@
             mode: gl.TRIANGLES,
             color: {r: 0.0, g: 1.0, b: 0.0},
             axis: { x: 1.0, y: 1.0, z: 1.0 },
+            scale: {x:4.0, y:1.0, z:4.0},
             children: [
                     new Shape({
                         vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
@@ -301,13 +302,13 @@
     var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
     var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     var orthoMatrix = gl.getUniformLocation(shaderProgram, "orthogonalMatrix");
-    var instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
+    //var instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
 
      // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE,
         //left, right, bottom, top, near, far
-        new Float32Array(Matrix.getFrutsumMatrix(-2, 2, -2, 2, 20, 2000).getTransposeForConsumption().elements)
+        new Float32Array(Matrix.getFrutsumMatrix(-20, 2, -2, 2, 20, 2000).getTransposeForConsumption().elements)
     );
 
     // Initialize scale matrix
@@ -363,7 +364,7 @@
                                                 )
                                         );
         // Set up instance 
-        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
+        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "projectionMatrix"),
                 gl.FALSE,
                 new Float32Array(instanceMatrix.getTransposeForConsumption().elements)
             );
