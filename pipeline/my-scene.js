@@ -362,10 +362,7 @@
                                                     object.rotation.z || 0
                                                 )
                                         );
-
-        console.log(instanceMatrix);
-        // Set up the model-view matrix, if an axis is included.  If not, we
-        // specify the identity matrix.
+        // Set up instance 
         gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
                 gl.FALSE,
                 new Float32Array(instanceMatrix.getTransposeForConsumption().elements)
