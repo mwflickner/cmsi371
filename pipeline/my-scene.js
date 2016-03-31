@@ -41,109 +41,6 @@
     var j;
     var maxj;
 
-    /*
-     * This code does not really belong here: it should live
-     * in a separate library of matrix and transformation
-     * functions.  It is here only to show you how matrices
-     * can be used with GLSL.
-     *
-     * Based on the original glRotate reference:
-     *     http://www.opengl.org/sdk/docs/man/xhtml/glRotate.xml
-     */
-    var getRotationMatrix = function (angle, x, y, z) {
-        // In production code, this function should be associated
-        // with a matrix object with associated functions.
-        var axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
-        var s = Math.sin(angle * Math.PI / 180.0);
-        var c = Math.cos(angle * Math.PI / 180.0);
-        var oneMinusC = 1.0 - c;
-
-        // We can't calculate this until we have normalized
-        // the axis vector of rotation.
-        var x2; // "2" for "squared."
-        var y2;
-        var z2;
-        var xy;
-        var yz;
-        var xz;
-        var xs;
-        var ys;
-        var zs;
-
-        // Normalize the axis vector of rotation.
-        x /= axisLength;
-        y /= axisLength;
-        z /= axisLength;
-
-        // *Now* we can calculate the other terms.
-        x2 = x * x;
-        y2 = y * y;
-        z2 = z * z;
-        xy = x * y;
-        yz = y * z;
-        xz = x * z;
-        xs = x * s;
-        ys = y * s;
-        zs = z * s;
-
-        // GL expects its matrices in column major order.
-        return [
-            (x2 * oneMinusC) + c,
-            (xy * oneMinusC) + zs,
-            (xz * oneMinusC) - ys,
-            0.0,
-
-            (xy * oneMinusC) - zs,
-            (y2 * oneMinusC) + c,
-            (yz * oneMinusC) + xs,
-            0.0,
-
-            (xz * oneMinusC) + ys,
-            (yz * oneMinusC) - xs,
-            (z2 * oneMinusC) + c,
-            0.0,
-
-            0.0,
-            0.0,
-            0.0,
-            1.0
-        ];
-    };
-
-    /*
-     * This is another function that really should reside in a
-     * separate library.  But, because the creation of that library
-     * is part of the student course work, we leave it here for
-     * later refactoring and adaptation by students.
-     */
-    var getOrthoMatrix = function (left, right, bottom, top, zNear, zFar) {
-        var width = right - left;
-        var height = top - bottom;
-        var depth = zFar - zNear;
-
-        return [
-            2.0 / width,
-            0.0,
-            0.0,
-            0.0,
-
-            0.0,
-            2.0 / height,
-            0.0,
-            0.0,
-
-            0.0,
-            0.0,
-            -2.0 / depth,
-            0.0,
-
-            -(right + left) / width,
-            -(top + bottom) / height,
-            -(zFar + zNear) / depth,
-            1.0
-        ];
-    };
-
     // Grab the WebGL rendering context.
     gl = GLSLUtilities.getGL(canvas);
     if (!gl) {
@@ -169,13 +66,15 @@
             mode: gl.TRIANGLES,
             color: {r: 0.0, g: 1.0, b: 0.0},
             axis: { x: 1.0, y: 1.0, z: 1.0 },
-            scale: {x:4.0, y:1.0, z:4.0},
+            scale: {x:0.5, y:0.5, z:0.5},
+            rotation: {angle: 200.0, x:0.0, y:2.0, z:0.0},
             children: [
                     new Shape({
                         vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
                         mode: gl.LINES,
                         color: {r: 0.0, g: 0.0, b: 1.0},
-                        axis: { x: 1.0, y: 1.0, z: 1.0}
+                        axis: { x: 1.0, y: 1.0, z: 1.0},
+                        rotation: {angle: 200.0, x:1.0, y:1.0, z:2.0},
                     }),
 
                     new Shape({
@@ -183,7 +82,8 @@
                         mode: gl.TRIANGLES,
                         color: {r: 0.0, g: 0.0, b:0.75},
                         axis: { x:1.0, y:1.0, z:1.0},
-                        scale: {x:4.0, y:2.0, z:2.0}
+                        scale: {x:0.4, y:0.4, z:0.4},
+                        translation: {x: 1, y: 0, z: 0}
                     })
             ]
         })
@@ -308,13 +208,13 @@
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE,
         //left, right, bottom, top, near, far
-        new Float32Array(Matrix.getFrutsumMatrix(-20, 2, -2, 2, 20, 2000).getTransposeForConsumption().elements)
+        new Float32Array(Matrix.getFrutsumMatrix(-2, 2, -2, 2, -2, 2).getTransposeForConsumption().elements)
     );
 
     // Initialize scale matrix
     gl.uniformMatrix4fv(scaleMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix.getScaleMatrix(0.5, 0.5, 0.5).getTransposeForConsumption().elements)
+        new Float32Array(Matrix.getScaleMatrix(1.0, 1.0, 1.0).getTransposeForConsumption().elements)
     );
 
     // Initialize translation matrix
