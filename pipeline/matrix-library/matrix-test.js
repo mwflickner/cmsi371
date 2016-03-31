@@ -40,6 +40,19 @@
                     0,0,2,0,
                     0,0,0,1
                 );
+    var m3 = new Matrix(
+                    1,1,1,1,
+                    0,0,0,0,
+                    0,0,0,0,
+                    0,0,0,0
+                );
+
+    var m3Transpose = new Matrix(
+                    1,0,0,0,
+                    1,0,0,0,
+                    1,0,0,0,
+                    1,0,0,0
+                );
 
     QUnit.test("Creation Test", function(assert){
         assert.ok(16 === identity.dimension(), "Dimension!");
@@ -124,6 +137,12 @@
             ),
             "Get Frutsum Test"
         );
+    });
+
+    QUnit.test("Get Transpose Test", function(assert){
+        assert.deepEqual(identity, identity.getTransposeForConsumption(), "I = I^T");
+        assert.deepEqual(m3.getTransposeForConsumption(), m3Transpose, "Transpose Row to Column");
+        assert.deepEqual(m3Transpose.getTransposeForConsumption(), m3, "Transpose Column to Row");
     });
 
 
