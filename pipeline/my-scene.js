@@ -369,7 +369,7 @@
             objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].colors);
 
-            if (objectsToDraw[i].children && objectsToDraw[i].children.length != 0) {
+            if (objectsToDraw[i].children.length != 0) {
                 verticesPasser(objectsToDraw[i].children);
             }
         }
