@@ -68,6 +68,7 @@
             axis: { x: 1.0, y: 1.0, z: 1.0 },
             scale: {x:0.5, y:0.5, z:0.5},
             rotation: {angle: 200.0, x:0.0, y:2.0, z:0.0},
+            translation: { x: 0, y: 0, z: -10 },
             children: [
                     new Shape({
                         vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
@@ -75,6 +76,7 @@
                         color: {r: 0.0, g: 0.0, b: 1.0},
                         axis: { x: 1.0, y: 1.0, z: 1.0},
                         rotation: {angle: 200.0, x:1.0, y:1.0, z:2.0},
+                        translation: { x: -1, y: 1, z: -50 }
                     }),
 
                     new Shape({
@@ -83,7 +85,7 @@
                         color: {r: 0.0, g: 0.0, b:0.75},
                         axis: { x:1.0, y:1.0, z:1.0},
                         scale: {x:0.4, y:0.4, z:0.4},
-                        translation: {x: 1, y: 0, z: 0}
+                        translation: {x: 1, y: 0, z: -15}
                     })
             ]
         })
@@ -208,7 +210,7 @@
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE,
         //left, right, bottom, top, near, far
-        new Float32Array(Matrix.getFrutsumMatrix(-2, 2, -2, 2, -2, 2).getTransposeForConsumption().elements)
+        new Float32Array(Matrix.getFrutsumMatrix(-4, 4, -2, 2, 5, 1000).getTransposeForConsumption().elements)
     );
 
     // Initialize scale matrix
@@ -235,10 +237,10 @@
 
         // Set up the model-view matrix, if an axis is included.  If not, we
         // specify the identity matrix.
-        gl.uniformMatrix4fv(modelViewMatrix, gl.FALSE, new Float32Array(object.axis ?
-                Matrix.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z).elements :
-                new Matrix().elements
-            ));
+//        gl.uniformMatrix4fv(modelViewMatrix, gl.FALSE, new Float32Array(object.axis ?
+//                Matrix.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z).elements :
+//                new Matrix().elements
+//            ));
 
         var instanceMatrix = new Matrix();
         instanceMatrix = instanceMatrix.multiply(
@@ -264,7 +266,7 @@
                                                 )
                                         );
         // Set up instance 
-        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "projectionMatrix"),
+        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "modelViewMatrix"),
                 gl.FALSE,
                 new Float32Array(instanceMatrix.getTransposeForConsumption().elements)
             );
@@ -314,14 +316,14 @@
     // We keep the vertical range fixed, but change the horizontal range
     // according to the aspect ratio of the canvas.  We can also expand
     // the z range now.
-    gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(Matrix.getOrthoMatrix(
-        -2 * (canvas.width / canvas.height),
-        2 * (canvas.width / canvas.height),
-        -2,
-        2,
-        -10,
-        10
-    ).elements));
+//    gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(Matrix.getOrthoMatrix(
+//        -2 * (canvas.width / canvas.height),
+//        2 * (canvas.width / canvas.height),
+//        -2,
+//        2,
+//        -10,
+//        10
+//    ).elements));
 
     verticesPasser(objectsToDraw);
     // Animation initialization/support.
