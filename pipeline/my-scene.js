@@ -76,7 +76,7 @@
                         color: {r: 0.0, g: 0.0, b: 1.0},
                         axis: { x: 1.0, y: 1.0, z: 1.0},
                         rotation: {angle: 200.0, x:1.0, y:1.0, z:2.0},
-                        translation: { x: -1, y: 1, z: -50 }
+                        translation: { x: -1, y: 1, z: -10 }
                     }),
 
                     new Shape({
@@ -86,51 +86,19 @@
                         axis: { x:1.0, y:1.0, z:1.0},
                         scale: {x:0.4, y:0.4, z:0.4},
                         translation: {x: 1, y: 0, z: -15}
+                    }),
+
+                    new Shape({
+                        vertices: new Shape(Shape.sphere()).toRawLineArray(),
+                        mode: gl.LINES,
+                        color: {r: 0.0, g: 0.0, b:0.75},
+                        axis: { x:1.0, y:1.0, z:1.0},
+                        scale: {x:0.5, y:0.5, z:0.5},
+                        rotation: {angle: 200.0, x:0.0, y:2.0, z:0.0},
+                        translation: { x: -1, y: 1, z: -20 }
                     })
             ]
-        })
-
-        // new Shape({
-        //     vertices: new Shape(Shape.sphere()).toRawLineArray(),
-        //     mode: gl.LINES,
-        //     color: {r: 0.0, g: 0.0, b:0.75},
-        //     axis: { x:1.0, y:1.0, z:1.0}
-        // }),
-
-        // new Shape({
-        //     vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-        //     mode: gl.TRIANGLES,
-        //     colors: [].concat(
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-        //         [ 1.0, 0.0, 0.0 ],
-
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-        //         [ 0.0, 1.0, 0.0 ],
-
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-        //         [ 0.0, 0.0, 1.0 ],
-
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ],
-        //         [ 1.0, 1.0, 0.0 ]
-        //     ),
-        //     axis: { x:1.0, y:1.0, z:1.0}
-        // })
+        })   
     ];
 
     var verticesPasser = function(objectsToDraw){
