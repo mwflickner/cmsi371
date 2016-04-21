@@ -67,15 +67,14 @@
             color: {r: 0.0, g: 1.0, b: 0.0},
             axis: { x: 1.0, y: 1.0, z: 1.0 },
             scale: {x:0.5, y:0.5, z:0.5},
-            rotation: {angle: 200.0, x:0.0, y:2.0, z:0.0},
+            rotation: {angle: 10.0, x:0.0, y:2.0, z:-12.0},
             translation: { x: 0, y: 0, z: -10 },
             children: [
                     new Shape({
                         vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
                         mode: gl.LINES,
                         color: {r: 0.0, g: 0.0, b: 1.0},
-                        axis: { x: 1.0, y: 1.0, z: 1.0},
-                        rotation: {angle: 200.0, x:1.0, y:1.0, z:2.0},
+                        rotation: {angle: 10.0, x:1.0, y:1.0, z:-12.0},
                         translation: { x: -1, y: 1, z: -10 }
                     }),
 
@@ -83,7 +82,6 @@
                         vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
                         mode: gl.TRIANGLES,
                         color: {r: 0.0, g: 0.0, b:0.75},
-                        axis: { x:1.0, y:1.0, z:1.0},
                         scale: {x:0.4, y:0.4, z:0.4},
                         translation: {x: 1, y: 0, z: -15}
                     }),
@@ -92,9 +90,8 @@
                         vertices: new Shape(Shape.sphere()).toRawLineArray(),
                         mode: gl.LINES,
                         color: {r: 0.0, g: 0.0, b:0.75},
-                        axis: { x:1.0, y:1.0, z:1.0},
                         scale: {x:0.5, y:0.5, z:0.5},
-                        rotation: {angle: 200.0, x:0.0, y:2.0, z:0.0},
+                        rotation: {angle: 10.0, x:0.0, y:2.0, z:-12.0},
                         translation: { x: -1, y: 1, z: -20 }
                     })
             ]

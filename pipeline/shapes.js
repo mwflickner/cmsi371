@@ -8,7 +8,6 @@
         this.color = properties.color || {r:0.0, g:0.0, b:0.0};
         this.colors = properties.colors || null;
         this.mode = properties.mode;
-        this.axis = properties.axis || {x:1.0, y:0.0, z:0.0};
         this.translation = properties.translation || {x:0.0, y:0.0, z:0.0};
         this.scale = properties.scale || {x:1.0, y:1.0, z:1.0};
         this.rotation = properties.rotation || {angle: 0.0, x:1.0, y:0.0, z:0.0};
