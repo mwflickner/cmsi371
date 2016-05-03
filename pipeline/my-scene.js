@@ -57,45 +57,48 @@
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    // Build the objects to display.  Note how each object may come with a
-    // rotation axis now.
-    objectsToDraw = [
-
-        new Shape({
+    var shapeCluster =  new Shape({
             vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
             mode: gl.TRIANGLES,
             color: {r: 0.0, g: 1.0, b: 0.0},
             axis: { x: 1.0, y: 1.0, z: 1.0 },
-            scale: {x:0.5, y:0.5, z:0.5},
-            rotation: {angle: 10.0, x:0.0, y:2.0, z:-12.0},
-            translation: { x: 0, y: 0, z: -10 },
-            children: [
-                    new Shape({
-                        vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
-                        mode: gl.LINES,
-                        color: {r: 0.0, g: 0.0, b: 1.0},
-                        rotation: {angle: 10.0, x:1.0, y:1.0, z:-12.0},
-                        translation: { x: -1, y: 1, z: -10 }
-                    }),
+            scale: {x:1.0, y:1.0, z:1.0},
+            rotation: {angle: -10.0, x:0.0, y:0.0, z:-12.0},
+            translation: { x: 0, y: 0, z: -5 }
+    }); 
+    
+    var icosahedron = new Shape({
+        vertices: new Shape(Shape.icosahedron()).toRawTriangleArray(),
+        mode: gl.LINES,
+        color: {r: 0.0, g: 0.0, b: 1.0},
+        scale: {x: 2.0, y:2.0, z:2.0},
+        rotation: {angle: 10.0, x:10.0, y:1.0, z:-5.0},
+        translation: { x: -1, y: 1, z: -10 }
+    });
 
-                    new Shape({
-                        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-                        mode: gl.TRIANGLES,
-                        color: {r: 0.0, g: 0.0, b:0.75},
-                        scale: {x:0.4, y:0.4, z:0.4},
-                        translation: {x: 1, y: 0, z: -15}
-                    }),
+    var ramp = new Shape({
+        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+        mode: gl.TRIANGLES,
+        color: {r: 0.0, g: 0.0, b:0.75},
+        scale: {x:0.5, y:0.5, z:0.5},
+        rotation: {angle: 10.0, x:0.0, y:2.0, z:-12.0},
+        translation: { x: -1, y: 1, z: 0 }
+    });
 
-                    new Shape({
-                        vertices: new Shape(Shape.sphere()).toRawLineArray(),
-                        mode: gl.LINES,
-                        color: {r: 0.0, g: 0.0, b:0.75},
-                        scale: {x:0.5, y:0.5, z:0.5},
-                        rotation: {angle: 10.0, x:0.0, y:2.0, z:-12.0},
-                        translation: { x: -1, y: 1, z: -20 }
-                    })
-            ]
-        })   
+    var sphere = new Shape({
+        vertices: new Shape(Shape.sphere()).toRawLineArray(),
+        mode: gl.LINES,
+        color: {r: 0.0, g: 0.0, b:0.75},
+        scale: {x:0.4, y:0.4, z:0.4},
+        translation: {x: 1, y: 0, z: 0}
+    });
+
+    shapeCluster.children = [icosahedron, ramp, sphere];
+    console.log(shapeCluster);
+    // Build the objects to display.  Note how each object may come with a
+    // rotation axis now.
+    objectsToDraw = [
+        shapeCluster  
     ];
 
     var verticesPasser = function(objectsToDraw){
@@ -178,24 +181,30 @@
         new Float32Array(Matrix.getFrutsumMatrix(-4, 4, -2, 2, 5, 1000).getTransposeForConsumption().elements)
     );
 
-    // Initialize scale matrix
-    gl.uniformMatrix4fv(scaleMatrix, 
-        gl.FALSE, 
-        new Float32Array(Matrix.getScaleMatrix(1.0, 1.0, 1.0).getTransposeForConsumption().elements)
+    gl.uniformMatrix4fv(rotationMatrix, 
+        gl.FALSE,
+        //left, right, bottom, top, near, far
+        new Float32Array(Matrix.getRotationMatrix(-4, 4, -2, 2, 5, 1000).elements)
     );
 
+    // Initialize scale matrix
+    // gl.uniformMatrix4fv(scaleMatrix, 
+    //     gl.FALSE, 
+    //     new Float32Array(Matrix.getScaleMatrix(1.0, 1.0, 1.0).getTransposeForConsumption().elements)
+    // );
+
     // Initialize translation matrix
-    gl.uniformMatrix4fv(translationMatrix, 
-        gl.FALSE, 
-        new Float32Array(Matrix.getTranslationMatrix(0, 0, 0).getTransposeForConsumption().elements)
-    );
+    // gl.uniformMatrix4fv(translationMatrix, 
+    //     gl.FALSE, 
+    //     new Float32Array(Matrix.getTranslationMatrix(0, 0, 0).getTransposeForConsumption().elements)
+    // );
 
 
     /*
      * Displays an individual object, including a transformation that now varies
      * for each object drawn.
      */
-    drawObject = function (object) {
+    drawObject = function (object, parentMatrix) {
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
@@ -208,28 +217,11 @@
 //            ));
 
         var instanceMatrix = new Matrix();
-        instanceMatrix = instanceMatrix.multiply(
-                                            Matrix.getTranslationMatrix(
-                                                object.translation.x || 0,
-                                                object.translation.y || 0,
-                                                object.translation.z || 0
-                                            )
-                                        )
-                                        .multiply(
-                                            Matrix.getScaleMatrix(
-                                                object.scale.x || 1,
-                                                object.scale.y || 1,
-                                                object.scale.z || 1
-                                            )
-                                        )
-                                        .multiply(
-                                                Matrix.getRotationMatrix(
-                                                    object.rotation.angle || 0,
-                                                    object.rotation.x || 1,
-                                                    object.rotation.y || 0,
-                                                    object.rotation.z || 0
-                                                )
-                                        );
+        instanceMatrix = getInstanceMatrix(object);
+
+        if (parentMatrix){
+            instanceMatrix = parentMatrix.multiply(instanceMatrix);
+        }
         // Set up instance 
         gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "modelViewMatrix"),
                 gl.FALSE,
@@ -245,10 +237,35 @@
 
         if (object.children.length != 0){
             for(i = 0; i < object.children.length; i++){
-                drawObject(object.children[i]);
+                drawObject(object.children[i], instanceMatrix);
             }
         }
     };
+
+    var getInstanceMatrix = function(object) {
+        var instanceMatrix = new Matrix();
+        instanceMatrix = instanceMatrix.multiply(
+            Matrix.getTranslationMatrix(
+                object.translation.x || 0,
+                object.translation.y || 0,
+                object.translation.z || 0
+            )
+        ).multiply(
+            Matrix.getScaleMatrix(
+                object.scale.x || 1,
+                object.scale.y || 1,
+                object.scale.z || 1
+            )
+        ).multiply(
+            Matrix.getRotationMatrix(
+                object.rotation.angle || 0,
+                object.rotation.x || 1,
+                object.rotation.y || 0,
+                object.rotation.z || 0
+            )
+        );
+        return instanceMatrix;  
+    }
 
     /*
      * Displays the scene.

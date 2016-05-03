@@ -2,9 +2,10 @@
     window.Shape = window.Shape || {};
 
     Shape = function(properties) {
+        console.log(properties);
         this.vertices = properties.vertices || [];
-        this.indices = properties.indices || [];
         this.children = properties.children || [];
+        this.indices = properties.indices || [];
         this.color = properties.color || {r:0.0, g:0.0, b:0.0};
         this.colors = properties.colors || null;
         this.mode = properties.mode;
