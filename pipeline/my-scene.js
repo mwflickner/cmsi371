@@ -68,9 +68,9 @@
     }); 
     
     var icosahedron = new Shape({
-        vertices: new Shape(Shape.icosahedron()).toRawTriangleArray(),
+        vertices: new Shape(Shape.icosahedron()).toRawLineArray(),
         mode: gl.LINES,
-        color: {r: 0.0, g: 0.0, b: 1.0},
+        color: {r: 0.0, g: 1.0, b: 1.0},
         scale: {x: 2.0, y:2.0, z:2.0},
         rotation: {angle: 10.0, x:10.0, y:1.0, z:-5.0},
         translation: { x: -1, y: 1, z: -10 }
@@ -215,7 +215,7 @@
 //                Matrix.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z).elements :
 //                new Matrix().elements
 //            ));
-
+        object.rotation.angle = currentRotation;
         var instanceMatrix = new Matrix();
         instanceMatrix = getInstanceMatrix(object);
 
