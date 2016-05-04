@@ -57,12 +57,12 @@
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    var shapeCluster =  new Shape({
+    var masterShape =  new Shape({
             vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
             mode: gl.TRIANGLES,
             color: {r: 0.0, g: 1.0, b: 0.0},
             scale: {x:1.0, y:1.0, z:1.0},
-            rotation: {angle: Math.PI, x:0.0, y:1.0, z:0.0},
+            //rotation: {angle: Math.PI, x:0.0, y:1.0, z:0.0},
             translation: { x: 0, y: 0, z: -5 },
             specularColor: {r: 1.0, g: 1.0, b: 1.0},
             shininess: 16,
@@ -73,7 +73,7 @@
         vertices: new Shape(Shape.icosahedron()).toRawTriangleArray(),
         mode: gl.TRIANGLES,
         color: {r: 0.0, g: 1.0, b: 1.0},
-        scale: {x: 2.0, y:2.0, z:2.0},
+        scale: {x: 1.0, y:1.0, z:1.0},
         rotation: {angle: Math.PI, x:0, y:1.0, z:0},
         translation: { x: -1, y: 1, z: -10 },
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
@@ -85,9 +85,21 @@
         vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
         mode: gl.TRIANGLES,
         color: {r: 0.0, g: 0.0, b:0.75},
-        scale: {x:0.5, y:0.5, z:0.5},
-        rotation: {angle: Math.PI, x:0.0, y:1.0, z:0},
-        translation: { x: -1, y: 1, z: 0 },
+        scale: {x:4.0, y:-1.0, z:1.0},
+        translation: { x: 4, y: 1, z: 0 },
+        rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
+        specularColor: {r: 1.0, g: 1.0, b: 1.0},
+        shininess: 16,
+        normals: new Shape(Shape.ramp()).toNormalArray()
+    });
+
+    var lowerRamp = new Shape({
+        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+        mode: gl.TRIANGLES,
+        color: {r: 0.0, g:0.0, b:0.75},
+        scale: {x:1.0, y:-1.0, z:1.0},
+        translation: {x:0.0, y:1.0, z:0.0},
+        rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
         shininess: 16,
         normals: new Shape(Shape.ramp()).toNormalArray()
@@ -104,18 +116,20 @@
         shininess: 16,
         normals: new Shape(Shape.sphere()).toNormalArray()
     });
-
-    shapeCluster.children = [icosahedron, ramp, sphere];
+    ramp.children = [lowerRamp];
+    var rightWing = ramp;
+    masterShape.children = [icosahedron, sphere];
 
     // Build the objects to display.  Note how each object may come with a
     // rotation axis now.
     objectsToDraw = [
-        shapeCluster  
+        
+        rightWing, masterShape
     ];
 
     var verticesPasser = function(objectsToDraw){
         // Pass the vertices to WebGL.
-        for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
+        for (var i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
             objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].vertices);
 
@@ -123,7 +137,7 @@
                 // If we have a single color, we expand that into an array
                 // of the same color over and over.
                 objectsToDraw[i].colors = [];
-                for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
+                for (var j = 0, maxj = objectsToDraw[i].vertices.length / 3;
                         j < maxj; j += 1) {
                     objectsToDraw[i].colors = objectsToDraw[i].colors.concat(
                         objectsToDraw[i].color.r,
@@ -225,16 +239,16 @@
     );
 
     // Initialize rotation matrix
-    gl.uniformMatrix4fv(rotationMatrix, 
-        gl.FALSE,
-        //left, right, bottom, top, near, far
-        new Float32Array(Matrix.getRotationMatrix(-4, 4, -2, 2, 5, 1000).elements)
-    );
+    // gl.uniformMatrix4fv(rotationMatrix, 
+    //     gl.FALSE,
+    //     //left, right, bottom, top, near, far
+    //     new Float32Array(Matrix.getRotationMatrix(-4, 4, -2, 2, 5, 1000).elements)
+    // );
 
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix.getCameraMatrix(0, 0, 20, 0, 0, 0, 0, 1, 0).getTransposeForConsumption().elements)
+        new Float32Array(Matrix.getCameraMatrix(0, 0, 10, 0, 0, 0, 0, 1, 0).getTransposeForConsumption().elements)
     );
 
     // Initialize scale matrix
@@ -332,7 +346,7 @@
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        gl.uniform4fv(lightPosition, [0.0,0.0,0.5,0.0]);
+        gl.uniform4fv(lightPosition, [0.0,0.0,-10,0.0]);
         gl.uniform3fv(lightDiffuse, [1.0,1.0,1.0]);
         gl.uniform3fv(lightSpecular, [1.0,1.0,1.0]);
         //gl.uniform3fv(lightAmbient, []);
@@ -344,7 +358,8 @@
         );
 
         // Display the objects.
-        for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
+        for (var i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
+            
             drawObject(objectsToDraw[i]);
         }
 

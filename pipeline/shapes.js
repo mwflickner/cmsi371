@@ -13,7 +13,7 @@
         this.mode = properties.mode;
         this.translation = properties.translation || {x:0.0, y:0.0, z:0.0};
         this.scale = properties.scale || {x:1.0, y:1.0, z:1.0};
-        this.rotation = properties.rotation || {angle: 0.0, x:1.0, y:0.0, z:0.0};
+        this.rotation = properties.rotation || {angle: 0.0, x:0.0, y:0.0, z:0.0};
     };
 
     Shape.icosahedron = function () {
