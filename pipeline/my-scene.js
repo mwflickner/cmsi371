@@ -62,7 +62,7 @@
             mode: gl.TRIANGLES,
             color: {r: 1.0, g: 1.0, b: 0.0},
             scale: {x:1.0, y:1.0, z:1.0},
-            rotation: {angle: Math.PI, x:0.0, y:15.0, z:0.0},
+            rotation: {angle: Math.PI, x:0.0, y:16.0, z:0.0},
             translation: { x: 0, y: 0, z: -10 },
             specularColor: {r: 1.0, g: 1.0, b: 1.0},
             shininess: 16,
@@ -131,7 +131,8 @@
 
     // ramp.children = [lowerRamp];
     // var rightWing = ramp;
-    masterShape.children = [icosahedron, earth, mars];
+    var planets = [icosahedron, earth, mars];
+    masterShape.children = planets;
 
     // Build the objects to display.  Note how each object may come with a
     // rotation axis now.
@@ -446,6 +447,16 @@
             previousTimestamp = null;
             window.requestAnimationFrame(advanceScene);
         }
+    });
+
+    $(document).keydown(function(e) {
+        console.log( "Handler for .keypress() called." );
+         var code = e.keyCode || e.which;
+         if(code === 40) { 
+            if (masterShape.children.length > 0) {
+                masterShape.removeChild();
+            }
+         }
     });
 
 }(document.getElementById("matrices-webgl")));
