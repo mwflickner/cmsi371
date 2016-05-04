@@ -58,15 +58,15 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     var masterShape =  new Shape({
-            vertices: new Shape(Shape.pyramid()).toRawTriangleArray(),
+            vertices: new Shape(Shape.sphere()).toRawTriangleArray(),
             mode: gl.TRIANGLES,
-            color: {r: 0.0, g: 1.0, b: 0.0},
+            color: {r: 1.0, g: 1.0, b: 0.0},
             scale: {x:1.0, y:1.0, z:1.0},
-            //rotation: {angle: Math.PI, x:0.0, y:1.0, z:0.0},
-            translation: { x: 0, y: 0, z: -5 },
+            rotation: {angle: Math.PI, x:0.0, y:15.0, z:0.0},
+            translation: { x: 0, y: 0, z: -10 },
             specularColor: {r: 1.0, g: 1.0, b: 1.0},
             shininess: 16,
-            normals: new Shape(Shape.pyramid()).toNormalArray()
+            normals: new Shape(Shape.sphere()).toNormalArray()
     }); 
     
     var icosahedron = new Shape({
@@ -74,57 +74,70 @@
         mode: gl.TRIANGLES,
         color: {r: 0.0, g: 1.0, b: 1.0},
         scale: {x: 1.0, y:1.0, z:1.0},
-        rotation: {angle: Math.PI, x:0, y:1.0, z:0},
+        rotation: {angle: Math.PI, x:1.0, y:0.0, z:0},
         translation: { x: -1, y: 1, z: -10 },
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
         shininess: 16,
         normals: new Shape(Shape.icosahedron()).toNormalArray()
     });
 
-    var ramp = new Shape({
-        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-        mode: gl.TRIANGLES,
-        color: {r: 0.0, g: 0.0, b:0.75},
-        scale: {x:4.0, y:-1.0, z:1.0},
-        translation: { x: 4, y: 1, z: 0 },
-        rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
-        specularColor: {r: 1.0, g: 1.0, b: 1.0},
-        shininess: 16,
-        normals: new Shape(Shape.ramp()).toNormalArray()
-    });
+    // var ramp = new Shape({
+    //     vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+    //     mode: gl.TRIANGLES,
+    //     color: {r: 0.0, g: 0.0, b:0.75},
+    //     scale: {x:4.0, y:-1.0, z:1.0},
+    //     translation: { x: 4, y: 1, z: 0 },
+    //     rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
+    //     specularColor: {r: 1.0, g: 1.0, b: 1.0},
+    //     shininess: 16,
+    //     normals: new Shape(Shape.ramp()).toNormalArray()
+    // });
 
-    var lowerRamp = new Shape({
-        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-        mode: gl.TRIANGLES,
-        color: {r: 0.0, g:0.0, b:0.75},
-        scale: {x:1.0, y:-1.0, z:1.0},
-        translation: {x:0.0, y:1.0, z:0.0},
-        rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
-        specularColor: {r: 1.0, g: 1.0, b: 1.0},
-        shininess: 16,
-        normals: new Shape(Shape.ramp()).toNormalArray()
-    });
+    // var lowerRamp = new Shape({
+    //     vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+    //     mode: gl.TRIANGLES,
+    //     color: {r: 0.0, g:0.0, b:0.75},
+    //     scale: {x:1.0, y:-1.0, z:1.0},
+    //     translation: {x:10.0, y:1.0, z:0.0},
+    //     rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
+    //     specularColor: {r: 1.0, g: 1.0, b: 1.0},
+    //     shininess: 16,
+    //     normals: new Shape(Shape.ramp()).toNormalArray()
+    // });
 
-    var sphere = new Shape({
+    var earth = new Shape({
         vertices: new Shape(Shape.sphere()).toRawTriangleArray(),
         mode: gl.TRIANGLES,
         color: {r: 0.0, g: 0.0, b:0.75},
         scale: {x:0.4, y:0.4, z:0.4},
-        translation: {x: 1, y: 0, z: 0},
-        rotation: {angle: Math.PI, x:0.0, y:1.0, z:0},
+        translation: {x: 3, y: 0, z: -3},
+        rotation: {angle: 1, x:5.0, y:0.0, z:0.0},
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
         shininess: 16,
         normals: new Shape(Shape.sphere()).toNormalArray()
     });
-    ramp.children = [lowerRamp];
-    var rightWing = ramp;
-    masterShape.children = [icosahedron, sphere];
+
+    var mars = new Shape({
+        vertices: new Shape(Shape.sphere()).toRawTriangleArray(),
+        mode: gl.TRIANGLES,
+        color: {r: 1.0, g: 0.0, b:0.0},
+        scale: {x:0.4, y:0.5, z:0.4},
+        translation: {x: -1, y: 0, z: 4},
+        rotation: {angle: Math.PI, x:0.0, y:1.0, z:0.0},
+        specularColor: {r: 1.0, g: 1.0, b: 1.0},
+        shininess: 16,
+        normals: new Shape(Shape.sphere()).toNormalArray()
+    });
+
+    // ramp.children = [lowerRamp];
+    // var rightWing = ramp;
+    masterShape.children = [icosahedron, earth, mars];
 
     // Build the objects to display.  Note how each object may come with a
     // rotation axis now.
     objectsToDraw = [
         
-        rightWing, masterShape
+        masterShape
     ];
 
     var verticesPasser = function(objectsToDraw){
@@ -346,7 +359,7 @@
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        gl.uniform4fv(lightPosition, [0.0,0.0,-10,0.0]);
+        gl.uniform4fv(lightPosition, [0.0,0.0,-10,1.0]);
         gl.uniform3fv(lightDiffuse, [1.0,1.0,1.0]);
         gl.uniform3fv(lightSpecular, [1.0,1.0,1.0]);
         //gl.uniform3fv(lightAmbient, []);
