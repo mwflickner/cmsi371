@@ -78,7 +78,7 @@
         translation: { x: -1, y: 1, z: -10 },
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
         shininess: 16,
-        normals: new Shape(Shape.pyramid()).toNormalArray()
+        normals: new Shape(Shape.icosahedron()).toNormalArray()
     });
 
     var ramp = new Shape({
@@ -90,7 +90,7 @@
         translation: { x: -1, y: 1, z: 0 },
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
         shininess: 16,
-        normals: new Shape(Shape.pyramid()).toNormalArray()
+        normals: new Shape(Shape.ramp()).toNormalArray()
     });
 
     var sphere = new Shape({
@@ -102,7 +102,7 @@
         rotation: {angle: Math.PI, x:0.0, y:1.0, z:0},
         specularColor: {r: 1.0, g: 1.0, b: 1.0},
         shininess: 16,
-        normals: new Shape(Shape.pyramid()).toNormalArray()
+        normals: new Shape(Shape.sphere()).toNormalArray()
     });
 
     shapeCluster.children = [icosahedron, ramp, sphere];
@@ -240,7 +240,7 @@
     //     gl.FALSE, 
     //     new Float32Array(Matrix.getTranslationMatrix(0, 0, 0).getTransposeForConsumption().elements)
     // );
-
+    //vertices colors specular colors normals
 
     /*
      * Displays an individual object, including a transformation that now varies
@@ -248,8 +248,12 @@
      */
     drawObject = function (object, parentMatrix) {
         // Set the varying colors.
+        console.log(object.colors.length);
+        console.log(object.specularColors.length);
+        console.log(object.normals.length);
+        console.log(object.vertices.length);
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-        gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, object.specularBuffer);
         gl.vertexAttribPointer(vertexSpecularColor, 3, gl.FLOAT, false, 0, 0);
@@ -324,7 +328,7 @@
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        gl.uniform3fv(lightPosition, [0,0,2.0,0.5]);
+        gl.uniform4fv(lightPosition, [0.0,0.0,0.5,0.0]);
         gl.uniform3fv(lightDiffuse, [1.0,1.0,1.0]);
         gl.uniform3fv(lightSpecular, [1.0,1.0,1.0]);
         //gl.uniform3fv(lightAmbient, []);
@@ -361,6 +365,11 @@
 //        -10,
 //        10
 //    ).elements));
+
+    // attribute vec3 vertexPosition;
+    //     attribute vec3 vertexDiffuseColor;
+    //     attribute vec3 vertexSpecularColor;
+    //     attribute vec3 normalVector;
 
     verticesPasser(objectsToDraw);
     // Animation initialization/support.
