@@ -81,29 +81,17 @@
         normals: new Shape(Shape.icosahedron()).toNormalArray()
     });
 
-    // var ramp = new Shape({
-    //     vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-    //     mode: gl.TRIANGLES,
-    //     color: {r: 0.0, g: 0.0, b:0.75},
-    //     scale: {x:4.0, y:-1.0, z:1.0},
-    //     translation: { x: 4, y: 1, z: 0 },
-    //     rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
-    //     specularColor: {r: 1.0, g: 1.0, b: 1.0},
-    //     shininess: 16,
-    //     normals: new Shape(Shape.ramp()).toNormalArray()
-    // });
-
-    // var lowerRamp = new Shape({
-    //     vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
-    //     mode: gl.TRIANGLES,
-    //     color: {r: 0.0, g:0.0, b:0.75},
-    //     scale: {x:1.0, y:-1.0, z:1.0},
-    //     translation: {x:10.0, y:1.0, z:0.0},
-    //     rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
-    //     specularColor: {r: 1.0, g: 1.0, b: 1.0},
-    //     shininess: 16,
-    //     normals: new Shape(Shape.ramp()).toNormalArray()
-    // });
+    var ramp = new Shape({
+        vertices: new Shape(Shape.ramp()).toRawTriangleArray(),
+        mode: gl.TRIANGLES,
+        color: {r: 0.0, g: 1.0, b:1.0},
+        scale: {x:4.0, y:-1.0, z:1.0},
+        translation: { x: 0, y: 0, z: 0 },
+        rotation: {angle: 0, x:0.0, y:0.0, z:0.0},
+        specularColor: {r: 1.0, g: 1.0, b: 1.0},
+        shininess: 16,
+        normals: new Shape(Shape.ramp()).toNormalArray()
+    });
 
     var earth = new Shape({
         vertices: new Shape(Shape.sphere()).toRawTriangleArray(),
@@ -117,6 +105,7 @@
         normals: new Shape(Shape.sphere()).toNormalArray()
     });
 
+
     var mars = new Shape({
         vertices: new Shape(Shape.sphere()).toRawTriangleArray(),
         mode: gl.TRIANGLES,
@@ -129,15 +118,10 @@
         normals: new Shape(Shape.sphere()).toNormalArray()
     });
 
-    // ramp.children = [lowerRamp];
-    // var rightWing = ramp;
     var planets = [icosahedron, earth, mars];
     masterShape.children = planets;
 
-    // Build the objects to display.  Note how each object may come with a
-    // rotation axis now.
     objectsToDraw = [
-        
         masterShape
     ];
 
@@ -220,8 +204,6 @@
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
     gl.enableVertexAttribArray(vertexPosition);
-    // vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
-    // gl.enableVertexAttribArray(vertexColor);
     var vertexDiffuseColor = gl.getAttribLocation(shaderProgram, "vertexDiffuseColor");
     gl.enableVertexAttribArray(vertexDiffuseColor);
     var vertexSpecularColor = gl.getAttribLocation(shaderProgram, "vertexSpecularColor");
@@ -235,10 +217,8 @@
     var projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     var rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
-    //var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     var orthoMatrix = gl.getUniformLocation(shaderProgram, "orthogonalMatrix");
     var cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
-    //var instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
 
     var lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
     var lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
@@ -264,19 +244,6 @@
         gl.FALSE,
         new Float32Array(Matrix.getCameraMatrix(0, 0, 10, 0, 0, 0, 0, 1, 0).getTransposeForConsumption().elements)
     );
-
-    // Initialize scale matrix
-    // gl.uniformMatrix4fv(scaleMatrix, 
-    //     gl.FALSE, 
-    //     new Float32Array(Matrix.getScaleMatrix(1.0, 1.0, 1.0).getTransposeForConsumption().elements)
-    // );
-
-    // Initialize translation matrix
-    // gl.uniformMatrix4fv(translationMatrix, 
-    //     gl.FALSE, 
-    //     new Float32Array(Matrix.getTranslationMatrix(0, 0, 0).getTransposeForConsumption().elements)
-    // );
-    //vertices colors specular colors normals
 
     /*
      * Displays an individual object, including a transformation that now varies
@@ -360,7 +327,7 @@
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        gl.uniform4fv(lightPosition, [0.0,0.0,-10,1.0]);
+        gl.uniform4fv(lightPosition, [0.0,0.0,-1,1.0]);
         gl.uniform3fv(lightDiffuse, [1.0,1.0,1.0]);
         gl.uniform3fv(lightSpecular, [1.0,1.0,1.0]);
         //gl.uniform3fv(lightAmbient, []);
@@ -455,6 +422,13 @@
          if(code === 40) { 
             if (masterShape.children.length > 0) {
                 masterShape.removeChild();
+            }
+            else {
+                verticesPasser(objectsToDraw);
+                objectsToDraw = [ramp];
+                verticesPasser(objectsToDraw);
+                objectsToDraw = [ramp];
+                $("#haha").text("RAMP DESTROYS ALL HAHAHAHAHAHAHA");
             }
          }
     });
