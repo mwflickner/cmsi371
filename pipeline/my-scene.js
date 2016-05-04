@@ -207,7 +207,7 @@
     var projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     var rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
-    var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
+    //var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     var orthoMatrix = gl.getUniformLocation(shaderProgram, "orthogonalMatrix");
     var cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
     //var instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
@@ -340,10 +340,7 @@
         gl.uniformMatrix4fv(
             rotationMatrix,
             gl.FALSE,
-            new Float32Array(Matrix.getRotationMatrix(
-                currentRotation, 
-                0, 1, 0
-            ).getTransposeForConsumption().elements)
+            new Float32Array(Matrix.getRotationMatrix(0, 0, 1, 0).getTransposeForConsumption().elements)
         );
 
         // Display the objects.
