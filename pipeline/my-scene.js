@@ -209,6 +209,7 @@
     var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
     var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     var orthoMatrix = gl.getUniformLocation(shaderProgram, "orthogonalMatrix");
+    var cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
     //var instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
 
     var lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
@@ -223,10 +224,17 @@
         new Float32Array(Matrix.getFrutsumMatrix(-4, 4, -2, 2, 5, 1000).getTransposeForConsumption().elements)
     );
 
+    // Initialize rotation matrix
     gl.uniformMatrix4fv(rotationMatrix, 
         gl.FALSE,
         //left, right, bottom, top, near, far
         new Float32Array(Matrix.getRotationMatrix(-4, 4, -2, 2, 5, 1000).elements)
+    );
+
+    // Initialize camera matrix
+    gl.uniformMatrix4fv(cameraMatrix,
+        gl.FALSE,
+        new Float32Array(Matrix.getCameraMatrix(0, 0, 20, 0, 0, 0, 0, 1, 0).getTransposeForConsumption().elements)
     );
 
     // Initialize scale matrix
@@ -248,10 +256,6 @@
      */
     drawObject = function (object, parentMatrix) {
         // Set the varying colors.
-        console.log(object.colors.length);
-        console.log(object.specularColors.length);
-        console.log(object.normals.length);
-        console.log(object.vertices.length);
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
 

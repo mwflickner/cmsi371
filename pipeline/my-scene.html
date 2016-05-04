@@ -58,6 +58,7 @@
         uniform mat4 projectionMatrix;
         uniform mat4 modelViewMatrix;
         uniform mat4 rotationMatrix;
+        uniform mat4 cameraMatrix;
 
         varying vec3 fragmentDiffuseColor;
         varying vec3 fragmentSpecularColor;
@@ -87,7 +88,7 @@
 
           // OK, finally assign things.  Note the scale cheat  :-P
           gl_Position = projectionMatrix *
-                  rotationMatrix * modelViewMatrix *
+                  rotationMatrix * cameraMatrix * modelViewMatrix *
                   vec4(vertexPosition, 1.0);
           //finalVertexColor = vec4(finalDiffuse.rgb, 1.0);
         }

@@ -221,5 +221,23 @@
         );
     };
 
+    Matrix.getCameraMatrix = function (px, py, pz, qx, qy, qz, upx, upy, upz) {
+        var p = new Vector(px, py, pz),
+            q = new Vector(qx, qy, qz),
+            up = new Vector(upx, upy, upz);
+
+        var ze = p.subtract(q).unit(),
+            ye = up.subtract(up.projection(ze)).unit(),
+            xe = ye.cross(ze);
+
+        return new Matrix(
+            xe.x(), xe.y(), xe.z(), -p.dot(xe),
+            ye.x(), ye.y(), ye.z(), -p.dot(ye),
+            ze.x(), ze.y(), ze.z(), -p.dot(ze),
+            0, 0, 0, 1
+        );
+    
+    };
+
 
 }());
